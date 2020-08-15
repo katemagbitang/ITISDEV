@@ -7,10 +7,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <title>Chapter One</title>
+    <title>Request A Book | Chapter One</title>
 </head>
 <body>
-    <!-- navbar -->
+<!--logged in navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <a class="navbar-brand" href="notlog-index.html">Chapter One</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,16 +33,35 @@
     </ul>
     <span>
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a href="signup.html" class="nav-link">Sign Up</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Book Requests
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="requestbook.html">Request a Book</a>
+            <a class="dropdown-item" href="#">View Requests Made</a>
+          </div>
         </li>
         <li class="nav-item">
-          <a href="login.html" class="nav-link">Login</a>
+          <a href="#" class="nav-link">Cart <span class="badge badge-pill badge-danger"> 4</span></a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Messages <span class="badge badge-pill badge-danger"> 4</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Profile
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Edit Profile</a>
+            <a class="dropdown-item" href="#">Logout</a>
+          </div>
         </li>
       </ul>
     </span>
   </div>
 </nav>
+<!--end of logged in navbar-->
 <div class="container-fluid">
   <div class="row">text</div>
   <div class="row">text</div>
@@ -55,30 +74,31 @@
           <div id="signup-column" class="col-md-6">
               <div id="signup-box" class="col-md-12">
                   <form id="login-form" class="form" action="" method="post">
-                      <h3 class="text-center text-info">Sign Up</h3>
+                      <h3 class="text-center text-info">Book Request</h3>
                       <div class="form-group">
-                          <label for="username" class="text-info">Username:</label><br>
-                          <input type="text" name="username" id="username" class="form-control">
+                          <label for="btitle" class="text-info">Book Title</label><br>
+                          <input type="text" name="btitle" id="btitle" class="form-control">
                       </div>
                       <div class="form-group">
-                        <label for="email" class="text-info">Email Address:</label><br>
-                        <input type="email" name="email" id="email" class="form-control">
+                        <label for="authors" class="text-info">Author(s)</label><br>
+                        <input type="text" name="authors" id="authors" class="form-control">
                       </div>
                       <div class="form-group">
-                          <label for="password" class="text-info">Password:</label><br>
-                          <input type="password" name="password" id="password" class="form-control">
-                      </div>
-                      <div class="form-group">
-                        <label for="cpassword" class="text-info">Confirm Password:</label><br>
-                        <input type="password" name="cpassword" id="cpassword" class="form-control">
-                      </div>
-                      <div class="form-group">
-                        <label for="fname" class="text-info">First Name:</label><br>
-                        <input type="text" name="fname" id="fname" class="form-control">
-                      </div>
-                      <div class="form-group">
-                        <label for="lname" class="text-info">Last Name:</label><br>
-                        <input type="text" name="lname" id="lname" class="form-control">
+                        <div class="form-check-inline">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">Option 1
+                          </label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="">Option 2
+                          </label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" value="" disabled>Option 3
+                          </label>
+                        </div>
                       </div>
                       <div class="form-group">
                           <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit">
