@@ -24,9 +24,6 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Books</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="#">Send Book Request</a>
-      </li> -->
       <li class="nav-item">
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -44,24 +41,41 @@
   <div class="row">text</div>
   <div class="row">text</div>
 </div>
-<div id="login">
-  <h3 class="text-center text-white pt-5">Login form</h3>
+<div id="signup">
+  <!-- <h4 class="text-center text-white pt-5">Sign Up form</h4> -->
+  <br>
   <div class="container">
-      <div id="login-row" class="row justify-content-center align-items-center">
-          <div id="login-column" class="col-md-6">
-              <div id="login-box" class="col-md-12">
+      <div id="signup-row" class="row justify-content-center align-items-center">
+          <div id="signup-column" class="col-md-6">
+              <div id="signup-box" class="col-md-12">
                   <form id="login-form" class="form" action="" method="post">
-                      <h3 class="text-center text-info">Login</h3>
+                      <h3 class="text-center text-info">Sign Up</h3>
                       <div class="form-group">
                           <label for="username" class="text-info">Username:</label><br>
                           <input type="text" name="username" id="username" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="email" class="text-info">Email Address:</label><br>
+                        <input type="email" name="email" id="email" class="form-control">
                       </div>
                       <div class="form-group">
                           <label for="password" class="text-info">Password:</label><br>
                           <input type="password" name="password" id="password" class="form-control">
                       </div>
                       <div class="form-group">
-                          <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit" formaction="index.html">
+                        <label for="cpassword" class="text-info">Confirm Password:</label><br>
+                        <input type="password" name="cpassword" id="cpassword" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="fname" class="text-info">First Name:</label><br>
+                        <input type="text" name="fname" id="fname" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="lname" class="text-info">Last Name:</label><br>
+                        <input type="text" name="lname" id="lname" class="form-control">
+                      </div>
+                      <div class="form-group">
+                          <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit">
                       </div>
                   </form>
               </div>
