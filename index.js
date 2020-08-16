@@ -48,6 +48,10 @@ app.get('/logout',function(req,res){
 	res.render("index_loggedout",{});
 });
 
+app.get('/productpage',function(req,res){
+	res.render("productpage",{});
+});
+
 
 app.listen(port, function(){
     console.log('App listening at port ' + port)
