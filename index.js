@@ -3,18 +3,37 @@ const app = express()
 const port = 9090
 const hbs = require("hbs")
 
+app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
+// app.use(express.static(__dirname + "/public"));
+
 app.get('/',function(req,res){
-	res.send("index");
+	res.render("index", {});
 });
 
 app.get('/home',function(req,res){
-	res.send("home");
+	res.render("home",{});
 });
 
-app.set('view engine', 'hbs')
+app.get('/signup',function(req,res){
+	res.render("signup",{});
+});
 
-hbs.registerPartials(__dirname + '/views/partials');
-// app.use(express.static('public'));
+app.get('/login',function(req,res){
+	res.render("login",{});
+});
+
+app.get('/cart',function(req,res){
+	res.render("cart",{});
+});
+
+app.get('/requestbook',function(req,res){
+	res.render("requestform",{});
+});
+
+app.get('/requestlist',function(req,res){
+	res.render("requestlist",{});
+});
 
 app.listen(port, function(){
     console.log('App listening at port ' + port)
