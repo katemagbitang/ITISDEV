@@ -35,6 +35,9 @@ app.get('/requestlist',function(req,res){
 	res.render("requestlist",{});
 });
 
+app.get('/productdetailspage',function(req,res){
+	res.render("productdetailspage",{});
+});
 
 
 app.get('/messages',function(req,res){
