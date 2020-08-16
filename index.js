@@ -39,6 +39,10 @@ app.get('/productdetailspage',function(req,res){
 	res.render("productdetailspage",{});
 });
 
+app.get('/pageslist',function(req,res){
+	res.render("pageslist",{});
+});
+
 
 app.get('/messages',function(req,res){
 	res.render("messages",{});
