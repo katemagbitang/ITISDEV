@@ -7,51 +7,121 @@
 <body>
     {{> navuser}}
     <br>
-    <div class="categories" style="width: 15%; float:left"> 
+    <div style="width: 15%; float:left"> 
       <center>
+        <h5 style="margin-left: 10px">Categories</h5>
         <div id="accordion" style="margin-left: 10px">
           <div class="card">
-            <div class="card-header" id="headingOne">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <h3>Categories</h3>
-                </button>
-              </h5>
+            <div style="cursor: pointer" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              <p style="margin: 5px">
+                  Art and Design
+              </p>
             </div>
 
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="card-body">
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Fantasy</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Adventure</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Romance</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Contemporary</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Dystopian</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Mystery</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Horror</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Thriller</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Paranormal</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Historical fiction</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Science Fiction</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Memoir</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Cooking</button><br>
+              <div>
                 <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Art</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Self-help / Personal</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Development</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Motivational</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Health</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">History</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Travel</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Guide / How-to</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Families & Relationships</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">SecondHumorary</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Secondary</button><br>
-                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Children’s</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Beauty & Fashion</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Architecture</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Film and Media</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Photography</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Graphic Design</button><br>
               </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div div style="cursor: pointer" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <p style="margin: 5px">
+                  Children's
+               </p>
+            </div>
+
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Hobbies</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Children's Classic</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Toddler</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Early Reader</button><br>
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div style="cursor: pointer" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <p style="margin: 5px">
+                  Graphic Novel
+                </p>
+            </div>
+
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Comics</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Manga</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Illustrated Humor</button><br>
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div style="cursor: pointer" id="headingFour" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <p style="margin: 5px">
+                  Humanities
+                </p>
+            </div>
+
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+              <div>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Literature</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">History & Politics</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Non-Fiction</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Fiction</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Religion</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Philosphy</button><br>
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div style="cursor: pointer" id="headingFive" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                <p style="margin: 5px">
+                  Lifestyle
+                </p>
+            </div>
+
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+              <div>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Cooking</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Family & Relationships</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Health</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Travel</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Sports</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Crafts</button><br>
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div style="cursor: pointer" id="headingSix" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                <p style="margin: 5px">
+                  Professional
+                </p>
+            </div>
+
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                <div>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Business</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Language</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Science</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Self-Help</button><br>
+                <button type="button" style="margin: 5px" class="btn btn-outline-secondary">Psychology</button><br>
+                </div>
             </div>
           </div>
         </div>
       </center>
     </div>
+
 
     <div class="container" style="width: 85%">
       <br>
