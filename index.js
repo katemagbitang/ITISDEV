@@ -38,3 +38,7 @@ app.get('/requestlist',function(req,res){
 app.listen(port, function(){
     console.log('App listening at port ' + port)
 });
+
+// set the folder `public` as folder containing static assets
+// such as css, js, and image files
+app.use(express.static('public'));
