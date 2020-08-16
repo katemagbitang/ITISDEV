@@ -5,7 +5,7 @@ const hbs = require("hbs")
 
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
-// app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));
 
 app.get('/',function(req,res){
 	res.render("index", {});
@@ -35,10 +35,18 @@ app.get('/requestlist',function(req,res){
 	res.render("requestlist",{});
 });
 
+
+
+app.get('/messages',function(req,res){
+	res.render("messages",{});
+});
+
+app.get('/logout',function(req,res){
+	res.render("index_loggedout",{});
+});
+
+
 app.listen(port, function(){
     console.log('App listening at port ' + port)
 });
 
-// set the folder `public` as folder containing static assets
-// such as css, js, and image files
-app.use(express.static('public'));
