@@ -11,4 +11,7 @@ git clone https://github.com/katemagbitang/ITISDEV.git
 4. Run the command `npm install` to initialize and install all necessary modules used in the project.
 
 5. Run the command 'npx nodemon index' to run the program. Run the command 'rs' to manually restart the port. Nodemon is installed for easier restarting of the run when making changes.
-6. yay
+6. Now enter the link below to your browser:
+```
+http://localhost:9090/
+```
