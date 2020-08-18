@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>head}}
+    <link rel="stylesheet" href="../css/messagesStyle.css">
+    <title>My Transactions</title>
+</head>
+<body>
+    {{> navuser}}
+
+
+
+    <div class="container">
+        <h4>My Orders</h4>
+
+
+        <ul class="nav nav-tabs flex-row bg-light">
+            <li class="nav-item">
+                <a class="nav-link " href="/Orders/ToPay">To Pay</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Orders/PaymentProcessing">Payment Processing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/Orders/Confirmed">Confirmed</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/Orders/Cancelled">Cancelled</a>
+            </li>
+        </ul>
+
+
+        <table class=" table table-bordered table-responsive-md">
+            <thead>
+                <tr>
+                    <th >Order Number</th>
+                    <th style="min-width: 300px">Order Details</th>
+                    <th >Total Amount</th>
+                    <th >Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">12345sdfgsdfg6789</th>   
+                    <td>Maasdfasfdgd fffffffffffff ffffffffffff fff ffff ffff fffff ffffffffffff fff ffff fffffff ffffff fff fffff fff fffff ff ffffff fffff ff ffffffffff ffffrk</td>
+                    <td>999.50</td>
+                    <td>Complete</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>250.00</td>
+                    <td>Complete</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>1499.00</td>
+                    <td>Complete</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+</body>
+</html>

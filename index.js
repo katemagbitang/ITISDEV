@@ -56,8 +56,24 @@ app.get('/productpage',function(req,res){
 	res.render("productpage",{});
 });
 
-app.get('/mytransactions',function(req,res){
-	res.render("usertransactionslist",{});
+app.get('/Orders',function(req,res){
+	res.redirect("/Orders/ToPay");
+});
+
+app.get('/Orders/ToPay',function(req,res){
+	res.render("userOrdersToPay",{});
+});
+
+app.get('/Orders/PaymentProcessing',function(req,res){
+	res.render("userOrdersPaymentProcessing",{});
+});
+
+app.get('/Orders/Confirmed',function(req,res){
+	res.render("userOrdersConfirmed",{});
+});
+
+app.get('/Orders/Cancelled',function(req,res){
+	res.render("userOrdersCancelled",{});
 });
 
 app.get('/browse',function(req,res){
