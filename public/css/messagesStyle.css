@@ -65,28 +65,55 @@ img{ max-width:80%;}
 }
 .srch_bar .input-group-addon { margin: 0 0 0 -27px;}
 
-.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;}
-.chat_ib h5 span{ font-size:13px; float:right;}
-.chat_ib p{ font-size:14px; color:#989898; margin:auto}
+.chat_ib h5{ 
+  font-size:15px; 
+  color:#464646; 
+  margin:0 0 8px 0;
+}
+
+.chat_ib h5 span{ 
+  font-size:13px; 
+  float:right;
+}
+
+.chat_ib p{ 
+  font-size:14px; 
+  color:#989898; 
+  margin:auto;
+}
+
 .chat_img {
   float: left;
   width: 11%;
 }
 .chat_ib {
   float: left;
-  padding: 0 0 0 15px;
-  width: 88%;
+  padding: 0 15px 0 15px;
+  width: 100%;
 }
 
 .chat_people{ 
   overflow:hidden; 
   clear:both;
 }
+
 .chat_list {
   border-bottom: 1px solid #c4c4c4;
   margin: 0;
   padding: 18px 16px 10px;
 }
+
+/* para may ellipses nalang sa chat panel if nagoverflow na */
+.chat_list p{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  
+  
+}
+
 .inbox_chat { 
   /* position: relative; */
   height: 860px;

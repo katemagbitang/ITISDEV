@@ -56,6 +56,14 @@ app.get('/productpage',function(req,res){
 	res.render("productpage",{});
 });
 
+app.get('/mytransactions',function(req,res){
+	res.render("usertransactionslist",{});
+});
+
+app.get('/browse',function(req,res){
+	res.render("productpage",{});
+});
+
 
 app.listen(port, function(){
     console.log('App listening at port ' + port)
