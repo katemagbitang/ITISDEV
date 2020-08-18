@@ -552,6 +552,19 @@ pre code {
   margin-left: auto;
 }
 
+.container-nopadding,
+.container-fluid-nopadding,
+.container-sm-nopadding,
+.container-md-nopadding,
+.container-lg-nopadding,
+.container-xl-nopadding {
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
 @media (min-width: 576px) {
   .container, .container-sm {
     max-width: 540px;
@@ -4259,10 +4272,13 @@ input[type="button"].btn-block {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
+  color: #212529;
 }
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
+  
+  color: #4E6172;
 }
 
 .nav-link.disabled {
@@ -4297,9 +4313,9 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #495057;
-  background-color: #fff;
-  border-color: #dee2e6 #dee2e6 #fff;
+  color: #e9ecef;
+  background-color: #4E6172;
+  border-color: transparent transparent #212529;
 }
 
 .nav-tabs .dropdown-menu {
@@ -4445,6 +4461,10 @@ input[type="button"].btn-block {
     padding-right: 0;
     padding-left: 0;
   }
+}
+
+.vh80{
+  height: 80vh;
 }
 
 @media (min-width: 576px) {
@@ -4795,6 +4815,13 @@ input[type="button"].btn-block {
   padding: 1.25rem;
 }
 
+.card-body-orders {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1rem;
+}
+
 .card-title {
   margin-bottom: 0.75rem;
 }
@@ -4837,10 +4864,16 @@ input[type="button"].btn-block {
   border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
 }
 
-.card-header-tabs {
+/* .card-header-tabs {
   margin-right: -0.625rem;
-  margin-bottom: -0.75rem;
+  margin-bottom: -0.95rem;
   margin-left: -0.625rem;
+  border-bottom: 0;
+} */
+.card-header-tabs {
+  margin-right: 0rem;
+  margin-bottom: 0rem;
+  margin-left: 0rem;
   border-bottom: 0;
 }
 
@@ -6810,6 +6843,17 @@ button.bg-light:hover,
 button.bg-light:focus {
   background-color: #dae0e5 !important;
 }
+
+.bg-4E6172 {
+  background-color: #4E6172 !important;
+}
+
+a.bg-4E6172:hover, a.bg-4E6172:focus,
+button.bg-4E6172:hover,
+button.bg-4E6172:focus {
+  background-color: #4E6172 !important;
+}
+
 
 .bg-dark {
   background-color: #343a40 !important;
