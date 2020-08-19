@@ -80,6 +80,10 @@ app.get('/browse',function(req,res){
 	res.render("productpage",{});
 });
 
+app.get('/AddProducts',function(req,res){
+	res.render("addproducts",{});
+});
+
 
 app.listen(port, function(){
     console.log('App listening at port ' + port)
