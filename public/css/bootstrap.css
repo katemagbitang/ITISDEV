@@ -4463,9 +4463,7 @@ input[type="button"].btn-block {
   }
 }
 
-.vh80{
-  height: 80vh;
-}
+
 
 @media (min-width: 576px) {
   .navbar-expand-sm {
@@ -10336,3 +10334,21 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+/* CUSTOM STYLES ADDED BELOW */
+
+.vh80{
+  height: 77vh;
+}
+
+.bg-AC703D{
+  background: #AC703D;
+  color: #212529;
+}
+
+.card-header-center {
+  padding: 35px 20px 20px 20px;
+  margin: 0px;
+}
+
