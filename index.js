@@ -56,6 +56,9 @@ app.get('/productpage',function(req,res){
 	res.render("productpage",{});
 });
 
+app.get('/confirmpayment',function(req,res){
+	res.render("confirmpayment",{});
+});
 
 app.listen(port, function(){
     console.log('App listening at port ' + port)
