@@ -84,6 +84,22 @@ app.get('/AddPRoducts',function(req,res){
 	res.render("addproducts",{});
 });
 
+app.get('/adminRequestsList',function(req,res){
+	res.render("adminRequestsListIndividual",{});
+});
+
+app.get('/adminRequestsList/Collective',function(req,res){
+	res.render("adminRequestsListCollective",{});
+});
+
+app.get('/adminRequestsList/Individual',function(req,res){
+	res.render("adminRequestsListIndividual",{});
+});
+
+app.get('/adminRequestsList/Soon-to-be-Cancelled',function(req,res){
+	res.render("adminRequestsListSTBC",{});
+});
+
 app.listen(port, function(){
     console.log('App listening at port ' + port)
 });
