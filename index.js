@@ -60,6 +60,30 @@ app.get('/confirmpayment',function(req,res){
 	res.render("confirmpayment",{});
 });
 
+app.get('/Orders',function(req,res){
+	res.redirect("/Orders/ToPay");
+});
+
+app.get('/Orders/ToPay',function(req,res){
+	res.render("userOrdersToPay",{});
+});
+
+app.get('/Orders/PaymentProcessing',function(req,res){
+	res.render("userOrdersPaymentProcessing",{});
+});
+
+app.get('/Orders/Confirmed',function(req,res){
+	res.render("userOrdersConfirmed",{});
+});
+
+app.get('/Orders/Cancelled',function(req,res){
+	res.render("userOrdersCancelled",{});
+});
+
+app.get('/AddPRoducts',function(req,res){
+	res.render("addproducts",{});
+});
+
 app.listen(port, function(){
     console.log('App listening at port ' + port)
 });
