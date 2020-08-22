@@ -18,12 +18,13 @@
 
             <div class="card-header card-header-tabs bg-light">
                 <ul class="nav nav-tabs  bg-light">
-                    <li class="nav-item ">
-                        <a class="nav-link " href="/adminRequestsList/Individual">Individual</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="/adminRequestsList/Collective">Collective</a>
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/adminRequestsList/Individual">Individual</a>
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link " href="/adminRequestsList/Soon-to-be-Cancelled">Soon-to-be Cancelled</a>
                     </li>
@@ -36,7 +37,7 @@
 
 
                 <table class=" table table-bordered table-hover">
-                    <thead class="">
+                    <thead class="thead-light">
                         <tr>
                             <th >Request Number</th>
                             <th >Book Title</th>
@@ -55,7 +56,11 @@
                             <td> REbeccah</td>
                             <td>15</td>
                             <td>2.5</td>
-                            <td><button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button></td>
+                            <td>
+                                <a href="/adminRequestsList/Individual/somethingthat-will-lead-to-a-page-with-all-requests-for-that-book" class="btn btn-sm btn-primary" role="button">View</a>
+                                {{!-- <button type="button" class="btn btn-sm btn-primary" redirect="/adminRequestsList/Individual">View</button> --}}
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button>
+                            </td>
                         </tr>
                         
                     </tbody>

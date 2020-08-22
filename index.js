@@ -85,7 +85,7 @@ app.get('/AddPRoducts',function(req,res){
 });
 
 app.get('/adminRequestsList',function(req,res){
-	res.render("adminRequestsListIndividual",{});
+	res.render("adminRequestsListCollective",{});
 });
 
 app.get('/adminRequestsList/Collective',function(req,res){
