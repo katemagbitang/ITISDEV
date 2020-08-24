@@ -30,10 +30,13 @@ const userSchema = new Schema({
     },
     lastLogin: {
         type: Date
-    }
-    // messages: {
-    //     type: 
-    // }
+    },
+    messages: [{
+        message_ID: {
+            type: Number,
+            required:[true,'Required']
+        }
+    }]
 });
 
 module.exports = mongoose.model('User', userSchema);
