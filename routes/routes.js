@@ -1,5 +1,8 @@
 const express = require('express');
 
+const orderController = require('../controllers/orderController.js');
+const adminController = require('../controllers/adminController.js');
+
 const app = express();
 
 app.get('/',function(req,res){
@@ -55,44 +58,24 @@ app.get('/confirmpayment',function(req,res){
 	res.render("confirmpayment",{});
 });
 
-app.get('/Orders',function(req,res){
-	res.redirect("/Orders/ToPay");
-});
+app.get('/Orders',orderController.getOrders);
 
-app.get('/Orders/ToPay',function(req,res){
-	res.render("userOrdersToPay",{});
-});
+app.get('/Orders/ToPay',orderController.getOrdersToPay);
 
-app.get('/Orders/PaymentProcessing',function(req,res){
-	res.render("userOrdersPaymentProcessing",{});
-});
+app.get('/Orders/PaymentProcessing',orderController.getOrdersPayment);
 
-app.get('/Orders/Confirmed',function(req,res){
-	res.render("userOrdersConfirmed",{});
-});
+app.get('/Orders/Confirmed',orderController.getOrdersConfirmed);
 
-app.get('/Orders/Cancelled',function(req,res){
-	res.render("userOrdersCancelled",{});
-});
+app.get('/Orders/Cancelled',orderController.getOrdersCancelled);
 
-app.get('/AddPRoducts',function(req,res){
-	res.render("addproducts",{});
-});
+app.get('/addProducts',adminController.getAddProduct);
 
-app.get('/adminRequestsList',function(req,res){
-	res.render("adminRequestsListCollective",{});
-});
+app.get('/adminRequestsList',adminController.getAdminRequestList);
 
-app.get('/adminRequestsList/Collective',function(req,res){
-	res.render("adminRequestsListCollective",{});
-});
+app.get('/adminRequestsList/Collective',adminController.getAdminRequestListCollective);
 
-app.get('/adminRequestsList/Individual',function(req,res){
-	res.render("adminRequestsListIndividual",{});
-});
+app.get('/adminRequestsList/Individual',adminController.getAdminRequestListIndividual);
 
-app.get('/adminRequestsList/Soon-to-be-Cancelled',function(req,res){
-	res.render("adminRequestsListSTBC",{});
-});
+app.get('/adminRequestsList/Soon-to-be-Cancelled',adminController.getAdminRequestListSTBC);
 
 module.exports = app;
