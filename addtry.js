@@ -1,11 +1,36 @@
 const db = require('./model/db.js');
 const mongodb = require('./model/mongodb.js');
 
-// name of the collection (table)
-// to perform CRUD (Create, Read, Update, Delete) operations
+
 const authorCollections = 'authorModel';
+const bookAuthorsCollections = 'bookAuthorsModel';
+const booksCollections = 'booksModel';
+const cartItemsCollections = 'cartItemsModel';
+const fulfillmentCollections = 'fulfillmentModel';
+const messagesCollections = 'messagesModel';
+const notifCollections = 'notifModel';
+const orderItemsCollections = 'orderItemsModel';
+const ordersCollections = 'ordersModel';
+const paymentCollections = 'paymentModel';
+const requestCollections = 'requestModel';
+const userCollections = 'userModel';
 
 mongodb.createDatabase();
+
+mongodb.createCollection(authorCollections);
+mongodb.createCollection(bookAuthorsCollections);
+mongodb.createCollection(booksCollections);
+mongodb.createCollection(cartItemsCollections);
+mongodb.createCollection(fulfillmentCollections);
+mongodb.createCollection(messagesCollections);
+mongodb.createCollection(notifCollections);
+mongodb.createCollection(orderItemsCollections);
+mongodb.createCollection(ordersCollections);
+mongodb.createCollection(paymentCollections);
+mongodb.createCollection(requestCollections);
+mongodb.createCollection(userCollections);
+
+
 
 
 var author1= {
