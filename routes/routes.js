@@ -43,6 +43,14 @@ app.get('/confirmpayment',function(req,res){
 	res.render("confirmpayment",{});
 });
 
+app.get('/generatesalesreport',function(req,res){
+	res.render("generatesalesreport",{});
+});
+
+app.get('/salesreport',function(req,res){
+	res.render("salesreport",{});
+});
+
 app.get('/Orders',orderController.getOrders);
 app.get('/Orders/ToPay',orderController.getOrdersToPay);
 app.get('/Orders/PaymentProcessing',orderController.getOrdersPayment);
