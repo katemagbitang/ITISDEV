@@ -72,34 +72,48 @@
 
     </div>
 
-{{!-- Modal for Send Payment --}}
+{{!-- Modal for fulfilment --}}
     <div class="modal fade" id="sendPaymentForm" tabindex="-1" role="dialog" aria-labelledby="sendPaymentFormTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="sendPaymentFormTitle">Send Payment Form</h5>
+            <h5 class="modal-title" id="sendPaymentFormTitle">Fulfill Request Form</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <form>
+            <form name = "Fulfillment-Form">
             <div class="form-group row">
-                <label for="Order Number" class="col-sm-5 col-form-label">Order Number</label>
+                <label for="Request Number" class="col-sm-5 col-form-label">Request Number</label>
                 <div class="col-sm-7">
-                <input type="text" readonly class="form-control-plaintext" id="SendPaymentOrderNumber" value="0123456789">
+                <input type="text" readonly class="form-control-plaintext" id="FulfillRequestNumber" value="0123456789">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="Bank Name" class="col-sm-5 col-form-label">Bank Name</label>
+                <label for="requester" class="col-sm-5 col-form-label">Requester</label>
                 <div class="col-sm-7">
-                <input type="text" class="form-control" id="SendPaymentBankName" placeholder="Bank Name">
+                <input type="text" readonly class="form-control-plaintext" id="FulfillReqeuster" value="John Smith">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="Reference Number" class="col-sm-5 col-form-label">Reference/OR Number</label>
+                <label for="Book title" class="col-sm-5 col-form-label">Book Title</label>
                 <div class="col-sm-7">
-                <input type="text" class="form-control" id="SendPaymentRefNum" placeholder="Reference Number">
+                <input type="text" readonly class="form-control-plaintext" id="FulfillBookTitle" value="Animal Farm">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Author" class="col-sm-5 col-form-label">Author/s
+                </label>
+                <div class="col-sm-7">
+                <input type="text" readonly class="form-control-plaintext" id="FulfillAuthor" value="George ORwell">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Author" class="col-sm-5 col-form-label">Book Item Reference ID
+                </label>
+                <div class="col-sm-7">
+                <input type="text" class="form-control" id="FulfillBookID" placeholder="">
                 </div>
             </div>
             </form>
@@ -111,7 +125,7 @@
         </div>
     </div>
     </div>
-{{!-- END Modal for Send Payment --}}
+{{!-- END Modal for fulfillment --}}
 
     
 

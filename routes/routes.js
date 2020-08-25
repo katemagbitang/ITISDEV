@@ -53,6 +53,7 @@ app.get('/addProducts',adminController.getAddProduct);
 app.get('/adminRequestsList',adminController.getAdminRequestList);
 app.get('/adminRequestsList/Collective',adminController.getAdminRequestListCollective);
 app.get('/adminRequestsList/Individual',adminController.getAdminRequestListIndividual);
+app.get('/adminRequestsList/Individual/:something',adminController.getAdminRequestListIndividual);
 app.get('/adminRequestsList/Soon-to-be-Cancelled',adminController.getAdminRequestListSTBC);
 
 module.exports = app;
