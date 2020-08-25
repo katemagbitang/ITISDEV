@@ -1,0 +1,28 @@
+<head>
+    {{>head}}
+    <title>Generate Sales Report | Chapter One</title>
+</head>
+<body>
+    {{> navadmin}}
+    <br>
+    <div class="container">
+        <h3 class="text-center text-info">Generate Sales Report</h3><br>
+        <div style="text-align: center">
+            <form id="sales-report" class="form-group" action="" method="post">
+                <label>Select Date: </label>
+                <div class="form-row" style="margin: 0 30%">
+                    <div class="col-md-5 mb-3">
+                        <input type="date" class="form-control" id="starting-date" value="" required>
+                    </div>
+                    <div class="col"> – </div>
+                    <div class="col-md-5 mb-3">
+                        <input type="date" class="form-control" id="ending-date" value="" required>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit" formaction="/salesreport">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
