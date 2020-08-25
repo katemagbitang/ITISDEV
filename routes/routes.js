@@ -1,25 +1,19 @@
 const express = require('express');
 
+const controller = require('../controllers/controller.js');
+const userController = require('../controllers/userController.js');
 const orderController = require('../controllers/orderController.js');
 const adminController = require('../controllers/adminController.js');
 
 const app = express();
 
-app.get('/',function(req,res){
-	res.render("index", {});
-});
+app.get('/',controller.getIndex);
+app.get('/home',controller.getHome);
 
-app.get('/home',function(req,res){
-	res.render("home",{});
-});
-
-app.get('/signup',function(req,res){
-	res.render("signup",{});
-});
-
-app.get('/login',function(req,res){
-	res.render("login",{});
-});
+app.get('/signup',userController.getSignUp);
+app.get('/login',userController.getLogin);
+app.get('/logout',userController.getLogout);
+app.get('/messages',userController.getMessage);
 
 app.get('/cart',function(req,res){
 	res.render("cart",{});
@@ -41,15 +35,6 @@ app.get('/pageslist',function(req,res){
 	res.render("pageslist",{});
 });
 
-
-app.get('/messages',function(req,res){
-	res.render("messages",{});
-});
-
-app.get('/logout',function(req,res){
-	res.render("index_loggedout",{});
-});
-
 app.get('/productpage',function(req,res){
 	res.render("productpage",{});
 });
@@ -59,23 +44,15 @@ app.get('/confirmpayment',function(req,res){
 });
 
 app.get('/Orders',orderController.getOrders);
-
 app.get('/Orders/ToPay',orderController.getOrdersToPay);
-
 app.get('/Orders/PaymentProcessing',orderController.getOrdersPayment);
-
 app.get('/Orders/Confirmed',orderController.getOrdersConfirmed);
-
 app.get('/Orders/Cancelled',orderController.getOrdersCancelled);
 
 app.get('/addProducts',adminController.getAddProduct);
-
 app.get('/adminRequestsList',adminController.getAdminRequestList);
-
 app.get('/adminRequestsList/Collective',adminController.getAdminRequestListCollective);
-
 app.get('/adminRequestsList/Individual',adminController.getAdminRequestListIndividual);
-
 app.get('/adminRequestsList/Soon-to-be-Cancelled',adminController.getAdminRequestListSTBC);
 
 module.exports = app;
