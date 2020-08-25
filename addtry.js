@@ -15,20 +15,19 @@ const paymentCollections = 'paymentModel';
 const requestCollections = 'requestModel';
 const userCollections = 'userModel';
 
-mongodb.createDatabase();
 
-mongodb.createCollection(authorCollections);
-mongodb.createCollection(bookAuthorsCollections);
-mongodb.createCollection(booksCollections);
-mongodb.createCollection(cartItemsCollections);
-mongodb.createCollection(fulfillmentCollections);
-mongodb.createCollection(messagesCollections);
-mongodb.createCollection(notifCollections);
-mongodb.createCollection(orderItemsCollections);
-mongodb.createCollection(ordersCollections);
-mongodb.createCollection(paymentCollections);
-mongodb.createCollection(requestCollections);
-mongodb.createCollection(userCollections);
+// mongodb.createCollection(authorCollections);
+// mongodb.createCollection(bookAuthorsCollections);
+// mongodb.createCollection(booksCollections);
+// mongodb.createCollection(cartItemsCollections);
+// mongodb.createCollection(fulfillmentCollections);
+// mongodb.createCollection(messagesCollections);
+// mongodb.createCollection(notifCollections);
+// mongodb.createCollection(orderItemsCollections);
+// mongodb.createCollection(ordersCollections);
+// mongodb.createCollection(paymentCollections);
+// mongodb.createCollection(requestCollections);
+// mongodb.createCollection(userCollections);
 
 
 
@@ -39,7 +38,4 @@ var author1= {
     a_lName: "Nieva",
     suffix: "x"
 }
-
-
-
 mongodb.insertOne(authorCollections, author1);
