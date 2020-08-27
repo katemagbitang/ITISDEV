@@ -3,7 +3,17 @@
     <title>Sales Report | Chapter One</title>
 </head>
 <body>
-    {{> navadmin}} <br>
+    {{!-- NAVBARS START --}}
+    <div id= "navvisit">
+        {{> navvisit}}
+    </div>
+    <div id = "navadmin">
+         {{> navadmin}}
+    </div>
+    <div id = "navuser">
+       {{> navuser}}
+    </div>
+    {{!-- NAVBARS END --}}
 
     <h3 class="text-center text-info">Sales Report</h3>
     <h5 class="text-center text-info">[Starting Date] - [Ending Date]</h5><br>

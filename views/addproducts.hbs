@@ -3,7 +3,17 @@
     <title>Add Products | Chapter One</title>
 </head>
 <body>
-    {{>navadmin}}   <br><br>
+    {{!-- NAVBARS START --}}
+    <div id= "navvisit">
+        {{> navvisit}}
+    </div>
+    <div id = "navadmin">
+         {{> navadmin}}
+    </div>
+    <div id = "navuser">
+       {{> navuser}}
+    </div>
+    {{!-- NAVBARS END --}}   <br><br>
 
     <div class="col-10  card card-body" style="margin: 0 auto">
         <h5 class="card-title" style="text-align:center; color:#DC3545">Add Product</h5>
