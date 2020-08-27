@@ -17,8 +17,6 @@ const userController = {
         var username = req.body.username;
         var password = req.body.password;
 
-        console.log(req.body.username);
-
         db.findOne(userModel, {username : username}, 'username password', function(err, result){
         
             if(result != null) {
@@ -31,13 +29,16 @@ const userController = {
                         console.log("password INcorrect");
                     }
                 }else{
-                
+                    //if username input is not in the db
                         console.log("username does not exist");
                 }
 
             }else{
+                //if username input is not in the db
                 console.log("no such user bitch");
             }
+
+            res.redirect("/");
         });
 
 
