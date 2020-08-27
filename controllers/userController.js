@@ -21,43 +21,23 @@ const userController = {
         var password = req.body.password;
 
         db.findOne(userModel, {username : username}, 'username password userType', function(result){
-
-            console.log(result);
-            // console.log(result.username+ result.password);
-        
-            if(result != null) {
-
+            if(result != null) { // if username EXISTS in the db
                 if (username == result.username){
-                    console.log("username exists");
-
-
                     bcrypt.compare(password, result.password, function(err, equal) {
-                        if(equal){
-
+                        if(equal){ // correct password
                             req.session.username = result.username;
                             req.session.userType = result.userType;
-                            console.log("password correct");
-        
+                            res.redirect("/"); //success, then redirects to home
                         }
-                        else {
-                            console.log("password INcorrect");
+                        else { // wrong password
+                            res.render("login", {err:"Username and password does not match."});
                         }
-                    
                     })
-
-                }else{
-                    //if username input is not in the db
-                        console.log("username does not exist");
                 }
-
-            }else{
-                //if username input is not in the db
-                console.log("null siya");
+            }else{//if username DOES NOT EXIST in the db
+                res.render("login", {err:"Username and password does not match."});
             }
-
-            res.redirect("/");
         });
-
 
     },
     postSignup: function(req,res){
