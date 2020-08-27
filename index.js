@@ -11,6 +11,9 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + "/public"));
 
+// parses incoming requests with urlencoded payloads
+app.use(express.urlencoded({extended: true}));
+
 app.use('/', routes);
 
 db.connect();
