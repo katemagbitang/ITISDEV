@@ -18,6 +18,8 @@ app.post('/login', userController.postLogin);
 app.get('/logout',userController.getLogout);
 app.get('/messages',userController.getMessage);
 
+app.post('/signup',userController.postSignup);
+
 app.get('/cart',function(req,res){
 	res.render("cart",{});
 });

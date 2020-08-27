@@ -27,16 +27,16 @@ const userSchema = new Schema({
         type : String,
         enum: ['Regular', 'Admin'],
         default: 'Regular'
-    },
-    lastLogin: {
-        type: Date
-    },
-    messages: [{
-        message_ID: {
-            type: Number,
-            required:[true,'Required']
-        }
-    }]
+    }
+    // lastLogin: {
+    //     type: Date
+    // },
+    // messages: [{
+    //     message_ID: {
+    //         type: Number,
+    //         required:[true,'Required']
+    //     }
+    // }]
 });
 
 module.exports = mongoose.model('User', userSchema);
