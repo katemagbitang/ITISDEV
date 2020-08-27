@@ -21,7 +21,7 @@ var user = [
     {
         username: "seanxnieva",
         email: "sean@gmail.com",
-        password: "secret",
+        password: "$2b$10$DW5ggP/brSWeU1xZzXk2gejAPbF2BGyyFQbkilHbB.6WoEETmCgkm", //"secret"
         firstName: "sean",
         lastName: "nieva",
         userType: "Admin",
@@ -29,7 +29,7 @@ var user = [
     {
         username: "johnsmith",
         email: "john@gmail.com",
-        password: "secret",
+        password: "$2b$10$DW5ggP/brSWeU1xZzXk2gejAPbF2BGyyFQbkilHbB.6WoEETmCgkm", // "secret"
         firstName: "john",
         lastName: "smith",
         userType: "Regular",
