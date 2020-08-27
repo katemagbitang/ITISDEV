@@ -6,7 +6,7 @@ const client = mongodb.MongoClient;
 const url = 'mongodb://localhost:27017/chapterone';
 
 // name of the database
-const dbName = 'ChapterOneDB';
+const dbName = 'chapterone';
 
 // additional connection options
 const options = { useUnifiedTopology: true };

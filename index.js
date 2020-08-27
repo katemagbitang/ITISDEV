@@ -6,10 +6,22 @@ const hbs = require("hbs")
 
 const routes = require('./routes/routes.js');
 const db = require('./model/db.js');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
 
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + "/public"));
+
+// use `express-session`` middleware and set its options
+// use `MongoStore` as server-side session storage
+app.use(session({
+    'secret': 'chapterone-secret',
+    'resave': false,
+    'saveUninitialized': false,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
+}));
 
 // parses incoming requests with urlencoded payloads
 app.use(express.urlencoded({extended: true}));

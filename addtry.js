@@ -2,8 +2,8 @@ const db = require('./model/db.js');
 const mongodb = require('./model/mongodb.js');
 
 
-const authorCollections = 'authorModel';
-const userCollections = 'userModel';
+const authorCollections = 'authors';
+const userCollections = 'users';
 
 
 

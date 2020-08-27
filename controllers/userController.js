@@ -3,6 +3,7 @@ const db = require('../model/db.js');
 // const mongodb = require('../model/mongodb.js');
 
 const userModel = require('../model/userModel.js');
+const bcrypt = require('bcrypt');
 
 const userController = {
     getSignUp: function(req,res){
@@ -18,7 +19,7 @@ const userController = {
         var username = req.body.username;
         var password = req.body.password;
 
-        db.findOne(userModel, {username : username}, 'username password', function(err, result){
+        db.findOne(userModel, {username : username}, 'username password userType', function(err, result){
         
             if(result != null) {
 
@@ -26,6 +27,9 @@ const userController = {
                     console.log("username exists");
                     if(password == result.password){
                         console.log("password correct");
+                        req.session.username = username
+
+
                     }else{
                         console.log("password INcorrect");
                     }
