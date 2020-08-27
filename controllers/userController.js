@@ -1,4 +1,7 @@
-const { db } = require("../model/userModel");
+
+const db = require('../model/db.js');
+
+const userModel = require('../model/userModel.js');
 
 const userController = {
     getSignUp: function(req,res){
@@ -11,17 +14,17 @@ const userController = {
 
     postLogin: function(req,res){
         
-        // var username = req.body.username;
-        // var password = req.body.password;
+        var username = req.body.username;
+        var password = req.body.password;
 
         console.log(req.body.username);
 
-        // db.findOne(userModel, {username : username}, 'username password', function(){
+        db.findOne(userModel, {username : username}, 'username password', function(){
 
-        //     alert("okay");
+           console.log("OKAY");
 
 
-        // })
+        })
 
 
     },
