@@ -30,8 +30,6 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/', routes);
 
-
-
 app.listen(port, function(){
     console.log('App listening at port ' + port)
 });
