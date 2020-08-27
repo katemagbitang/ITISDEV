@@ -14,6 +14,8 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + "/public"));
 
+db.connect();
+
 // use `express-session`` middleware and set its options
 // use `MongoStore` as server-side session storage
 app.use(session({
@@ -28,7 +30,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/', routes);
 
-db.connect();
+
 
 app.listen(port, function(){
     console.log('App listening at port ' + port)
