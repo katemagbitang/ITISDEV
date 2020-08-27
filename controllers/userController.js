@@ -55,28 +55,6 @@ const userController = {
         var fName = req.body.fname;
         var lName = req.body.lname;
         var userType = 'Regular';
-
-        // var user = {
-        //     username: username,
-        //     email: email,
-        //     password: password,
-        //     firstName:fName,
-        //     lastName: lName,
-        //     userType: userType
-        // }
-        // db.insertOne(userModel, user, function(flag) {
-        //     if(flag) {
-        //         /*
-        //             upon adding a user to the database,
-        //             redirects the client to `/success` using HTTP GET,
-        //             defined in `../routes/routes.js`
-        //             passing values using URL
-        //             which calls getSuccess() method
-        //             defined in `./successController.js`
-        //         */
-        //         res.redirect('/login');
-        //     }
-        // });
         
         let user = userModel.findOne({ email: email });
         if (!user) {
