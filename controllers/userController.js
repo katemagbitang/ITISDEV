@@ -97,7 +97,18 @@ const userController = {
     },
 
     getLogout: function(req,res){
-        res.render("index_loggedout",{});
+
+        //destroys current session
+        req.session.destroy(function(err) {
+
+            if(err) throw err;
+            /*
+                redirects the client to `/profile` using HTTP GET,
+                defined in `../routes/routes.js`
+            */
+            res.redirect('/');
+        });
+            
     },
 
     getMessage: function(req,res){
