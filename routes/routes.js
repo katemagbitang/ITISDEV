@@ -12,6 +12,8 @@ app.get('/home',controller.getHome);
 
 app.get('/signup',userController.getSignUp);
 
+app.get('/getsession', controller.getSession);
+
 app.get('/login',userController.getLogin);
 app.post('/login', userController.postLogin);
 

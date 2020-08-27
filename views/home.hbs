@@ -5,7 +5,19 @@
     <title>Home | Chapter One</title>
 </head>
 <body>
-    {{> navuser}}
+    {{!-- NAVBARS START --}}
+    <div id= "navvisit">
+        {{> navvisit}}
+    </div>
+    <div id = "navadmin">
+         {{> navadmin}}
+    </div>
+    <div id = "navuser">
+       {{> navuser}}
+    </div>
+    {{!-- NAVBARS END --}}
+
+
     {{> homepage}}
 </body>
 </html>
