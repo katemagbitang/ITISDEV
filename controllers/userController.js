@@ -19,12 +19,26 @@ const userController = {
 
         console.log(req.body.username);
 
-        db.findOne(userModel, {username : username}, 'username password', function(){
+        db.findOne(userModel, {username : username}, 'username password', function(err, result){
+        
+            if(result != null) {
 
-           console.log("OKAY");
+                if (username == result.username){
+                    console.log("username exists");
+                    if(password == result.password){
+                        console.log("password correct");
+                    }else{
+                        console.log("password INcorrect");
+                    }
+                }else{
+                
+                        console.log("username does not exist");
+                }
 
-
-        })
+            }else{
+                console.log("no such user bitch");
+            }
+        });
 
 
     },
