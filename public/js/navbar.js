@@ -1,6 +1,9 @@
 $(document).ready(function (req, res) {
 
 
+   
+
+
 
     function preloadFunc()
     {
@@ -22,6 +25,10 @@ $(document).ready(function (req, res) {
             }
 
         })
+
+
+
+
     };
     window.onpaint = preloadFunc();
 

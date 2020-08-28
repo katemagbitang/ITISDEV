@@ -33,8 +33,26 @@ var user = [
         firstName: "john",
         lastName: "smith",
         userType: "Regular",
+    },
+    {
+        username: "bobjohnson",
+        email: "bob@gmail.com",
+        password: "$2b$10$DW5ggP/brSWeU1xZzXk2gejAPbF2BGyyFQbkilHbB.6WoEETmCgkm", // "secret"
+        firstName: "bob",
+        lastName: "johnson",
+        userType: "Regular",
+    },
+    {
+        username: "willowsmith",
+        email: "willow@gmail.com",
+        password: "$2b$10$DW5ggP/brSWeU1xZzXk2gejAPbF2BGyyFQbkilHbB.6WoEETmCgkm", // "secret"
+        firstName: "willow",
+        lastName: "smith",
+        userType: "Regular",
     }
-
 ]
 
 mongodb.insertMany(userCollections, user);
+
+
+
