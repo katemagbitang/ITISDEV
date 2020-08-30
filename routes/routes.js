@@ -4,6 +4,7 @@ const controller = require('../controllers/controller.js');
 const userController = require('../controllers/userController.js');
 const orderController = require('../controllers/orderController.js');
 const adminController = require('../controllers/adminController.js');
+const messageController = require('../controllers/messageController.js');
 
 const app = express();
 
@@ -18,7 +19,9 @@ app.get('/login',userController.getLogin);
 app.post('/login', userController.postLogin);
 
 app.get('/logout',userController.getLogout);
-app.get('/messages',userController.getMessage);
+
+app.get('/messages', messageController.getMessage);
+app.get('/messages/:username', messageController.getMessageByUsername);
 
 app.post('/signup',userController.postSignup);
 

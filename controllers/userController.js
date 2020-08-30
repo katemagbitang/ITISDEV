@@ -89,10 +89,6 @@ const userController = {
             res.redirect('/');
         });
             
-    },
-
-    getMessage: function(req,res){
-        res.render("messages",{});
     }
 }
 

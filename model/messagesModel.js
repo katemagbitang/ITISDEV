@@ -7,10 +7,21 @@ const messageSchema = new Schema({
         unique: true,
         required: [true,'Required']
     },
+    // sender: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "User",
+    //     required: [true, 'Required']
+    // },
     sender: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "User",
         required: [true, 'Required']
+    },
+    receiver:{
+        type: String,
+        ref: "User",
+        required: [true, 'Required']
+
     },
     message: {
         type : String,
@@ -26,4 +37,4 @@ const messageSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Messages', messageSchema);
+module.exports = mongoose.model('messages', messageSchema);
