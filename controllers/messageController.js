@@ -209,6 +209,74 @@ const messageController = {
     getMessageByUsername: function(req, res){
 
         
+
+        messagesHistoryModel.find({user1: req.session.username}, function (err, user1result){
+            messagesHistoryModel.find({user2: req.session.username}, function (err, user2result){
+
+                
+                // stores _id of the las messages in the user's messageHistory
+                //used in the sidebar of chat
+                const messageSnippetIDs = [];
+
+                //relationship or link is stored in 2 separate variable, so this is necessary
+                // to make sure that all messages are retrieved
+                for(i = 0 ; i < user1result.length; i++){
+                    if(user1result[i].user1 == req.session.username){ //will get the user2 attribute
+                        var messageSnippetID1 = user1result[i].messages[user1result[i].messages.length - 1];
+                        messageSnippetIDs.push(messageSnippetID1);
+
+                    }
+                }
+
+                //relationship or link is stored in 2 separate variable, so this is necessary
+                // to make sure that all messages are retrieved
+                for(i = 0 ; i < user2result.length; i++){
+                    if(user2result[i].user2 == req.session.username){ //will get the user2 attribute
+                        var messageSnippetID2 = user2result[i].messages[user2result[i].messages.length - 1];
+                        messageSnippetIDs.push(messageSnippetID2);
+                    }
+                }
+
+                // console.log(messageSnippetIDs); //debugging
+
+                // an arraylist of object to be passed to the handlebar.
+                //this contains all necessary information in the front end
+                const messagesList = [];
+
+                var messagesListDetails ; // for storing each messages details
+
+                // finding the message object by the _id (messageSnippetID)
+                messagesModel.find({_id: messageSnippetIDs },   function(err, latestMessage){
+
+                    for( i = 0 ; i< latestMessage.length; i++){
+                        if(latestMessage[i].sender == req.session.username){//gets the receiver username
+                            messagesListDetails = {
+                                username: latestMessage[i].receiver,
+                                messageSnippet : latestMessage[i].message,
+                                snippetDate: latestMessage[i].date
+                            }
+                            messagesList.push(messagesListDetails); //add to the array
+                        }else if(latestMessage[i].receiver == req.session.username){ //gets the sender
+                            messagesListDetails = {
+                                username: latestMessage[i].sender,
+                                messageSnippet : latestMessage[i].message,
+                                snippetDate: latestMessage[i].date
+                            }
+                            messagesList.push(messagesListDetails);//add to the array
+                        }
+                    }
+
+                    // console.log("messagesList: " + JSON.stringify(messagesList)); //debug
+
+                    // Render
+                    res.render("messages", {
+                        messagesList: messagesList // all infos for the messages sidebar
+                    });
+                })
+            });
+        });
+
+        
     }
 
 }
