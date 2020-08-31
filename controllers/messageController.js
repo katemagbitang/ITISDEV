@@ -81,12 +81,12 @@ const messageController = {
                     var usernameParam = req.params.username;
                     var loggedusername = req.session.username;
 
-                    console.log(usernameParam);
-                    console.log(loggedusername);
+                    // console.log(usernameParam);
+                    // console.log(loggedusername);
 
                     messagesHistoryModel.findOne({user1: usernameParam, user2: loggedusername}, function(err, result1){
                         if(result1 != null){
-                            console.log("result1: " + result1);
+                            // console.log("result1: " + result1);
                             const messagesID = result1.messages;
                             messagesModel.find({ _id: messagesID}, function(err, messagesResult){
                                 const messages = [];
@@ -117,7 +117,7 @@ const messageController = {
                                         messages.push(message);
                                     }
                                 }
-                                console.log("messages: "+ JSON.stringify(messages));
+                                // console.log("messages: "+ JSON.stringify(messages));
                                 res.render("messages", {
                                     activeMessageUsername: usernameParam,
                                     messagesList: messagesList, // all infos for the messages sidebar
@@ -125,7 +125,7 @@ const messageController = {
                             })
                         }else{
                             messagesHistoryModel.findOne({user2: usernameParam, user1: loggedusername}, function(err, result2){
-                                console.log("result2: " + result2);
+                                // console.log("result2: " + result2);
                                 const messagesID = result2.messages;
                                 messagesModel.find({ _id: messagesID}, function(err, messagesResult){
                                     const messages = [];
@@ -156,7 +156,7 @@ const messageController = {
                                             messages.push(message);
                                         }
                                     }
-                                    console.log("messages: "+ JSON.stringify(messages));
+                                    // console.log("messages: "+ JSON.stringify(messages));
                                     res.render("messages", {
                                         activeMessageUsername: usernameParam,
                                         messagesList: messagesList, // all infos for the messages sidebar
