@@ -1,0 +1,21 @@
+<div class="msg_history">
+    {{#each messages}}
+    {{#if sender}}
+    {{!-- if sender exists --}}
+        <div class="outgoing_msg">
+            <div class="sent_msg">
+            <p>{{message}}</p>
+            <span class="time_date"> {{date}}</span> </div>
+        </div>
+    {{else}} 
+    {{!-- else if receiver exists --}}
+        <div class="incoming_msg">
+            <div class="received_msg">
+            <div class="received_withd_msg">
+                <p>{{message}}</p>
+                <span class="time_date"> {{date}}</span></div>
+            </div>
+        </div>
+    {{/if}}
+    {{/each}}
+</div>

@@ -12,6 +12,7 @@
 
     {{!-- for changing navbar depending on current user --}}
     <script src="../js/navbar.js" type="text/javascript"></script>
+    <script src="../js/messages.js" type="text/javascript"></script>
 
     <title>Messages | Chapter One</title>
 </head>
@@ -38,20 +39,21 @@
           </div>
         </div>
 
-        <div class="inbox_chat">
+        <div class="inbox_chat" id="inbox_chat">
           {{#each messagesList}}
           
-          <a href="/messages/{{username}}">  
+          {{!-- <a href="/messages/{{username}}" class = "message_link">   --}}
             {{!-- <div class="chat_list active_chat">      NOTE USE THIS FOR ACTIVE CHAT    SO MODIFY THE HBS PA, SHOUD HAVE IF STATEMENTS--}}
             <div class="chat_list "> 
+              <input type="hidden" class="username_list" name="username_list" value="{{username}}">
               <div class="chat_people">
                 <div class="chat_ib">
-                  <h5>{{username}} <span class="chat_date">{{snippetDate}}</span></h5>
+                  <h5>{{username}}<span class="chat_date">{{snippetDate}}</span></h5>
                   <p>{{messageSnippet}}</p>
                 </div>
               </div>
             </div>
-          </a>
+          {{!-- </a> --}}
           {{/each}}
         </div>
         
@@ -59,143 +61,11 @@
       </div>
 
       <div class="messagesRight">
-        <div class="messageRightName"> <h4>Sunil Rajput</h4></div>
-        <div class="msg_history">
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>Test which is a new approach to have all
-                  solutions</p>
-                <span class="time_date"> 11:01 AM    |    June 9</span></div>
-            </div>
-          </div>
-          <div class="outgoing_msg">
-            <div class="sent_msg">
-              <p>Test which is a new approach to have all
-                solutions</p>
-              <span class="time_date"> 11:01 AM    |    June 9</span> </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>Test, which is a new approach to have</p>
-                <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>Test, which is a new approach to have</p>
-                <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>Test, which is a new approach to have</p>
-                <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>Test, which is a new approach to have</p>
-                <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-            </div>
-          </div>
-          <div class="outgoing_msg">
-            <div class="sent_msg">
-              <p>Apollo University, Delhi, India Test</p>
-              <span class="time_date"> 11:01 AM    |    Today</span> </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>We work directly with our designers and suppliers,
-                  and sell direct to you, which means quality, exclusive
-                  products, at a price anyone can afford.</p>
-                <span class="time_date"> 11:01 AM    |    Today</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>We work directly with our designers and suppliers,
-                  and sell direct to you, which means quality, exclusive
-                  products, at a price anyone can afford.</p>
-                <span class="time_date"> 11:01 AM    |    Today</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>We work directly with our designers and suppliers,
-                  and sell direct to you, which means quality, exclusive
-                  products, at a price anyone can afford.</p>
-                <span class="time_date"> 11:01 AM    |    Today</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>We work directly with our designers and suppliers,
-                  and sell direct to you, which means quality, exclusive
-                  products, at a price anyone can afford.</p>
-                <span class="time_date"> 11:01 AM    |    Today</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>We work directly with our designers and suppliers,
-                  and sell direct to you, which means quality, exclusive
-                  products, at a price anyone can afford.</p>
-                <span class="time_date"> 11:01 AM    |    Today</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>We work directly with our designers and suppliers,
-                  and sell direct to you, which means quality, exclusive
-                  products, at a price anyone can afford.</p>
-                <span class="time_date"> 11:01 AM    |    Today</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>We work directly with our designers and suppliers,
-                  and sell direct to you, which means quality, exclusive
-                  products, at a price anyone can afford.</p>
-                <span class="time_date"> 11:01 AM    |    Today</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>We work directly with our designers and suppliers,
-                  and sell direct to you, which means quality, exclusive
-                  products, at a price anyone can afford.</p>
-                <span class="time_date"> 11:01 AM    |    Today</span></div>
-            </div>
-          </div>
-          <div class="incoming_msg">
-            <div class="received_msg">
-              <div class="received_withd_msg">
-                <p>We work directly with our designers and suppliers,
-                  and sell direct to you, which means quality, exclusive
-                  products, at a price anyone can afford.</p>
-                <span class="time_date"> 11:01 AM    |    Today</span></div>
-            </div>
-          </div>
-          <div class="outgoing_msg">
-            <div class="sent_msg">
-              <p>Apollo University, Delhi, India Test</p>
-              <span class="time_date"> 11:01 AM    |    Today   | <span class="seen"> Seen.</span> </span> 
-            </div>
-          </div>
-        </div>
+        <div class="messageRightName"><h4>{{activeMessageUsername}}</h4></div>
+
+        {{!-- this is the messages na talaga --}}
+        {{> messagesPartial}}
+        
         <div class="type_msg">
           <div class="input_msg_write">
             <input type="text" class="write_msg" placeholder="Type a message" />
