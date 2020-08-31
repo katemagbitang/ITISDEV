@@ -22,6 +22,11 @@ app.get('/logout',userController.getLogout);
 
 app.get('/messages', messageController.getMessage);
 app.get('/messages/:username', messageController.getMessageByUsername);
+// app.get('/getMessagesList/:username', messageController.getMessagesList);
+// app.get('/getMessages/:username/:messages', messageController.getMessages);
+// app.get('/messages/:messages/:messagesList', messageController.getMessage);
+// app.get('/messages/:username/:messages/:messagesList', messageController.getMessageByUsername);
+
 
 app.post('/signup',userController.postSignup);
 
