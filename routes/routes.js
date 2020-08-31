@@ -6,6 +6,8 @@ const orderController = require('../controllers/orderController.js');
 const adminController = require('../controllers/adminController.js');
 const messageController = require('../controllers/messageController.js');
 
+// const validation = require('../helpers/validation.js');
+
 const app = express();
 
 app.get('/',controller.getIndex);
@@ -19,6 +21,8 @@ app.get('/login',userController.getLogin);
 app.post('/login', userController.postLogin);
 
 app.get('/logout',userController.getLogout);
+
+app.get('/getUsername', userController.getUsername);
 
 app.get('/messages', messageController.getMessage);
 app.get('/messages/:username', messageController.getMessageByUsername);
