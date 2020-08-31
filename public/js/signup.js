@@ -18,6 +18,30 @@ $(document).ready(function(){
         $('#username').css({'border': "1px solid #4E6172 "});
     }
 
+    function nameIsEmpty(){
+        if($("#fname").val() != null && $("#fname").val() != ""){
+            enableSubmit();
+            $('#fname').css({'border': "1px solid #4E6172 "});
+            $('#fNameError').text('');
+        }else{
+            disableSubmit();
+            $('#fname').css({'border': "1px solid #DB4E35 "});
+            $('#fNameError').text('First name is empty');
+
+        }
+
+        if($("#lname").val() != null && $("#lname").val() != ""){
+            enableSubmit();
+            $('#lname').css({'border': "1px solid #4E6172 "});
+            $('#lNameError').text('');
+        }else{
+            disableSubmit();
+            $('#lname').css({'border': "1px solid #DB4E35 "});
+            $('#lNameError').text('Last name is empty');
+
+        }
+    }
+
     function fieldsValidate(field){
         if($("#username").val() != null && $("#username").val() != ""){
             enableSubmit();
@@ -58,7 +82,13 @@ $(document).ready(function(){
         fieldsValidate();
     });
 
-  
+    $('#fname').keyup(function(){
+        nameIsEmpty();
+    });
+
+    $('#lname').keyup(function(){
+        nameIsEmpty();
+    });
 });
 
 

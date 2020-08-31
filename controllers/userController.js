@@ -92,23 +92,6 @@ const userController = {
     },
 
     getUsername: function (req, res) {
-
-        // var username = req.query.username;
-        // User.findOne({username: username}, 'username', function (err, result) {
-        //     if(err){
-        //         // return res.render('error');
-        //         console.log('User not found');
-        //         res.send(false)
-        //     }
-        //     else{
-        //         if(result){
-        //             res.send(false);
-        //         }
-        //         else{
-        //             res.send(true);
-        //         }
-        //     }
-        // });
         var username = req.query.username;
 
         db.findOne(userModel, {username : username}, 'username', function(result){
