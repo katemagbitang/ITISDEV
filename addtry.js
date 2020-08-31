@@ -52,7 +52,7 @@ var messages = [
         _id : ObjectId(),
         sender: "willowsmith",
         receiver: "seanxnieva",
-        message: "Hello, ask ko lang po yung.. jk kaxadskjfga ok test test lorem ipsum",
+        message: "okay si willow smith ito 1",
         date: Date(),
         read: "Read"
     },
@@ -60,7 +60,7 @@ var messages = [
         _id : ObjectId(),
         sender: "seanxnieva",
         receiver: "willowsmith",
-        message: "ah bale po ano po ano.. ganito po kase.. ahmm ok",
+        message: "si seanxnieva ito 1",
         date: Date(),
         read: "Read"
     },
@@ -68,7 +68,7 @@ var messages = [
         _id : ObjectId(),
         sender: "willowsmith",
         receiver: "seanxnieva",
-        message: "Hello, ask ko lang po yung.. jk kaxadskjfga ok test test lorem ipsum",
+        message: "okay si willow smith ito 2",
         date: Date(),
         read: "Read"
     },
@@ -76,7 +76,7 @@ var messages = [
         _id : ObjectId(),
         sender: "willowsmith",
         receiver: "seanxnieva",
-        message: "Hello, ask ko lang po yung.. jk kaxadskjfga ok test test lorem ipsum",
+        message: "okay si willow smith ito 3",
         date: Date(),
         read: "Read"
     },
@@ -84,7 +84,7 @@ var messages = [
         _id : ObjectId(),
         sender: "johnsmith",
         receiver: "seanxnieva",
-        message: "Hello, ask ko lang po yung.. jk kaxadskjfga ok test test lorem ipsum",
+        message: "okay si john smith ito 2",
         date: Date(),
         read: "Read"
     },

@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <div class="inbox_chat">
+        <div class="inbox_chat" id="inbox_chat">
           {{#each messagesList}}
           
           {{!-- <a href="/messages/{{username}}" class = "message_link">   --}}
@@ -61,7 +61,7 @@
       </div>
 
       <div class="messagesRight">
-        <div class="messageRightName"> <h4>{{activeMessageUsername}}</h4></div>
+        <div class="messageRightName"><h4>{{activeMessageUsername}}</h4></div>
 
         {{!-- this is the messages na talaga --}}
         {{> messagesPartial}}
