@@ -16,27 +16,87 @@
        {{> navuser}}
     </div>
     {{!-- NAVBARS END --}}
-    <div id="requestlist">
-    <br>
-    <div class="container">
-        <div id="signup-row" class="row justify-content-center align-items-center">
-            <div id="signup-column" class="col-md-6">
-                <div id="signup-box" class="col-md-12 text-center">
-                    <h3 class="text-info">Cart</h3>
-                    <p class="text-info">No items in the cart.</p>
-                    <a class="btn btn-info btn-md" role="button" href="#">Add more books</a>
-                    <a class="btn btn-info btn-md" role="button" href="home">Home</a>
-                </div>
-            </div>
-            <div id="signup-column" class="col-md-6 bg-info">
-                <div id="signup-box" class="col-md-12 text-center">
-                    <h3 class="text-light">Cart Infomation</h3>
-                    <!-- <p class="text-light">No items in the cart.</p> -->
-                    <a class="btn btn-light btn-md" role="button" href="#">Proceed to Checkout</a>
-                </div>
-            </div>
-        </div>
+    <div id="cart">
+        <br>
+        <br>
+        <h3 class="text-center text-dark">Cart</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>
+                        <img src="https://static.scientificamerican.com/sciam/cache/file/1DDFE633-2B85-468D-B28D05ADAE7D1AD8_source.jpg?w=590&h=800&D80F3D79-4382-49FA-BE4B4D0C62A5C3ED" height="150px" width="150px" alt="Card image cap">
+                    </td>
+                    <td>
+                        <div class="row">Title</div>
+                        <div class="row">Author</div>
+                        <div class="row">Quality</div>
+                        <div class="row">Edition</div>
+                        <div class="row">Type</div>
+                    </td>
+                    <td>Php100.00</td>
+                    <td>1</td>
+                    <td>Php100.00</td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" role="button" href="#">Remove</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>
+                        <img src="https://static.scientificamerican.com/sciam/cache/file/1DDFE633-2B85-468D-B28D05ADAE7D1AD8_source.jpg?w=590&h=800&D80F3D79-4382-49FA-BE4B4D0C62A5C3ED" height="150px" width="150px" alt="Card image cap">
+                    </td>
+                    <td>
+                        <div class="row">Title</div>
+                        <div class="row">Author</div>
+                        <div class="row">Quality</div>
+                        <div class="row">Edition</div>
+                        <div class="row">Type</div>
+                    </td>
+                    <td>Php100.00</td>
+                    <td>1</td>
+                    <td>Php100.00</td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" role="button" href="#">Remove</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>
+                        <img src="https://static.scientificamerican.com/sciam/cache/file/1DDFE633-2B85-468D-B28D05ADAE7D1AD8_source.jpg?w=590&h=800&D80F3D79-4382-49FA-BE4B4D0C62A5C3ED" height="150px" width="150px" alt="Card image cap">
+                    </td>
+                    <td>
+                        <div class="row">Title</div>
+                        <div class="row">Author</div>
+                        <div class="row">Quality</div>
+                        <div class="row">Edition</div>
+                        <div class="row">Type</div>
+                    </td>
+                    <td>Php100.00</td>
+                    <td>1</td>
+                    <td>Php100.00</td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" role="button" href="#">Remove</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col text-center">
+            <a class="btn btn-dark btn-sm" role="button" href="productpage">Add more books</a>
+            <a class="btn btn-dark btn-sm" role="button" href="home">Home</a>
+            <a class="btn btn-dark btn-sm" role="button" href="#">Proceed to Checkout</a>
+        </div>     
     </div>
-</div>
 </body>
 </html>
