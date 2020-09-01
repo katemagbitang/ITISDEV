@@ -3,13 +3,18 @@ var Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
     book_ID: {
-        type: Number,
+        type: Schema.Types.ObjectId,
         unique: true,
         required: [true,'Required']
     },
     title: {
         type: String,
         required: [true,'Required']
+    },
+    author: {
+        type: [Schema.Types.ObjectId],
+        ref: "authors",
+        required: [true, 'Required']
     },
     publisher: {
         type: String,
@@ -20,7 +25,7 @@ const bookSchema = new Schema({
         required: [true,'Required']
     },
     category: {
-        type: Number,
+        type: String,
         required: [true,'Required']
     },
     bookSynopsis: {
