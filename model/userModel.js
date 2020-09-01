@@ -28,9 +28,12 @@ const userSchema = new Schema({
         enum: ['Regular', 'Admin'],
         default: 'Regular'
     }
-    // lastLogin: {
-    //     type: Date
-    // },
+    ,
+    lastLogin: {
+        type: Date,
+        default: null
+    }
+    // ,
     // messages: [{
     //     message_ID: {
     //         type: Number,
