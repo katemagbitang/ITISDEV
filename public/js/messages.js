@@ -21,7 +21,12 @@ $(document).ready(function (req, res) {
         console.log("messageRightName: " + JSON.stringify(messageRightName));
 
 
-        // $(".msg_history").scrollHeight;
+
+        // makes the messages scroll at the bottom on load
+        var chatHistory = document.getElementById("msg_history");
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+
+
 
     };
     window.onpaint = preloadFunc();
