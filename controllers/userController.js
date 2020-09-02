@@ -100,6 +100,17 @@ const userController = {
                 console.log(result);
             }
         });
+    },
+
+    getEmail: function (req, res) {
+        var email = req.query.email;
+
+        db.findOne(userModel, {email : email}, 'email', function(result){
+            if(result != null) { // if email EXISTS in the db
+                res.send(result);
+                console.log(result);
+            }
+        });
     }
 }
 

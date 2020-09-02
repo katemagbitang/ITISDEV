@@ -23,6 +23,7 @@ app.post('/login', userController.postLogin);
 app.get('/logout',userController.getLogout);
 
 app.get('/getUsername', userController.getUsername);
+app.get('/getEmail', userController.getEmail);
 
 app.get('/messages', messageController.getMessage);
 app.get('/messages/:username', messageController.getMessageByUsername);
