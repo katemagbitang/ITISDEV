@@ -20,6 +20,9 @@ $(document).ready(function (req, res) {
 
         console.log("messageRightName: " + JSON.stringify(messageRightName));
 
+
+        // $(".msg_history").scrollHeight;
+
     };
     window.onpaint = preloadFunc();
 
