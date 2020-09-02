@@ -27,6 +27,7 @@ app.get('/getEmail', userController.getEmail);
 
 app.get('/messages', messageController.getMessage);
 app.get('/messages/:username', messageController.getMessageByUsername);
+app.post('/messages/:username', messageController.postMessage);
 // app.get('/getMessagesList/:username', messageController.getMessagesList);
 // app.get('/getMessages/:username/:messages', messageController.getMessages);
 // app.get('/messages/:messages/:messagesList', messageController.getMessage);

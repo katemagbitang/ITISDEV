@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 const bookVersionSchema = new Schema({
     bookversion_ID: {
-        type: Number,
+        type: Schema.Types.ObjectId,
         unique: true,
         required: [true,'Required']
     },

@@ -20,11 +20,25 @@ const userController = {
         var username = req.body.username;
         var password = req.body.password;
 
-        db.findOne(userModel, {username : username}, 'username password userType', function(result){
+        db.findOne(userModel, {username : username}, '', function(result){
             if(result != null) { // if username EXISTS in the db
                 if (username == result.username){
                     bcrypt.compare(password, result.password, function(err, equal) {
                         if(equal){ // correct password
+
+                            var userUpdate = {
+                                _id: result._id,
+                                username: result.username,
+                                email: result.email,
+                                password: result.password,
+                                firstName: result.firstName,
+                                lastName: result.lastName,
+                                userType: result.userType,
+                                lastLogin: Date.now()
+                            }
+
+                            db.updateOne(userModel, {username : username}, userUpdate);
+
                             req.session.username = result.username;
                             req.session.userType = result.userType;
                             res.redirect("/"); //success, then redirects to home

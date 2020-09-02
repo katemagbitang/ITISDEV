@@ -60,20 +60,22 @@ const messageController = {
                             messagesListDetails = {
                                 username: latestMessage[i].receiver,
                                 messageSnippet : latestMessage[i].message,
-                                snippetDate: latestMessage[i].date.toLocaleString()
+                                snippetDate: latestMessage[i].date
                             }
                             messagesList.push(messagesListDetails); //add to the array
                         }else if(latestMessage[i].receiver == req.session.username){ //gets the sender
                             messagesListDetails = {
                                 username: latestMessage[i].sender,
                                 messageSnippet : latestMessage[i].message,
-                                snippetDate: latestMessage[i].date.toLocaleString()
+                                snippetDate: latestMessage[i].date
                             }
                             messagesList.push(messagesListDetails);//add to the array
                         }
                     }
 
                     // console.log("messagesList: " + JSON.stringify(messagesList)); //debug
+
+                    
 
 
                     // CODES ABOVE THIS IS SAME AS ON getMessages
@@ -117,9 +119,21 @@ const messageController = {
                                         messages.push(message);
                                     }
                                 }
+
+                                // // sorts messageslist by date descending order
+                                messagesList.sort((b,a) =>  a.snippetDate -  b.snippetDate );
+
+                                //converts iso date to a more uhm minimal format
+                                for( i = 0 ; i< messagesList.length; i++){
+                                    messagesList[i].senusernameder= messagesList[i].username;
+                                    messagesList[i].messageSnippet = messagesList[i].messageSnippet;
+                                    messagesList[i].snippetDate = messagesList[i].snippetDate.toLocaleString();
+                                }
+                                
                                 // console.log("messages: "+ JSON.stringify(messages));
                                 res.render("messages", {
                                     activeMessageUsername: usernameParam,
+                                    messagesHistory_id: result1._id,
                                     messagesList: messagesList, // all infos for the messages sidebar
                                     messages: messages});
                             })
@@ -156,9 +170,21 @@ const messageController = {
                                             messages.push(message);
                                         }
                                     }
+
+                                    // // sorts messageslist by date descending order
+                                    messagesList.sort((b,a) =>  a.snippetDate -  b.snippetDate );
+
+                                    //converts iso date to a more uhm minimal format
+                                    for( i = 0 ; i< messagesList.length; i++){
+                                        messagesList[i].senusernameder= messagesList[i].username;
+                                        messagesList[i].messageSnippet = messagesList[i].messageSnippet;
+                                        messagesList[i].snippetDate = messagesList[i].snippetDate.toLocaleString();
+                                    }
+
                                     // console.log("messages: "+ JSON.stringify(messages));
                                     res.render("messages", {
                                         activeMessageUsername: usernameParam,
+                                        messagesHistory_id: result2._id,
                                         messagesList: messagesList, // all infos for the messages sidebar
                                         messages: messages});
                                 })
@@ -207,34 +233,46 @@ const messageController = {
 
                 // an arraylist of object to be passed to the handlebar.
                 //this contains all necessary information in the front end
-                const messagesList = [];
+                var messagesList = [];
 
                 const messages = [];
 
                 var messagesListDetails ; // for storing each messages details
 
                 // finding the message object by the _id (messageSnippetID)
-                messagesModel.find({_id: messageSnippetIDs },   function(err, latestMessage){
+                messagesModel.find({_id: messageSnippetIDs }).sort([['snippetDate', 1]]).exec(   function(err, latestMessage){
 
                     for( i = 0 ; i< latestMessage.length; i++){
                         if(latestMessage[i].sender == req.session.username){//gets the receiver username
                             messagesListDetails = {
                                 username: latestMessage[i].receiver,
                                 messageSnippet : latestMessage[i].message,
-                                snippetDate: latestMessage[i].date.toLocaleString()
+                                snippetDate: latestMessage[i].date
                             }
                             messagesList.push(messagesListDetails); //add to the array
                         }else if(latestMessage[i].receiver == req.session.username){ //gets the sender
                             messagesListDetails = {
                                 username: latestMessage[i].sender,
                                 messageSnippet : latestMessage[i].message,
-                                snippetDate: latestMessage[i].date.toLocaleString()
+                                snippetDate: latestMessage[i].date
                             }
                             messagesList.push(messagesListDetails);//add to the array
                         }
                     }
 
-                    // console.log("messagesList: " + JSON.stringify(messagesList)); //debug
+                    // // console.log("messagesList: " + JSON.stringify(messagesList)); //debug
+
+
+                    // // sorts messageslist by date descending order
+                    messagesList.sort((b,a) =>  a.snippetDate -  b.snippetDate );
+
+                    //converts iso date to a more uhm minimal format
+                    for( i = 0 ; i< messagesList.length; i++){
+                        messagesList[i].senusernameder= messagesList[i].username;
+                        messagesList[i].messageSnippet = messagesList[i].messageSnippet;
+                        messagesList[i].snippetDate = messagesList[i].snippetDate.toLocaleString();
+                    }
+
 
                     // Render
                     res.render("messages", {
@@ -244,6 +282,79 @@ const messageController = {
                 })
             });
         });
+    },
+
+    postMessage: function(req, res){
+
+        var messageText = req.body.message;
+        var messagesHistory_id = req.body.messagesHistory_id;
+        var receiver = req.body.receiver ;
+
+        var sender = req.session.username;
+
+        console.log(messageText +" "+messagesHistory_id +" "+receiver+" "+sender )
+
+        
+        messagesHistoryModel.findOne({_id: messagesHistory_id}, function(err, messagesHistoryResult){
+
+            if(messageText != ""){
+                console.log(messagesHistory_id);
+
+                console.log(messagesHistoryResult);
+
+                
+
+                var message = new messagesModel({
+                    _id: ObjectId(),
+                    sender: sender,
+                    receiver: receiver,
+                    message: messageText,
+                    date: Date.now()
+                })
+
+                
+
+                console.log(message);
+                message.save();
+
+
+                var messages = [];
+                messages = messagesHistoryResult.messages;
+                messages.push(message._id);
+
+                console.log(messages);
+
+                var messagesHistoryUpdate = {
+                    _id: messagesHistoryResult._id,
+                    user1: messagesHistoryResult.user1,
+                    user2: messagesHistoryResult.user2,
+                    messages: messages
+                }
+
+                console.log(messagesHistoryUpdate);
+
+                // messagesHistoryModel.update({ _id: messagesHistory_id }, messagesHistoryUpdate ) ;
+
+                db.updateOne( messagesHistoryModel, { _id: messagesHistory_id }, messagesHistoryUpdate );
+
+                res.redirect('back');
+                // res.send(message);
+            }else{
+                res.redirect('back');
+            }
+                
+
+
+
+
+        })
+
+
+
+        // db.updateOne(Restaurant, {_id: ObjectId(reviewSResult[0].restaurantID)}, updatedResto);
+
+
+
     }
 }
 
