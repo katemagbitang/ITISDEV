@@ -39,10 +39,10 @@ $(document).ready(function(){
                 $('#lname').css({'border': "1px solid #DB4E35 "});
                 $('#lNameError').text('Last name is required.');
             }
-            if(field.is($('#password'))){
-                $('#password').css({'border': "1px solid #DB4E35 "});
-                $('#pwError').text('Password is required.');
-            }
+            // if(field.is($('#password'))){
+            //     $('#password').css({'border': "1px solid #DB4E35 "});
+            //     $('#pwError').text('Password is required.');
+            // }
             disableSubmit();            
             // valid = false;
             
@@ -56,10 +56,10 @@ $(document).ready(function(){
                 $('#lname').css({'border': "1px solid #4E6172 "});
                 $('#lNameError').text('');
             }
-            if (field.is($('#password'))){
-                $('#password').css({'border': "1px solid #4E6172 "});
-                $('#pwError').text('');
-            }
+            // if (field.is($('#password'))){
+            //     $('#password').css({'border': "1px solid #4E6172 "});
+            //     $('#pwError').text('');
+            // }
 
             if (areAllFilled() == true)
                 enableSubmit();
@@ -77,6 +77,11 @@ $(document).ready(function(){
             // valid = false;
             $('#username').css({'border': "1px solid #DB4E35 "});
             $('#usernameError').text('Username is required');
+            disableSubmit();
+        }
+        else if(user.val().length < 4 || user.val().length > 15){
+            $('#username').css({'border': "1px solid #DB4E35 "});
+            $('#usernameError').text('Username must be 4-15 characters only.');
             disableSubmit();
         }
         else{
@@ -119,6 +124,14 @@ $(document).ready(function(){
             $('#emailError').text('Email is required');
             disableSubmit();
         }
+        else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail.val()) == false){
+            // valid = false; // sets to false because the email is not valid.
+            $('#email').css({'border': "1px solid #DB4E35 "});
+            $("#emailError").text('Invalid email format');
+
+            disableSubmit();
+
+        }
         else{
             $('#email').css({'border': "1px solid #4E6172 "});
             $('#emailError').text('');
@@ -149,6 +162,26 @@ $(document).ready(function(){
         // return valid;
     }
 
+    function validPassword(pass){
+        if(pass.val() == ''){
+            $('#password').css({'border': "1px solid #DB4E35 "});
+            $('#pwError').text('Password is required.');
+            disableSubmit();
+        }
+        else if(pass.val().length < 5){
+            $('#password').css({'border': "1px solid #DB4E35 "});
+            $('#pwError').text('Password must be at least 5 characters.');
+            disableSubmit();
+        }
+        else{
+            $('#password').css({'border': "1px solid #4E6172 "});
+            $('#pwError').text('');
+            
+            if (areAllFilled() == true)
+                enableSubmit();
+        }
+    }
+
     $('#username').keyup(function(){
         // validateField($("#username"));
         validUsername($("#username"));
@@ -166,7 +199,7 @@ $(document).ready(function(){
 
     $('#password').keyup(function(){
         // validateField($('#password'));
-        isFilled($('#password'));
+        validPassword($('#password'));
     });
 
     $('#email').keyup(function(){
