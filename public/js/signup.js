@@ -289,7 +289,5 @@ $(document).ready(function(){
         validateField($('#email'));
     });
 
-    
-
 });
 
