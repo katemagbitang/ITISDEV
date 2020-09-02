@@ -10,54 +10,10 @@ $(document).ready(function(){
         $('#submit').prop('disabled', false);
     }
 
-
-    // function isFilled(){
-
-
-    //     var fname = $("#fname").val();
-    //     var lname = $("#lname").val();
-    //     var username = $("#username").val();
-    //     var email = $("#email").val();
-    //     var password = $("#password").val();
-
-    //     return !(fname == null && fname == "") && !!(lname == null && lname == "") && !(username == null && username == "") && !(email == null && email == "") && !(password == null && password == "")
-
-    //     // if($("#fname").val() != null && $("#fname").val() != ""){
-    //     //     // enableSubmit();
-    //     //     $('#fname').css({'border': "1px solid #4E6172 "});
-    //     //     $('#fNameError').text('');
-    //     //     check = true;
-    //     // }else{
-    //     //     // disableSubmit();
-    //     //     $('#fname').css({'border': "1px solid #DB4E35 "});
-    //     //     $('#fNameError').text('First name is empty');
-    //     //     check = false;
-    //     // }
-
-    //     // if($("#lname").val() != null && $("#lname").val() != ""){
-    //     //     // enableSubmit();
-    //     //     $('#lname').css({'border': "1px solid #4E6172 "});
-    //     //     $('#lNameError').text('');
-    //     //     check = true;
-    //     // }else{
-    //     //     // disableSubmit();
-    //     //     $('#lname').css({'border': "1px solid #DB4E35 "});
-    //     //     $('#lNameError').text('Last name is empty');
-    //     //     check = false;
-    //     // }
-
-    //     // return check;
-    // }
-
-        //checks if all fields are filled up
+     //checks if all fields are filled up
     function areAllFilled(){
 
         var valid ;
-    
-            // var validusername = validUsername($("#username"));
-            // var validemail = validEmail($("#email"));
-            // var validp = validPassword($("#password"));
-            // var validcp = validCPassword($("#cpassword"));
         
     
         if($("#username").val() != '' && $("#email").val() != '' && $("#password").val() != '' && $("#fname").val() != '' && $("#lname").val() != '' ){
