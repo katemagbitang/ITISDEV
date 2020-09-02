@@ -70,9 +70,9 @@
           <div class="input_msg_write">
             <form id="sendMessageForm" class="sendMessageForm"  method="post">
               <input type="hidden" class="messagesHistory_id" name="messagesHistory_id" value="{{messagesHistory_id}}">
-              <input type="hidden" class="receiverUsername" name="receiverUsername" value="{{activeMessageUsername}}">
+              <input type="hidden" class="receiver" name="receiver" value="{{activeMessageUsername}}">
               <input type="text" class="write_msg message" name = "message" placeholder="Type a message" />
-              <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"> ➤ </i></button>
+              <button class="msg_send_btn" id="msg_send_btn" type="submit" ><i class="fa fa-paper-plane-o" aria-hidden="true"> ➤ </i></button>
               {{!-- html: &#x27a4;   &#x27a4;	js: \u27a4	text: ➤ --}}
             </form>
           </div>
