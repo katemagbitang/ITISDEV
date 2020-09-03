@@ -21,6 +21,7 @@ var user = [
         firstName: "sean",
         lastName: "nieva",
         userType: "Admin",
+        lastLogin: new Date("2020-09-01T10:13:19.873+00:00")
     },
     {
         _id : ObjectId(),
@@ -30,6 +31,7 @@ var user = [
         firstName: "john",
         lastName: "smith",
         userType: "Regular",
+        lastLogin: new Date("2020-08-27T10:13:19.873+00:00")
     },
     {
         _id : ObjectId(),
@@ -39,6 +41,7 @@ var user = [
         firstName: "bob",
         lastName: "johnson",
         userType: "Regular",
+        lastLogin: new Date("2020-08-28T10:13:19.873+00:00")
     },
     {
         _id : ObjectId(),
@@ -48,6 +51,7 @@ var user = [
         firstName: "willow",
         lastName: "smith",
         userType: "Regular",
+        lastLogin: new Date("2020-08-30T10:13:19.873+00:00")
     }
 ]
 

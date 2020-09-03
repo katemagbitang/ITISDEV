@@ -10,230 +10,202 @@ $(document).ready(function(){
         $('#submit').prop('disabled', false);
     }
 
-    function errorUsername(){
-        $('#username').css({'border': "1px solid #DB4E35 "});
-    }
+     //checks if all fields are filled up
+    function areAllFilled(){
 
-    function normalUsername(){
-        $('#username').css({'border': "1px solid #4E6172 "});
-    }
-
-    function nameIsEmpty(){
-        if($("#fname").val() != null && $("#fname").val() != ""){
-            enableSubmit();
-            $('#fname').css({'border': "1px solid #4E6172 "});
-            $('#fNameError').text('');
+        var valid ;
+        
+    
+        if($("#username").val() != '' && $("#email").val() != '' && $("#password").val() != '' && $("#fname").val() != '' && $("#lname").val() != '' ){
+        // if($("#username").val() != '' && $("#email").val() != ''){
+                // alert("true");
+            valid = true;
         }else{
-            disableSubmit();
-            $('#fname').css({'border': "1px solid #DB4E35 "});
-            $('#fNameError').text('First name is empty');
-
+            valid = false;
         }
-
-        if($("#lname").val() != null && $("#lname").val() != ""){
-            enableSubmit();
-            $('#lname').css({'border': "1px solid #4E6172 "});
-            $('#lNameError').text('');
-        }else{
-            disableSubmit();
-            $('#lname').css({'border': "1px solid #DB4E35 "});
-            $('#lNameError').text('Last name is empty');
-
-        }
+        return valid;
     }
 
-    function fieldsValidate(field){
-        if($("#username").val() != null && $("#username").val() != ""){
-            enableSubmit();
-            normalUsername();
-            $('#usernameError').text('');
-        }else{
-            disableSubmit();
-            errorUsername();
-            $('#usernameError').text('Username is empty');
 
-        }
+    function isFilled(field){
+        // var valid = false;
 
-        // if($("#password").val() != null &&  $("#password").val() != ""){
-        //     enableSubmit();
-        //     normalPassword();
-        // }else{
-        //     disableSubmit();
-        //     errorPassword();
-        // }
-    }
-     
-    $('#username').keyup(function(){
-        var username = $('#username').val();
-
-        $.get('/getUsername', {username:username}, function(result){
-            if(result.username == username){
-                errorUsername();
-                disableSubmit();
-                $('#usernameError').text('Username already registered');
+        if (field.val() ==""){
+            if(field.is($('#fname'))){
+                $('#fname').css({'border': "1px solid #DB4E35 "});
+                $('#fNameError').text('First name is required.');
             }
-            else{
-                normalUsername();
+            if(field.is($('#lname'))){
+                $('#lname').css({'border': "1px solid #DB4E35 "});
+                $('#lNameError').text('Last name is required.');
+            }
+            // if(field.is($('#password'))){
+            //     $('#password').css({'border': "1px solid #DB4E35 "});
+            //     $('#pwError').text('Password is required.');
+            // }
+            disableSubmit();            
+            // valid = false;
+            
+        }
+        else{
+            if (field.is($('#fname'))){
+                $('#fname').css({'border': "1px solid #4E6172 "});
+                $('#fNameError').text('');
+            }
+            if (field.is($('#lname'))){
+                $('#lname').css({'border': "1px solid #4E6172 "});
+                $('#lNameError').text('');
+            }
+            // if (field.is($('#password'))){
+            //     $('#password').css({'border': "1px solid #4E6172 "});
+            //     $('#pwError').text('');
+            // }
+
+            if (areAllFilled() == true)
                 enableSubmit();
-                $('#usernameError').text('');
-            }
-        });
+            // valid = true;
+        }
 
-        fieldsValidate();
+        // return valid;
+    }
+
+    function validUsername(user){
+        // var username = $('#username').val();
+        // var valid = false;
+
+        if (user.val() == ""){
+            // valid = false;
+            $('#username').css({'border': "1px solid #DB4E35 "});
+            $('#usernameError').text('Username is required');
+            disableSubmit();
+        }
+        else if(user.val().length < 4 || user.val().length > 15){
+            $('#username').css({'border': "1px solid #DB4E35 "});
+            $('#usernameError').text('Username must be 4-15 characters only.');
+            disableSubmit();
+        }
+        else{
+            $('#username').css({'border': "1px solid #4E6172 "});
+            $('#usernameError').text('');
+        // }
+        // else{
+            username = user.val();
+
+            $.get('/getUsername', {username:username}, function(result){
+                if(result.username == username){
+                    $('#username').css({'border': "1px solid #DB4E35 "});
+                    $('#usernameError').text('Username already registered');
+                    // valid = false;
+                    disableSubmit();
+                }
+                else{
+                    $('#username').css({'border': "1px solid #4E6172 "});
+                    $('#usernameError').text('');
+    
+                    if (areAllFilled() == true){
+                        enableSubmit();
+                    }
+                    // valid = true;
+                        
+                }
+            });
+            // valid = true;
+        }
+        // return valid;
+    }
+
+    function validEmail(mail){
+        // var username = $('#username').val();
+        // var valid = false;
+
+        if (mail.val() == ""){
+            // valid = false;
+            $('#email').css({'border': "1px solid #DB4E35 "});
+            $('#emailError').text('Email is required');
+            disableSubmit();
+        }
+        else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail.val()) == false){
+            // valid = false; // sets to false because the email is not valid.
+            $('#email').css({'border': "1px solid #DB4E35 "});
+            $("#emailError").text('Invalid email format');
+
+            disableSubmit();
+
+        }
+        else{
+            $('#email').css({'border': "1px solid #4E6172 "});
+            $('#emailError').text('');
+        // }
+        // // else{
+            email = mail.val();
+
+            $.get('/getEmail', {email:email}, function(result){
+                if(result.email == email){
+                    $('#email').css({'border': "1px solid #DB4E35 "});
+                    $('#emailError').text('Email already registered');
+                    // valid = false;
+                    disableSubmit();
+                    
+                }
+                else{
+                    $('#email').css({'border': "1px solid #4E6172 "});
+                    $('#emailError').text('');
+    
+                    if (areAllFilled() == true){
+                        enableSubmit();
+                    }
+                    // valid = true;    
+                }
+            });
+            // valid = true;
+        }
+        // return valid;
+    }
+
+    function validPassword(pass){
+        if(pass.val() == ''){
+            $('#password').css({'border': "1px solid #DB4E35 "});
+            $('#pwError').text('Password is required.');
+            disableSubmit();
+        }
+        else if(pass.val().length < 5){
+            $('#password').css({'border': "1px solid #DB4E35 "});
+            $('#pwError').text('Password must be at least 5 characters.');
+            disableSubmit();
+        }
+        else{
+            $('#password').css({'border': "1px solid #4E6172 "});
+            $('#pwError').text('');
+            
+            if (areAllFilled() == true)
+                enableSubmit();
+        }
+    }
+
+    $('#username').keyup(function(){
+        // validateField($("#username"));
+        validUsername($("#username"));
     });
 
     $('#fname').keyup(function(){
-        nameIsEmpty();
+        // validateField($('#fname'));
+        isFilled($('#fname'));
     });
 
     $('#lname').keyup(function(){
-        nameIsEmpty();
+        // validateField($('#lname'));
+        isFilled($('#lname'));
     });
+
+    $('#password').keyup(function(){
+        // validateField($('#password'));
+        validPassword($('#password'));
+    });
+
+    $('#email').keyup(function(){
+        // validateField($('#email'));
+        validEmail($('#email'));
+    });
+
 });
 
-
-
-// $(document).ready(function(){
-    
-//      //disables submit button
-//      function disableSubmit(){
-//         $('#login-btn').prop('disabled', true);
-//     };
-
-//     // enables submit button
-//     function enableSubmit(){
-//         $('#login-btn').prop('disabled', false);
-        
-       
-//     };
-
-//     function errorPassword(){
-//         $('#password').css({'border': "1px solid #DB4E35 "});
-//     }
-
-//     function normalPassword(){
-//         $('#password').css({'border': "1px solid #4E6172 "});
-//     }
-
-//     function errorUsername(){
-//         $('#username').css({'border': "1px solid #DB4E35 "});
-//     }
-
-//     function normalUsername(){
-//         $('#username').css({'border': "1px solid #4E6172 "});
-//     }
-    
-//     function isFilled() {
-
-//         var fName = validator.trim($('#fname').val());
-//         var lName = validator.trim($('#lname').val());
-//         var username = validator.trim($('#username').val());
-//         var email = validator.trim($('#email').val());
-//         var pw = validator.trim($('#password').val());
-    
-//         var fNameEmpty = validator.isEmpty(fName);
-//         var lNameEmpty = validator.isEmpty(lName);
-//         var usernameEmpty = validator.isEmpty(username);
-//         var emailEmpty = validator.isEmpty(email);
-//         var pwEmpty = validator.isEmpty(pw);
-    
-//         return !fNameEmpty && !lNameEmpty && !usernameEmpty && !emailEmpty && !pwEmpty;
-//     }
-
-//     function isValidUsername(field, callback) {
-
-//         var username = validator.trim($('#username').val());
-//         var isValidLength = validator.isLength(username, {min: 8});
-    
-//         if(isValidLength) {
-//             $.get('/getUsername', {username: username}, function (result) {
-//                 if(result.username != username) {
-//                     if(field.is($('#username')))
-//                         $('#usernameError').text('');
-    
-//                     return callback(true);
-    
-//                 }
-    
-//                 else {
-//                     if(field.is($('#username')))
-//                         $('#usernameError').text('Username already registered.');
-//                         return callback(false);
-//                     }
-//                 });
-//             }
-    
-//         else {
-//             if(field.is($('#username')))
-//                 $('#usernameError').text('ID Number should contain at least 8 characters.');
-//                 return callback(false);
-//         }
-//     }
-
-//     function isValidPassword(field) {
-
-//         var validPassword = false;
-    
-//         var password = validator.trim($('#password').val());
-//         var isValidLength = validator.isLength(password, {min: 8});
-    
-//         if(isValidLength) {
-//             if(field.is($('#password')))
-//                 $('#pwError').text('');
-//             validPassword = true;
-//         }
-    
-//         else {
-//             if(field.is($('#password')))
-//                 $('#pwError').text(`Passwords should contain at least 8 characters.`);
-//         }
-    
-//         return validPassword;
-//     }
-
-//     function validateField(field, fieldName, error) {
-
-//         var value = validator.trim(field.val());
-//         var empty = validator.isEmpty(value);
-    
-//         if(empty) {
-//             field.prop('value', '');
-//             error.text(fieldName + ' should not be empty.');
-//         }
-    
-//         else
-//             error.text('');
-    
-//         var filled = isFilled();
-//         var validPassword = isValidPassword(field);
-//         // isValidUsername(field, function (validUsername) {
-    
-//             // if(filled && validPassword && validUsername)
-//             if (filled)
-//                 $('#submit').prop('disabled', false);
-    
-//             else
-//                 $('#submit').prop('disabled', true);
-//         // });
-//     }
-
-//     $('#fName').keyup(function () {
-//         validateField($('#fName'), 'First name', $('#fNameError'));
-//     });
-    
-//     $('#lName').keyup(function () {
-//         validateField($('#lName'), 'Last name', $('#lNameError'));
-//     });
-    
-//     $('#username').keyup(function () {
-//         validateField($('#username'), 'Username', $('#usernameError'));
-//     });
-
-//     $('#email').keyup(function () {
-//         validateField($('#email'), 'Email', $('#emailError'));
-//     });
-    
-//     $('#password').keyup(function () {
-//         validateField($('#password'), 'Password', $('#pwError'));
-//     });
-// });

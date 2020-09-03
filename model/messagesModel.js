@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 const messageSchema = new Schema({
-    message_ID: {
-        type: Number,
-        unique: true,
-        required: [true,'Required']
-    },
+    // i used the default _id instead
+    // message_ID: {
+    //     type: Number,
+    //     unique: true,
+    //     required: [true,'Required']
+    // },
     // sender: {
     //     type: Schema.Types.ObjectId,
     //     ref: "User",
