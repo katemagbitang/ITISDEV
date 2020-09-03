@@ -40,6 +40,10 @@ app.get('/cart',function(req,res){
 	res.render("cart",{});
 });
 
+app.get('/checkout',function(req,res){
+	res.render("checkout",{});
+});
+
 app.get('/requestbook',function(req,res){
 	res.render("requestform",{});
 });
