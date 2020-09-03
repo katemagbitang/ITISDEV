@@ -29,6 +29,8 @@ $(document).ready(function (req, res) {
         }
     };
     window.onpaint = preloadFunc();
+
+    
    
 
     //disables send button
@@ -51,11 +53,71 @@ $(document).ready(function (req, res) {
     });
 
 
-   
+   // when choosing a convo from left panel
     $(".chat_list").on('click', function(event){
         var username = $(this).find(".username_list").val();
         window.location.replace("/messages/"+username);
     });
+
+
+    // ajax ui for compose new message modal
+    
+    $("#composeNewMessageText").keyup(function(){
+        if($("#composeNewMessageText").val() == ""){
+            $("#composeNewMessageText").css({'border': "4px solid #DB4E35 ","border-radius":"4px"});
+        }else{
+            $("#composeNewMessageText").css({'border': "4px solid transparent "});
+        }
+
+        if( $("#composeNewMessageRecipient").val() == ""   ){
+            $("#composeNewMessageRecipient").css({'border': "4px solid #DB4E35 ","border-radius":"4px"});
+        }else{
+            $("#composeNewMessageRecipient").css({'border': "4px solid transparent "});
+
+        }
+
+        // for the button
+        if( $("#composeNewMessageText").val() != "" && $("#composeNewMessageRecipient").val() != ""){
+            $("#newMessageSubmit").prop("disabled", false);
+        }
+        
+    })
+
+    $("#composeNewMessageRecipient").keyup(function(){
+        if($("#composeNewMessageText").val() == ""){
+            $("#composeNewMessageText").css({'border': "4px solid #DB4E35 ","border-radius":"4px"});
+        }else{
+            $("#composeNewMessageText").css({'border': "4px solid transparent "});
+        }
+
+        if( $("#composeNewMessageRecipient").val() == ""   ){
+            $("#composeNewMessageRecipient").css({'border': "4px solid #DB4E35 ","border-radius":"4px"});
+        }else{
+            $("#composeNewMessageRecipient").css({'border': "4px solid transparent "});
+
+        }
+        
+        // for the button
+       if( $("#composeNewMessageText").val() != "" && $("#composeNewMessageRecipient").val() != ""){
+           $("#newMessageSubmit").prop("disabled", false);
+       }
+
+
+
+
+    })
+
+    
+
+
+
+    // $("#newMessageSubmit").on('click', function(event){
+    //     var receiver =  $("#composeNewMessageRecipient").val();
+    //     var messageText = $("#composeNewMessageRecipientText").val();
+
+    //     alert(receiver + messageText);
+
+    // })
 
 
 //     $(".msg_send_btn").on('click', function(event){

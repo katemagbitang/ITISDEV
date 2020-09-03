@@ -26,6 +26,38 @@ var user = [
     },
     {
         _id : ObjectId(),
+        username: "katemagbitang",
+        email: "kate@gmail.com",
+        password: "$2b$10$DW5ggP/brSWeU1xZzXk2gejAPbF2BGyyFQbkilHbB.6WoEETmCgkm", // "secret"
+        firstName: "Kate",
+        lastName: "Magbitang",
+        userType: "Admin",
+        lastLogin: new Date("2020-08-30T10:13:19.873+00:00")
+    }
+    ,
+    {
+        _id : ObjectId(),
+        username: "shimeizhang08",
+        email: "shimei@gmail.com",
+        password: "$2b$10$DW5ggP/brSWeU1xZzXk2gejAPbF2BGyyFQbkilHbB.6WoEETmCgkm", // "secret"
+        firstName: "Shimei",
+        lastName: "Zhang",
+        userType: "Admin",
+        lastLogin: new Date("2020-08-30T10:13:19.873+00:00")
+    }
+    ,
+    {
+        _id : ObjectId(),
+        username: "oninolan",
+        email: "onin@gmail.com",
+        password: "$2b$10$DW5ggP/brSWeU1xZzXk2gejAPbF2BGyyFQbkilHbB.6WoEETmCgkm", // "secret"
+        firstName: "Olan",
+        lastName: "Onin",
+        userType: "Admin",
+        lastLogin: new Date("2020-08-30T10:13:19.873+00:00")
+    },
+    {
+        _id : ObjectId(),
         username: "johnsmith",
         email: "john@gmail.com",
         password: "$2b$10$DW5ggP/brSWeU1xZzXk2gejAPbF2BGyyFQbkilHbB.6WoEETmCgkm", // "secret"

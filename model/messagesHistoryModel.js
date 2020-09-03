@@ -3,11 +3,11 @@ var Schema = mongoose.Schema;
 
 
 const messagesHistorySchema = new Schema({
-    messageHistory_ID: {
-        type: Number,
-        unique: true,
-        required: [true,'Required']
-    },
+    // messageHistory_ID: {
+    //     type: Number,
+    //     unique: true,
+    //     required: [true,'Required']
+    // },
     user1: {
         type: String,
         ref: "User",

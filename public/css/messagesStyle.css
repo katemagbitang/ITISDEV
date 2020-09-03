@@ -10,7 +10,7 @@ img{ max-width:80%;}
   background: #f8f8f8 none repeat scroll 0 0;
   float: left;
   overflow: hidden;
-  width: 40%; border-right:1px solid #c4c4c4;
+  width: 30%; border-right:1px solid #c4c4c4;
   
 }
 .inbox_msg {
@@ -21,10 +21,22 @@ img{ max-width:80%;}
 }
 .top_spac{ margin: 20px 0 0;}
 
+#composeNewMessageButton{
+  height: 25px;
+  float: right;
+
+}
+
+#composeNewMessageButton:hover{
+  height: 25px;
+  cursor: pointer;
+  
+
+}
 
 
+.recent_heading {float: left; width:100%;}
 
-.recent_heading {float: left; width:40%;}
 .srch_bar {
   display: inline-block;
   text-align: right;
@@ -159,7 +171,7 @@ img{ max-width:80%;}
 .messagesRight {
   float: left;
   /* padding: 0px 15px 0 25px; */
-  width: 60%;
+  width: 70%;
   height: 100%;
   
 }
