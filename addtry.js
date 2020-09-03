@@ -9,6 +9,7 @@ const messageHistoryCollections = 'messageshistories';
 const authorCollections = 'authors';
 const booksCollections = 'books';
 const bookVersionsCollections = 'bookVersions';
+const requestsCollections = 'requests';
 
 
 
@@ -109,7 +110,6 @@ var messages = [
 
 ]
 mongodb.insertMany(messageCollections, messages);
-
 
 var messageHistory = [
     {
@@ -360,3 +360,82 @@ var bookVersions = [
 mongodb.insertMany(bookVersionsCollections, bookVersions);
 
 
+var requests = [
+    { // [0]
+        request_ID : ObjectId(),
+        username: "johnsmith",
+        bookversion_ID: bookVersions[0].bookVersion_ID,
+        book_title: "Rogue One: A Star Wars Story",
+        book_author: "Alexander Freed",
+        isUrgent: "No",
+        maxPrice: 1000.00,
+        description: "Hard Cover version",
+        date_requested: Date(),
+        status: "active",
+        priority_rating: 0.034,
+        //notifications: 
+        ignored_notif_count: 0 
+    },
+    { // [1]
+        request_ID : ObjectId(),
+        username: "seanxnieva",
+        bookversion_ID: bookVersions[1].bookVersion_ID,
+        book_title: "The Art of Moana",
+        book_author: "Jessica Julius & Maggie Malone",
+        isUrgent:"No",
+        maxPrice: 1000.00,
+        description: "none",
+        date_requested: Date(),
+        status: "active",
+        priority_rating: 0.034,
+        //notifications:
+        ignored_notif_count: 0,
+    },
+    { // [2]
+        request_ID : ObjectId(),
+        username: "willowsmith",
+        bookversion_ID: bookVersions[2].bookVersion_ID,
+        book_title: "Gordon Ramsay's Ultimate Cookery Course",
+        book_author: "Gordon Ramsay",
+        isUrgent:"No",
+        maxPrice: 1500.00,
+        description: "none",
+        date_requested: Date(),
+        status: "active",
+        priority_rating: 0.034,
+        //notifications:
+        ignored_notif_count: 0,
+    },
+    { // [3]
+        request_ID : ObjectId(),
+        username: "bobjohnson",
+        bookversion_ID: bookVersions[3].bookVersion_ID,
+        book_title: "On the Nature and Existence of God",
+        book_author: "Richard M. Gale",
+        isUrgent:"No",
+        maxPrice: 1000.00,
+        description: "none",
+        date_requested: Date(),
+        status: "active",
+        priority_rating: 0.034,
+        //notifications:
+        ignored_notif_count: 0,
+    },
+    { // [4]
+        request_ID : ObjectId(),
+        username: "willowsmith",
+        bookversion_ID: bookVersions[4].bookVersion_ID,
+        book_title: "The Art of Moana",
+        book_author: "Janet Campbell",
+        isUrgent:"No",
+        maxPrice: 1000.00,
+        description: "none",
+        date_requested: Date(),
+        status: "active",
+        priority_rating: 0.034,
+        //notifications:
+        ignored_notif_count: 0,
+    },
+    
+]
+mongodb.insertMany(requestsCollections, requests);
