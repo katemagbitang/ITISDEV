@@ -11,6 +11,17 @@ const booksCollections = 'books';
 const bookVersionsCollections = 'bookVersions';
 const requestsCollections = 'requests';
 
+// comment these lines IF the collection doesn't exist in the first place
+// uncomment if it exists na
+mongodb.dropCollection(userCollections);
+mongodb.dropCollection(messageCollections);
+mongodb.dropCollection(messageHistoryCollections);
+mongodb.dropCollection(authorCollections);
+mongodb.dropCollection(booksCollections);
+mongodb.dropCollection(bookVersionsCollections);
+mongodb.dropCollection(requestsCollections);
+// end of note
+
 
 
 var user = [

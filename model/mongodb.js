@@ -56,7 +56,7 @@ const database = {
             var database = db.db(dbName);
             database.collection(collection).insertMany(docs, function (err, res) {
                 if(err) throw err;
-                console.log('Documents inserted: ' + res.insertedCount);
+                console.log('Documents inserted in '+ collection+ ':'  + res.insertedCount);
                 db.close();
             });
         });
@@ -164,7 +164,23 @@ const database = {
                 db.close();
             });
         });
+    },
+
+    dropCollection: function (collection){
+        client.connect(url, options, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db(dbName);
+                dbo.collection(collection).drop(function(err, delOK) {
+                if (err) throw err;
+                if (delOK) console.log("Documents deleted in "+collection );
+                db.close();
+                });
+
+          });
     }
+
+
+
 }
 
 // exports the object `database` (defined above)
