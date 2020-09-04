@@ -5,6 +5,7 @@ const userController = require('../controllers/userController.js');
 const orderController = require('../controllers/orderController.js');
 const adminController = require('../controllers/adminController.js');
 const messageController = require('../controllers/messageController.js');
+const bookController = require('../controllers/bookController.js');
 
 // const validation = require('../helpers/validation.js');
 
@@ -61,9 +62,7 @@ app.get('/pageslist',function(req,res){
 	res.render("pageslist",{});
 });
 
-app.get('/productpage',function(req,res){
-	res.render("productpage",{});
-});
+app.get('/productpage',bookController.getBook);
 
 app.get('/confirmpayment',function(req,res){
 	res.render("confirmpayment",{});
