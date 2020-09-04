@@ -11,8 +11,8 @@ const booksCollections = 'books';
 const bookVersionsCollections = 'bookVersions';
 const requestsCollections = 'requests';
 
-// comment these lines IF the collection doesn't exist in the first place
-// uncomment if it exists na
+// it will error IF the collection doesn't exist in the first place
+// it if errors, just run addtry.js again
 mongodb.dropCollection(userCollections);
 mongodb.dropCollection(messageCollections);
 mongodb.dropCollection(messageHistoryCollections);
