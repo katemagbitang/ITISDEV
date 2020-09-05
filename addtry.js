@@ -8,7 +8,7 @@ const messageCollections = 'messages';
 const messageHistoryCollections = 'messageshistories';
 const authorCollections = 'authors';
 const booksCollections = 'books';
-const bookVersionsCollections = 'bookVersions';
+const bookVersionsCollections = 'bookversions';
 const requestsCollections = 'requests';
 
 // it will error IF the collection doesn't exist in the first place

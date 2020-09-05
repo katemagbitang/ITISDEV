@@ -53,6 +53,12 @@ app.get('/requestbook',function(req,res){
 app.get('/requestlist',function(req,res){
 	res.render("requestlist",{});
 });
+app.get('/requestlist/cancelled',function(req,res){
+	res.render("requestlistCancelled",{});
+});
+
+
+
 
 app.get('/productdetailspage',function(req,res){
 	res.render("productdetailspage",{});
