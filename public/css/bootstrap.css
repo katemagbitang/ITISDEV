@@ -10339,7 +10339,11 @@ a.text-dark:hover, a.text-dark:focus {
 /* CUSTOM STYLES ADDED BELOW */
 
 .vh80{
-  height: 77vh;
+  height: 80vh;
+}
+
+.vh72{
+  height: 72vh;
 }
 
 .bg-AC703D{

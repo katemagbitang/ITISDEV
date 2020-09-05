@@ -64,9 +64,35 @@
         <div class="messageRightName"><h4>{{activeMessageUsername}}</h4></div>
 
         {{!-- this is the messages na talaga --}}
-        {{> messagesPartial}}
-        
-        <div class="type_msg">
+        {{!-- {{> messagesPartial}} --}}
+
+
+        <div class="msg_history" id="msg_history" >
+          {{#each messages}}
+          {{#if sender}}
+          {{!-- if sender exists --}}
+              <div class="outgoing_msg">
+                  <div class="sent_msg">
+                  <p>{{message}}</p>
+                  <span class="time_date"> {{date}}</span> </div>
+              </div>
+          {{else}} 
+          {{!-- else if receiver exists --}}
+              <div class="incoming_msg">
+                  <div class="received_msg">
+                  <div class="received_withd_msg">
+                      <p>{{message}}</p>
+                      <span class="time_date"> {{date}}</span></div>
+                  </div>
+              </div>
+          {{/if}}
+          {{/each}}
+
+
+          
+      </div>
+
+       <div class="type_msg">
           <div class="input_msg_write">
             <form id="sendMessageForm" class="sendMessageForm"  method="post">
               <input type="hidden" class="messagesHistory_id" name="messagesHistory_id" value="{{messagesHistory_id}}">
@@ -77,6 +103,8 @@
             </form>
           </div>
         </div>
+        
+       
       </div>
 
     </div>
