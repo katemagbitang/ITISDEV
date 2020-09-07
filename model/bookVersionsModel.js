@@ -38,10 +38,11 @@ const bookVersionSchema = new Schema({
     quantity: {
         type: Number,
         required: [true,'Required']
-    }
-    // bookCover: {
+    },
+    bookCover: {
+        type: String,
 
-    // }
+    }
 });
 
 module.exports = mongoose.model('BookVersions',bookVersionSchema);
