@@ -36,7 +36,7 @@ const bookController = {
                             var authorsID = booksresult.author;
                             var title = booksresult.title;
 
-                            authorModel.find({_id: authorsID}, 'aName', function (err, authorsresult) {
+                            authorModel.find({_id: authorsID},  function (err, authorsresult) {
 
                                 var aName = []; //because there can be multiple authors
                                 authorsresult.forEach(function(authors, err){
