@@ -11,12 +11,8 @@ const url = 'mongodb://localhost:27017/chapterone';
 
 const bookController = {
     getBook: function(req, res){
-        var books = [];
-        var booksVersions = [];
-        var authors = []; 
         var bookList = [];
 
-        //retrieve books
         //vars need for rendering: bookCover, title, aName, sellingPrice, 
             //      from versionsresult:  bookCover, sellingPrice, **book_ID
             //      from booksresult: title, author(contains _id of authors)
@@ -57,6 +53,8 @@ const bookController = {
                     })  
                 });
             }
+
+            //renders the page
             res.render("productpage",{
                 bookList: bookList
             });
