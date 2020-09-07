@@ -41,7 +41,6 @@ const bookVersionSchema = new Schema({
     },
     bookCover: {
         type: String,
-
     }
 });
 
