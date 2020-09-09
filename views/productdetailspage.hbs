@@ -1,6 +1,6 @@
 <head>
     {{>head}}
-    <title>Book Title | Chapter One</title>
+    <title>{{title}} | Chapter One</title>
 </head>
 <body>
     {{!-- NAVBARS START --}}
@@ -20,17 +20,17 @@
         <div class="row">
             <div class="col-4">
                 <div class="text-center img-thumbnail">
-                <img src="https://static.scientificamerican.com/sciam/cache/file/1DDFE633-2B85-468D-B28D05ADAE7D1AD8_source.jpg?w=590&h=800&D80F3D79-4382-49FA-BE4B4D0C62A5C3ED" height="290px" width="250px" alt="Book Cover">
+                <img src="{{bookCover}}" height="290px" width="250px" alt="{{title}}">
                 </div>
             </div>
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Book Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Author</h6> <br>
+                        <h5 class="card-title">{{title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{aName}}</h6> <br>
 
-                        <h5 style="color: #DC3545">₱00.00</h5> <hr>
-                        <p class="card-subtitle mb-2 text-muted">Quantity</p>
+                        <h5 style="color: #DC3545">₱{{sellingPrice}}</h5> <hr>
+                        <p class="card-subtitle mb-2 text-muted">{{quantity}}</p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button">-</button>
@@ -51,25 +51,34 @@
                 <div class="card-body"> <br>
                     <h6 class="card-subtitle mb-2 text-muted">Product Details</h6> <hr><br>
 
-                    <p class="card-text"> Book Synopsis <br> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p> <br><br>
+                    <p class="card-text"> Book Synopsis <br>{{bookSynopsis}}</p> <br><br>
 
                     <h6 class="card-subtitle mb-2 text-muted">More Information</h6> <hr><br>
                     
                     <table class="table table-hover" >
                         <tr><th>Book Title: </th>
-                            <td>Book Title</td>
+                            <td>{{title}}</td>
                         </tr>
-                        <tr><th>Publication Date: </th>
-                            <td>January 01, 2020</td>
+                        <tr><th>Quality: </th>
+                            <td>{{quality}}</td>
+                        </tr>
+                        <tr><th>Edition: </th>
+                            <td>{{edition}}</td>
+                        </tr>
+                        <tr><th>Book Ttype: </th>
+                            <td>{{type}}</td>
+                        </tr>
+                        <tr><th>Publication Year: </th>
+                            <td>{{year}}</td>
                         </tr>
                         <tr><th>Publisher: </th>
-                            <td>Publishing House</td>
+                            <td>{{publisher}}</td>
                         </tr>
                         <tr><th>Category: </th>
-                            <td>Category Type</td>
+                            <td>{{category}}</td>
                         </tr>
                         <tr><th>Author/s: </th>
-                            <td>Author Name/s</td>
+                            <td>{{author}}</td>
                         </tr>
                     </table>
                     
