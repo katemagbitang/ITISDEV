@@ -7,6 +7,7 @@ const bookVersionsModel = require('../model/bookVersionsModel.js');
 const ObjectId = require('mongodb').ObjectID;
 const mongoose = require('mongoose');
 const { version } = require('os');
+const { title } = require('process');
 const url = 'mongodb://localhost:27017/chapterone';
 
 const bookController = {
@@ -122,9 +123,61 @@ const bookController = {
             });
         });
 
+    },
+    getOneBook: function(req,res) {
+        //vars need for rendering: bookCover, title, aName, sellingPrice, publisher, year, quantity, bookSynopsis, quality, quantity, edition, type, category
+            //      from versionsresult:  bookCover, sellingPrice, quantity, type, quality, edition **book_ID
+            //      from booksresult: title, publisher, year, category, bookSynopsis, author(contains _id of authors)
+            //      from authorsresult: aName
+        
+        var bookVersion_ID = req.params.bookVersion_ID;
+        bookVersionsModel.findOne({bookVersion_ID: bookVersion_ID}, function (err, versionsresult) {
+            if (versionsresult != null) {
+                var book_ID = versionsresult.book_ID;
+                var bookCover = versionsresult.bookCover;
+                var sellingPrice = versionsresult.sellingPrice;
+                var quantity = versionsresult.quantity;
+                var type = versionsresult.type;
+                var quality = versionsresult.quality;
+                var edition = versionsresult.edition;
+
+                booksModel.findOne({book_ID: book_ID}, function (err, booksresult) {
+                    if (booksresult != null) {
+                        var authorsID = booksresult.author;
+                        var title = booksresult.title;
+                        var publisher = booksresult.publisher;
+                        var year = booksresult.year;
+                        var category = booksresult.category;
+                        var bookSynopsis = booksresult.bookSynopsis;
+
+                        authorModel.findOne({authorsID:authorsID}, function (err, authorsresult) {
+                            if (authorsresult != null) {
+                                var aName = authorsresult.aName;
+                            }
+
+                            res.render("productdetailspage",{
+                                title: title,
+                                bookCover: bookCover,
+                                aName: aName,
+                                sellingPrice: sellingPrice,
+                                quantity: quantity,
+                                bookSynopsis: bookSynopsis,
+                                quality: quality,
+                                edition: edition,
+                                type: type,
+                                year: year,
+                                publisher: publisher,
+                                category: category
+                            });
+                        });
+                    }
+                });
+            }
+        });
     }
 
 
+    
 }
 
 module.exports = bookController;
