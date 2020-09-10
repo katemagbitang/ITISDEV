@@ -61,15 +61,15 @@ app.get('/requestlist/cancelled',function(req,res){
 
 
 app.get('/productdetailspage',bookController.getOneBook);
-app.get('/:bookVersion_ID',bookController.getOneBook);
+app.get('/books/:bookVersion_ID',bookController.getOneBook);
 
 app.get('/pageslist',function(req,res){
 	res.render("pageslist",{});
 });
 
-app.get('/productpage',bookController.getBook);
-app.get('/productpage/:category',bookController.getBookByCategory);
-app.get('/productpage/books/:bookVersion_ID',bookController.getOneBook);
+app.get('/browse',bookController.getBook);
+app.get('/browse/:category',bookController.getBookByCategory);
+
 
 
 app.get('/confirmpayment',function(req,res){
