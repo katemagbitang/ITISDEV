@@ -60,9 +60,8 @@ app.get('/requestlist/cancelled',function(req,res){
 
 
 
-app.get('/productdetailspage',function(req,res){
-	res.render("productdetailspage",{});
-});
+app.get('/productdetailspage',bookController.getOneBook);
+app.get('/:bookVersion_ID',bookController.getOneBook);
 
 app.get('/pageslist',function(req,res){
 	res.render("pageslist",{});
