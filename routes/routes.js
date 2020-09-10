@@ -70,6 +70,8 @@ app.get('/pageslist',function(req,res){
 
 app.get('/productpage',bookController.getBook);
 app.get('/productpage/:category',bookController.getBookByCategory);
+app.get('/productpage/books/:bookVersion_ID',bookController.getOneBook);
+
 
 app.get('/confirmpayment',function(req,res){
 	res.render("confirmpayment",{});

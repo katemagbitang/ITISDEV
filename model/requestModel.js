@@ -13,8 +13,9 @@ const requestSchema = new Schema({
         required: [true,'Required']
     },
     bookversion_ID:{
-        type: Number,
-        required: [true,'Required']
+        type: Number
+        // ,
+        // required: [true,'Required']
     },
     book_title:{
         type: String,
@@ -50,12 +51,14 @@ const requestSchema = new Schema({
         required: [true,'Required']
     },
     notifications:[{
-        type: String,
-        required: [true,'Required']
+        type: String
+        // ,
+        // required: [true,'Required']
     }],
     ignored_notif_count:{
         type: Number,
-        required: [true,'Required']
+        required: [true,'Required'],
+        default: 0
     }
 });
 

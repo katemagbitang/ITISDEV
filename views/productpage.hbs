@@ -137,13 +137,16 @@
         {{#each bookList}}
         <div class="col-3">
           <div class="card text-center">
+            <a href="productpage/books/{{bookVersion_ID}}" style = " color: black">
             <img class="card-img-top" src="{{bookCover}}" height="200px" width="180px" alt="Card image cap">
             <div class="card-body">
               <p class="card-text"><b>{{title}}</b></p>
               <p classes="card-text">{{aName}}</p>
               <p classes="card-text">Php {{sellingPrice}}</p>
               <a href="#" class="btn btn-primary">Add to Cart</a>
+              
             </div>
+            </a>
           </div>
         </div>
         {{/each}}

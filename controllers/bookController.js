@@ -16,7 +16,7 @@ const bookController = {
         var bookList = []; // stores all info for the listing
 
         //vars need for rendering: bookCover, title, aName, sellingPrice, 
-            //      from versionsresult:  bookCover, sellingPrice, **book_ID
+            //      from versionsresult:  bookCover, sellingPrice, bookVersion_ID **book_ID
             //      from booksresult: title, author(contains _id of authors)
             //      from authorsresult: aName
         bookVersionsModel.find({}, function (err, versionsresult) {
@@ -29,6 +29,7 @@ const bookController = {
                     var book_ID = v.book_ID;
                     var sellingPrice = v.sellingPrice;
                     var bookCover = v.bookCover;
+                    var bookVersion_ID = v.bookVersion_ID;
                             
                     // find book with the same book_id as the bookversions
                     booksModel.findOne({book_ID: book_ID}, function (err, booksresult) {
@@ -49,16 +50,19 @@ const bookController = {
                                     title: title,
                                     sellingPrice: sellingPrice,
                                     aName:aName,
-                                    bookCover: bookCover
+                                    bookCover: bookCover,
+                                    bookVersion_ID: bookVersion_ID
                                 }
                                 // console.log(booklisting);
                                 //adds each booklisting into the bookList array || the bookList array contains all info needed per listing
                                 bookList.push(booklisting);
+                                // console.log(bookList);
                             })  
                         }
                     });
                 })
             }
+            
 
             //renders the page
             res.render("productpage",{
@@ -86,6 +90,7 @@ const bookController = {
                     var book_ID = v.book_ID;
                     var sellingPrice = v.sellingPrice;
                     var bookCover = v.bookCover;
+                    var bookVersion_ID = v.bookVersion_ID;
                             
                     // find book with the same book_id as the bookversions
                     booksModel.findOne({book_ID: book_ID, category: category}, function (err, booksresult) {
@@ -106,16 +111,20 @@ const bookController = {
                                     title: title,
                                     sellingPrice: sellingPrice,
                                     aName:aName,
-                                    bookCover: bookCover
+                                    bookCover: bookCover,
+                                    bookVersion_ID: bookVersion_ID
                                 }
                                 // console.log(booklisting);
                                 //adds each booklisting into the bookList array || the bookList array contains all info needed per listing
                                 bookList.push(booklisting);
+                                 
                             })  
                         }
                     });
                 })
             }
+
+           
 
             //renders the page
             res.render("productpage",{
@@ -125,6 +134,8 @@ const bookController = {
 
     },
     getOneBook: function(req,res) {
+
+        console.log("ENTER")
         //vars need for rendering: bookCover, title, aName, sellingPrice, publisher, year, quantity, bookSynopsis, quality, quantity, edition, type, category
             //      from versionsresult:  bookCover, sellingPrice, quantity, type, quality, edition **book_ID
             //      from booksresult: title, publisher, year, category, bookSynopsis, author(contains _id of authors)

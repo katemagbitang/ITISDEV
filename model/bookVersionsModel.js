@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 const bookVersionSchema = new Schema({
-    bookversion_ID: {
+    bookVersion_ID: {
         type: Schema.Types.ObjectId,
         unique: true,
         required: [true,'Required']
