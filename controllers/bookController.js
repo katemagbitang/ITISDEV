@@ -161,11 +161,14 @@ const bookController = {
                         var category = booksresult.category;
                         var bookSynopsis = booksresult.bookSynopsis;
 
-                        authorModel.findOne({authorsID:authorsID}, function (err, authorsresult) {
+                        authorModel.find({_id:authorsID}, function (err, authorsresult) {
                             if (authorsresult != null) {
-                                var aName = authorsresult.aName;
+                                var aName = []; //because there can be multiple authors
+                                authorsresult.forEach(function(authors, err){
+                                    aName.push(authors.aName);
+                                })
                             }
-
+                            
                             res.render("productdetailspage",{
                                 title: title,
                                 bookCover: bookCover,
