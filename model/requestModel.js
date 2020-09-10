@@ -3,17 +3,17 @@ var Schema = mongoose.Schema;
 
 const requestSchema = new Schema({
     request_ID: {
-        type: Number,
+        type: Schema.Types.ObjectId,
         unique: true,
         required: [true,'Required']
     },
     username: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         required: [true,'Required']
     },
     bookversion_ID:{
-        type: Number
+        type: Schema.Types.ObjectId
         // ,
         // required: [true,'Required']
     },
@@ -50,8 +50,13 @@ const requestSchema = new Schema({
         type: Number,
         required: [true,'Required']
     },
+    quantity:{
+        type: Number,
+        required: [true,'Required'],
+        default: 1
+    },
     notifications:[{
-        type: String
+        type: String //notic obj to-follow
         // ,
         // required: [true,'Required']
     }],

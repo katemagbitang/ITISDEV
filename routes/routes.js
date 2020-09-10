@@ -6,6 +6,7 @@ const orderController = require('../controllers/orderController.js');
 const adminController = require('../controllers/adminController.js');
 const messageController = require('../controllers/messageController.js');
 const bookController = require('../controllers/bookController.js');
+const requestController = require('../controllers/requestController.js');
 
 // const validation = require('../helpers/validation.js');
 
@@ -53,9 +54,7 @@ app.get('/requestbook',function(req,res){
 app.get('/requestlist',function(req,res){
 	res.render("requestlist",{});
 });
-app.get('/requestlist/cancelled',function(req,res){
-	res.render("requestlistCancelled",{});
-});
+app.get('/requestlist/:status', requestController.getRequestsForRegular);
 
 
 
