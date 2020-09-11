@@ -36,16 +36,13 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link active" href="/adminRequestsList/Soon-to-be-Cancelled">Soon-to-be Cancelled</a>
+                        <a class="nav-link active" href="/adminRequestsList/SoonExpiring">Soon Expiring</a>
                     </li>
                 </ul>
             </div>
                 
 
             <div class="card-body-orders  overflow-auto vh72"  >
-                
-
-
                 <table class=" table table-bordered table-hover ">
                     <thead class="thead-light">
                         <tr>
@@ -59,30 +56,29 @@
                             <th> Description</th>
                             <th>Date Requested</th> 
                             <th >Priority Rating</th>
+                            <th> Status</th>
                             <th> Action </th>
-
-
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">0123456789</th>   
-                            <td> John Smith</td>
-                            <td> Lorem ipsum lorea</td>
-                            <td>Rebecca Lauren</td>
-                            <td>Yes</td>
-                            <td>500</td>
-                            <td>1</td>
-                            <td>desc here</td>
-                            <td>January 1 2020 </td> 
-                            <td>2.5</td>
-                            <td><button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button></td>
-                        </tr>
-                        
+                        {{#each requestList}}
+                            <tr>
+                                <th scope="row">{{request_ID}}</th>   
+                                <td>  {{requester}}</td>
+                                <td>  {{ book_title}}</td>
+                                <td> {{book_author}}</td>
+                                <td>{{isUrgent}}</td>
+                                <td>{{maxPrice}}</td>
+                                <td>{{quantity}}</td>
+                                <td> {{description}}</td>
+                                <td>{{date_requested}}</td> 
+                                <td>{{priority_rating}}</td>
+                                <td>{{status}}</td>
+                                <td><button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button></td>
+                            </tr>
+                        {{/each}}
                     </tbody>
                 </table>
-
-
             </div>
         </div>
 

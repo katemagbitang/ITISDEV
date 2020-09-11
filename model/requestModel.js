@@ -56,7 +56,7 @@ const requestSchema = new Schema({
         default: 1
     },
     notifications:[{
-        type: String //notic obj to-follow
+        type: String //notic objid to-follow
         // ,
         // required: [true,'Required']
     }],

@@ -91,9 +91,9 @@ app.get('/Orders/Cancelled',orderController.getOrdersCancelled);
 
 app.get('/addProducts',adminController.getAddProduct);
 app.get('/adminRequestsList',adminController.getAdminRequestList);
-app.get('/adminRequestsList/Collective',adminController.getAdminRequestListCollective);
-app.get('/adminRequestsList/Individual',adminController.getAdminRequestListIndividual);
-app.get('/adminRequestsList/Individual/:something',adminController.getAdminRequestListIndividual);
-app.get('/adminRequestsList/Soon-to-be-Cancelled',adminController.getAdminRequestListSTBC);
+// app.get('/adminRequestsList/Collective',adminController.getAdminRequestListCollective);
+// app.get('/adminRequestsList/Individual',adminController.getAdminRequestListIndividual);
+// app.get('/adminRequestsList/Individual/:something',adminController.getAdminRequestListIndividual);
+app.get('/adminRequestsList/:view',requestController.getRequestsForAdmin);
 
 module.exports = app;
