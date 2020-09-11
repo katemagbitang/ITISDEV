@@ -62,6 +62,7 @@ const userController = {
         var lName = req.body.lname;
         var userType = 'Regular';
 
+        console.log("ENTER");
         bcrypt.hash(password, saltRounds, function(err, hash) {
 
             let user = userModel.findOne({ email: email });
@@ -111,8 +112,10 @@ const userController = {
         db.findOne(userModel, {username : username}, 'username', function(result){
             if(result != null) { // if username EXISTS in the db
                 res.send(result);
-                console.log(result);
-            }
+                console.log("not null: "+result);
+            }else
+                res.send(" null: "+result);
+
         });
     },
 
@@ -123,7 +126,8 @@ const userController = {
             if(result != null) { // if email EXISTS in the db
                 res.send(result);
                 console.log(result);
-            }
+            }else
+                res.send(" null: "+result);
         });
     }
 }

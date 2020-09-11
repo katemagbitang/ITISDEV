@@ -70,8 +70,11 @@ $(document).ready(function(){
     }
 
     function validUsername(user){
+        // var username = $('#username').val();
+        // var valid = false;
 
         if (user.val() == ""){
+            // valid = false;
             $('#username').css({'border': "1px solid #DB4E35 "});
             $('#usernameError').text('Username is required');
             disableSubmit();
@@ -84,25 +87,31 @@ $(document).ready(function(){
         else{
             $('#username').css({'border': "1px solid #4E6172 "});
             $('#usernameError').text('');
-
+        // }
+        // else{
             username = user.val();
 
             $.get('/getUsername', {username:username}, function(result){
                 if(result.username == username){
                     $('#username').css({'border': "1px solid #DB4E35 "});
                     $('#usernameError').text('Username already registered');
+                    // valid = false;
                     disableSubmit();
                 }
                 else{
                     $('#username').css({'border': "1px solid #4E6172 "});
                     $('#usernameError').text('');
-                    console.log("ELSE");
     
-                    enableSubmit();
+                    if (areAllFilled() == true){
+                        enableSubmit();
+                    }
+                    // valid = true;
                         
                 }
             });
+            // valid = true;
         }
+        // return valid;
     }
 
     function validEmail(mail){
@@ -174,47 +183,8 @@ $(document).ready(function(){
     }
 
     $('#username').keyup(function(){
-        // var user = $('#username');
-
-        if ($('#username').val() == ""){
-            $('#username').css({'border': "1px solid #DB4E35 "});
-            $('#usernameError').text('Username is required');
-            disableSubmit();
-            alert("emt");
-        }
-        else if($('#username').val().length < 4 || $('#username').val().length > 15){
-            $('#username').css({'border': "1px solid #DB4E35 "});
-            $('#usernameError').text('Username must be 4-15 characters only.');
-            disableSubmit();
-            alert("len!");
-        }
-        else{
-            $('#username').css({'border': "1px solid #4E6172 "});
-            $('#usernameError').text('');
-
-            username = $('#username').val();
-            // alert("pasok");
-
-            $.get('/getUsername', {username:username}, function(result){
-                if(result){
-                    // alert(JSON.stringify(err, null, ' '));
-                    alert(JSON.stringify(result, null, ' '));
-                    if(result.username == username){
-                        $('#username').css({'border': "1px solid #DB4E35 "});
-                        $('#usernameError').text('Username already registered');
-                        disableSubmit();
-                        alert("if");
-                    }
-                    else {
-                        alert("ELSE");
-                        // $('#username').css({'border': "1px solid #4E6172 "});
-                        // $('#usernameError').text('');
-                        if(areAllFilled())
-                            enableSubmit();
-                    }
-                }
-            });
-        }
+        // validateField($("#username"));
+        validUsername($("#username"));
     });
 
     $('#fname').keyup(function(){
@@ -238,3 +208,156 @@ $(document).ready(function(){
     });
 
 });
+
+//2nd try
+// $(document).ready(function () {
+//     function isFilled() {
+//         var fName = validator.trim($('#fname').val());
+//         var lName = validator.trim($('#lname').val());
+//         var email = validator.trim($('#email').val());
+//         var username = validator.trim($('#username').val());
+//         var pw = validator.trim($('#password').val());
+
+//         var fNameEmpty = validator.isEmpty(fName);
+//         var lNameEmpty = validator.isEmpty(lName);
+//         var emailEmpty = validator.isEmpty(email);
+//         var usernameEmpty = validator.isEmpty(username);
+//         var pwEmpty = validator.isEmpty(pw);
+
+//         return !fNameEmpty && !lNameEmpty && !emailEmpty && !usernameEmpty && !pwEmpty;
+//     }
+
+//     function isValidUsername(field, callback) {
+//         var valid = false;
+//         var username = validator.trim($('#username').val());
+//         var isValidLength = validator.isLength(username, {min: 4, max: 15});
+
+//         if(isValidLength) {
+//             $.get('/getUsername', {username: username}, function (result) {
+//                 if(!(result.username == username)) {
+//                     if(field.is($('#username')))
+//                         $('#usernameError').text('');
+
+//                     // return callback(true);
+//                     valid = true;
+//                 } else {
+//                     if(field.is($('#username')))
+//                         $('#usernameError').text('Username already taken.');
+
+//                     // return callback(false);
+//                 }
+//             });  
+//         } else {
+//             if(field.is($('#username')))
+//                 $('#usernameError').text('Username should contain at least 4 characters and 15 characters at most.');
+
+//             // return callback(false);
+//         }
+//         return valid;
+//     }
+
+//     function isValidEmail(field) {
+//         var validEmail = false;
+//         var email = validator.trim($('#email').val());
+//         var isValidFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail.val());
+//         // var isValidLength = validator.isLength(email, {min: 4, max: 15});
+
+//         if(isValidFormat) {
+//             $.get('/getEmail', {email: email}, function (result) {
+//                 if(!(result.email == email)) {
+//                     if(field.is($('#email')))
+//                         $('#emailError').text('');
+
+//                     validEmail = true;
+//                 } else {
+//                     if(field.is($('#email')))
+//                         $('#emailError').text('Email already taken.');
+//                 }
+//             });  
+//         } else {
+//             if(field.is($('#email')))
+//                 $('#emailError').text('Invalid email format.');
+//         }
+//         return validEmail;
+//     }
+
+//     function isValidPassword(field) {
+//         var validPassword = false;
+
+//         var password = validator.trim($('#password').val());
+//         var isValidLength = validator.isLength(password, {min: 5});
+
+//         if(isValidLength) {
+//             if(field.is($('#password')))
+//                 $('#pwError').text('');
+
+//             validPassword = true;    
+//         } else {
+//             if(field.is($('#password')))
+//                 $('#pwError').text('Password should contain at least 5 characters.');
+//         }
+
+//         return validPassword;
+//     }
+
+//     function validateField(field, fieldName, error) {
+//         var value = validator.trim(field.val());
+//         var empty = validator.isEmpty(value);
+
+//         if(empty) {
+//             field.prop('value', '');
+//             error.text(fieldName + ' should not be empty.');
+//         } else {
+//             error.text('');
+//         }
+
+//         var filled = isFilled();
+//         var validPassword = isValidPassword(field);
+//         var validEmail = isValidEmail(field);
+//         var validUsername = isValidUsername(field);
+
+//         // isValidUsername(field, function (validUsername) {
+//         //     if(filled && validPassword && validUsername && validEmail) {
+//         //         $('#submit').prop('disabled', false);
+//         //     }
+//         //     else{
+//         //         $('#submit').prop('disabled', true);
+//         //     }
+                
+//         // });
+
+//         if(filled && validPassword && validUsername && validEmail) {
+//             $('#submit').prop('disabled', false);
+//             console.log('email' + validEmail);
+//             console.log('user' + validUsername);
+//             console.log('pass' + validPassword);
+
+//         }
+//         else{
+//             $('#submit').prop('disabled', true);
+//             console.log('email' + validEmail);
+//             console.log('user' + validUsername);
+//             console.log('pass' + validPassword);
+//         }
+//     }
+
+//     $('#fname').keyup(function () {
+//         validateField($('#fname'), 'First name', $('#fNameError'));
+//     });
+
+//     $('#lname').keyup(function () {
+//         validateField($('#lname'), 'Last name', $('#lNameError'));
+//     });
+
+//     $('#email').keyup(function () {
+//         validateField($('#email'), 'Email', $('#emailError'));
+//     });
+
+//     $('#username').keyup(function () {
+//         validateField($('#username'), 'Username', $('#usernameError'));
+//     });
+
+//     $('#password').keyup(function () {
+//         validateField($('#password'), 'Password', $('#pwError'));
+//     });
+// });
