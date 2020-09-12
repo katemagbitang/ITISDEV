@@ -10,6 +10,10 @@ const authorCollections = 'authors';
 const booksCollections = 'books';
 const bookVersionsCollections = 'bookversions';
 const requestsCollections = 'requests';
+const cartItemsCollections = 'CartItems';
+const ordersCollections = 'Orders';
+const orderItemsCollections = 'OrderItems';
+const paymentDetailsCollections = 'PaymentDetails'
 
 // it will error IF the collection doesn't exist in the first place
 // it if errors, just run addtry.js again
@@ -535,3 +539,152 @@ var requests = [
     
 ]
 mongodb.insertMany(requestsCollections, requests);
+
+
+
+var cartItems = [
+    {
+        // [0]
+        CartItems_ID: ObjectId(),
+        username: "willowsmith",
+        items: [
+            {
+                bookVersion: bookVersions[0].bookVersion_ID,
+                quantity: 1
+            },
+            {
+                bookVersion: bookVersions[1].bookVersion_ID,
+                quantity: 2
+            },
+            {
+                bookVersion: bookVersions[2].bookVersion_ID,
+                quantity: 2
+            }
+        ],
+        isActive: "Yes"
+    },
+    {
+        // [1]
+        CartItems_ID: ObjectId(),
+        username: "willowsmith",
+        items: [
+            {
+                bookVersion: bookVersions[3].bookVersion_ID,
+                quantity: 1
+            },
+            {
+                bookVersion: bookVersions[4].bookVersion_ID,
+                quantity: 2
+            }
+        ],
+        isActive: "No"
+    },
+    {
+        // [2]
+        CartItems_ID: ObjectId(),
+        username: "willowsmith",
+        items: [
+            {
+                bookVersion: bookVersions[0].bookVersion_ID,
+                quantity: 2
+            }
+        ],
+        isActive: "No"
+    },
+    {
+        // [3]
+        CartItems_ID: ObjectId(),
+        username: "willowsmith",
+        items: [
+            {
+                bookVersion: bookVersions[1].bookVersion_ID,
+                quantity: 2
+            }
+        ],
+        isActive: "No"
+    },
+    {
+        // [4]
+        CartItems_ID: ObjectId(),
+        username: "willowsmith",
+        items: [
+            {
+                bookVersion: bookVersions[2].bookVersion_ID,
+                quantity: 2
+            }
+        ],
+        isActive: "No"
+    }
+]
+
+mongodb.insertMany(cartItemsCollections, cartItems);
+
+
+var Orders = [
+    {
+        // [0]
+        order_ID: ObjectId(),
+        username: "willowsmith",
+        status: "Payment Pending"
+    },
+    {
+        // [1]
+        order_ID: ObjectId(),
+        username: "willowsmith",
+        status: "Cancelled"
+    },
+    {
+        // [2]
+        order_ID: ObjectId(),
+        username: "willowsmith",
+        status: "Processing"
+    },
+    {
+        // [3]
+        order_ID: ObjectId(),
+        username: "willowsmith",
+        status: "Confirmed"
+    }
+]
+mongodb.insertMany(ordersCollections, Orders);
+
+var OrderItems = [
+    {
+        // [0]
+        OrderITems_ID : ObjectId(),
+        order_ID : Orders[0].order_ID,
+        CartItems_ID: cartItems[1].CartItems_ID
+    },
+    {
+        // [1]
+        OrderITems_ID : ObjectId(),
+        order_ID : Orders[1].order_ID,
+        CartItems_ID: cartItems[2].CartItems_ID
+    },
+    {
+        // [2]
+        OrderITems_ID : ObjectId(),
+        order_ID : Orders[2].order_ID,
+        CartItems_ID: cartItems[3].CartItems_ID
+    },
+    {
+        // [3]
+        OrderITems_ID : ObjectId(),
+        order_ID : Orders[3].order_ID,
+        CartItems_ID: cartItems[4].CartItems_ID
+    }
+]
+mongodb.insertMany(orderItemsCollections, OrderItems);
+
+var paymentDetails = [
+    {
+        payment_ID: ObjectId(),
+        username: "willowsmith",
+        order_ID: Orders[0].order_ID,
+        status: "Pending",
+        bank_name: "BPI",
+        ref_num: "11812345678",
+    }
+]
+
+mongodb.insertMany(paymentDetailsCollections, paymentDetails);

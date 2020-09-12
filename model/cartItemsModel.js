@@ -11,14 +11,22 @@ const cartItemSchema = new Schema({
         type: Number,
         required: [true, 'Required']
     },
-    books: {
-        type: Schema.Types.ObjectId,
-        ref: 'BookVersions',
+    items:[{
+        bookVersion: {
+            type: Schema.Types.ObjectId,
+            ref: 'BookVersions',
+            required: [true, 'Required']
+        },
+        quantity: {
+            type: Number,
+            required: [true,'Required']
+        }
+    }]
+    ,
+    isActive: {
+        type: String,
+        enum: ['No','Yes'],
         required: [true, 'Required']
-    },
-    quantity: {
-        type: Number,
-        required: [true,'Required']
     }
 });
 

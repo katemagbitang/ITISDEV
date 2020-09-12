@@ -3,18 +3,20 @@ var Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
     order_ID: {
-        type: Number,
+        type: Schema.Types.ObjectId,
         unique: true,
         required: [true,'Required']
     },
     username: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "User",
         required: [true, 'Required']
     },
     status: {
         type : String,
+        enum: ['Payment Pending','Processing', 'Confirmed', 'Cancelled'],
         required: [true, 'Required']
+        
     }
 });
 

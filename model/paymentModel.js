@@ -3,22 +3,23 @@ var Schema = mongoose.Schema;
 
 const paymentSchema = new Schema({
     payment_ID: {
-        type: Number,
+        type: Schema.Types.ObjectId,
         unique: true,
         required: [true,'Required']
     },
     username: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         required: [true,'Required']
     },
-    order_id: {
+    order_ID: {
         type: Schema.Types.ObjectId,
         ref: 'Orders',
         required: [true,'Required']
     },
-    confirmation: {
+    status: {
         type: Boolean,
+        enum: ['Pending', 'Accepted', 'Rejected'],
         required: [true,'Required']
     },
     bank_name: {
