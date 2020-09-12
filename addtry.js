@@ -629,7 +629,7 @@ var Orders = [
         // [0]
         order_ID: ObjectId(),
         username: "willowsmith",
-        status: "Payment Pending"
+        status: "Pending"
     },
     {
         // [1]
@@ -655,25 +655,25 @@ mongodb.insertMany(ordersCollections, Orders);
 var OrderItems = [
     {
         // [0]
-        OrderITems_ID : ObjectId(),
+        OrderItems_ID : ObjectId(),
         order_ID : Orders[0].order_ID,
         CartItems_ID: cartItems[1].CartItems_ID
     },
     {
         // [1]
-        OrderITems_ID : ObjectId(),
+        OrderItems_ID : ObjectId(),
         order_ID : Orders[1].order_ID,
         CartItems_ID: cartItems[2].CartItems_ID
     },
     {
         // [2]
-        OrderITems_ID : ObjectId(),
+        OrderItems_ID : ObjectId(),
         order_ID : Orders[2].order_ID,
         CartItems_ID: cartItems[3].CartItems_ID
     },
     {
         // [3]
-        OrderITems_ID : ObjectId(),
+        OrderItems_ID : ObjectId(),
         order_ID : Orders[3].order_ID,
         CartItems_ID: cartItems[4].CartItems_ID
     }

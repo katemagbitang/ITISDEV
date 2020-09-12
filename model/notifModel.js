@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 const notifSchema = new Schema({
     request_ID:{
-        type: Number,
+        type: Schema.Types.ObjectId,
         required: [true,'Required']
     },
     date:{
@@ -18,4 +18,4 @@ const notifSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Notifications', notifSchema);
+module.exports = mongoose.model('notifications', notifSchema);
