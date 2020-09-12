@@ -58,6 +58,10 @@ app.get('/requestlist/:status', requestController.getRequestsForRegular);
 
 
 
+app.get('/dummyupload', controller.getDummyUpload);
+app.post('/dummyupload', controller.postDummyUpload);
+
+
 
 app.get('/productdetailspage',bookController.getOneBook);
 app.get('/books/:bookVersion_ID',bookController.getOneBook);

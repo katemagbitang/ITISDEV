@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> head}}
+
+    <script src="./js/login.js" type="text/javascript"></script> 
+
+    <title>Login | Chapter One</title>
+</head>
+<body>
+    {{!-- NAVBARS START --}}
+    <div id= "navvisit">
+        {{> navvisit}}
+    </div>
+    <div id = "navadmin">
+         {{> navadmin}}
+    </div>
+    <div id = "navuser">
+       {{> navuser}}
+    </div>
+    {{!-- NAVBARS END --}}
+   
+
+    <form id = "createrecipe" class = "createrecipe" action = "/dummyupload" method = "POST" enctype="multipart/form-data">
+        <label for = "recipe_img">Upload an Image: <br></label><input type="file" id="recipe_img" name="recipe_img" accept="image/*" onchange="readURL(this);" required>
+        
+        <center><input type="submit" class="submitbtn" id="submitbtn" value="Post"></center>
+    </form>
+
+
+
+
+
+</body>
+</html>
