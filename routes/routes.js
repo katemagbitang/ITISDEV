@@ -12,7 +12,7 @@ const requestController = require('../controllers/requestController.js');
 
 const app = express();
 
-app.get('/',controller.getIndex);
+app.get('/',controller.getHome);
 app.get('/home',controller.getHome);
 
 app.get('/signup',userController.getSignUp);
