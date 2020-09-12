@@ -10,10 +10,10 @@ const authorCollections = 'authors';
 const booksCollections = 'books';
 const bookVersionsCollections = 'bookversions';
 const requestsCollections = 'requests';
-const cartItemsCollections = 'CartItems';
-const ordersCollections = 'Orders';
-const orderItemsCollections = 'OrderItems';
-const paymentDetailsCollections = 'PaymentDetails'
+const cartItemsCollections = 'cartitems';
+const ordersCollections = 'orders';
+const orderItemsCollections = 'orderitems';
+const paymentDetailsCollections = 'paymentdetails'
 
 // it will error IF the collection doesn't exist in the first place
 // it if errors, just run addtry.js again
@@ -24,6 +24,10 @@ mongodb.dropCollection(authorCollections);
 mongodb.dropCollection(booksCollections);
 mongodb.dropCollection(bookVersionsCollections);
 mongodb.dropCollection(requestsCollections);
+mongodb.dropCollection(cartItemsCollections);
+mongodb.dropCollection(ordersCollections);
+mongodb.dropCollection(orderItemsCollections);
+mongodb.dropCollection(paymentDetailsCollections);
 // end of note
 
 

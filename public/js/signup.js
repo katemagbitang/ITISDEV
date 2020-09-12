@@ -18,7 +18,6 @@ $(document).ready(function(){
     
         if($("#username").val() != '' && $("#email").val() != '' && $("#password").val() != '' && $("#fname").val() != '' && $("#lname").val() != '' ){
         // if($("#username").val() != '' && $("#email").val() != ''){
-                // alert("true");
             valid = true;
         }else{
             valid = false;
@@ -180,33 +179,26 @@ $(document).ready(function(){
             $('#username').css({'border': "1px solid #DB4E35 "});
             $('#usernameError').text('Username is required');
             disableSubmit();
-            alert("emt");
         }
         else if($('#username').val().length < 4 || $('#username').val().length > 15){
             $('#username').css({'border': "1px solid #DB4E35 "});
             $('#usernameError').text('Username must be 4-15 characters only.');
             disableSubmit();
-            alert("len!");
         }
         else{
             $('#username').css({'border': "1px solid #4E6172 "});
             $('#usernameError').text('');
 
             username = $('#username').val();
-            // alert("pasok");
 
             $.get('/getUsername', {username:username}, function(result){
                 if(result){
-                    // alert(JSON.stringify(err, null, ' '));
-                    alert(JSON.stringify(result, null, ' '));
                     if(result.username == username){
                         $('#username').css({'border': "1px solid #DB4E35 "});
                         $('#usernameError').text('Username already registered');
                         disableSubmit();
-                        alert("if");
                     }
                     else {
-                        alert("ELSE");
                         // $('#username').css({'border': "1px solid #4E6172 "});
                         // $('#usernameError').text('');
                         if(areAllFilled())

@@ -88,10 +88,11 @@ app.get('/salesreport',function(req,res){
 });
 
 app.get('/Orders',orderController.getOrders);
-app.get('/Orders/ToPay',orderController.getOrdersToPay);
-app.get('/Orders/PaymentProcessing',orderController.getOrdersPayment);
-app.get('/Orders/Confirmed',orderController.getOrdersConfirmed);
-app.get('/Orders/Cancelled',orderController.getOrdersCancelled);
+app.get('/Orders/:view', orderController.getOrdersByStatus);
+// app.get('/Orders/ToPay',orderController.getOrdersToPay);
+// app.get('/Orders/PaymentProcessing',orderController.getOrdersPayment);
+// app.get('/Orders/Confirmed',orderController.getOrdersConfirmed);
+// app.get('/Orders/Cancelled',orderController.getOrdersCancelled);
 
 app.get('/addProducts',adminController.getAddProduct);
 app.get('/adminRequestsList',adminController.getAdminRequestList);

@@ -1,7 +1,6 @@
 const db = require('../model/db.js');
 const assert = require('assert');
 const authorModel = require('../model/authorModel.js');
-// const bookAuthorsModel = require('../model/bookAuthorsModel.js');
 const booksModel = require('../model/booksModel.js');
 const bookVersionsModel = require('../model/bookVersionsModel.js');
 const ObjectId = require('mongodb').ObjectID;
