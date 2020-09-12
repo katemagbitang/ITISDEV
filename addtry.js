@@ -618,6 +618,18 @@ var cartItems = [
             }
         ],
         isActive: "No"
+    },
+    {
+        // [5]
+        CartItems_ID: ObjectId(),
+        username: "willowsmith",
+        items: [
+            {
+                bookVersion: bookVersions[3].bookVersion_ID,
+                quantity: 3
+            }
+        ],
+        isActive: "No"
     }
 ]
 
@@ -648,7 +660,14 @@ var Orders = [
         order_ID: ObjectId(),
         username: "willowsmith",
         status: "Confirmed"
+    },
+    {
+        // [4]
+        order_ID: ObjectId(),
+        username: "willowsmith",
+        status: "Pending"
     }
+
 ]
 mongodb.insertMany(ordersCollections, Orders);
 
@@ -676,6 +695,12 @@ var OrderItems = [
         OrderItems_ID : ObjectId(),
         order_ID : Orders[3].order_ID,
         CartItems_ID: cartItems[4].CartItems_ID
+    },
+    {
+        // [4]
+        OrderItems_ID : ObjectId(),
+        order_ID : Orders[4].order_ID,
+        CartItems_ID: cartItems[5].CartItems_ID
     }
 ]
 mongodb.insertMany(orderItemsCollections, OrderItems);

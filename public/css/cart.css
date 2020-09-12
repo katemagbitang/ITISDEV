@@ -1,0 +1,19 @@
+
+
+#checkoutModule{
+    position: fixed;
+    top: 100px;
+    padding: 10px;
+    box-shadow: 5px 5px 10px grey;
+    width: 25vw;
+    /* height: 75vh; */
+    left: 70vw; 
+}
+
+#cart {
+    top: 100px;
+    position: absolute;
+    width: 50vw;
+    left: 10vw;
+    float: left;
+}
