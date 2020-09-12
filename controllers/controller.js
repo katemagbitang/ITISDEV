@@ -1,13 +1,57 @@
 
 const db = require('../model/db.js');
 const dummyModel = require('../model/dummyModel.js');
+const bookVersionsModel = require('../model/bookVersionsModel.js');
+const booksModel = require('../model/booksModel.js');
 
 const controller ={
     getIndex: function(req,res){
         res.render("index", {});
     },
     getHome: function(req,res){
-        res.render("home",{});
+        console.log("GETTING HOME");
+
+        var categoryList = []; //what is needed: category
+        var bookList = []; //what is needed: bookCover, title, bookVersion_ID
+
+        bookVersionsModel.find({}, function (err, versionsresult) {
+            if (versionsresult != null) {
+                versionsresult.forEach(function(v, err) {
+                    var bookVersion_ID = v.bookVersion_ID;
+                    var book_ID = v.book_ID;
+                    var bookCover = v.bookCover;
+
+                    booksModel.findOne({book_ID: book_ID}, function(err, booksresult) {
+                        if (booksresult != null) {
+                            var title = booksresult.title;
+                            var category = booksresult.category;
+
+                            var booklisting = {
+                                bookVersion_ID: bookVersion_ID,
+                                bookCover: bookCover,
+                                title: title
+                            }
+
+                            bookList.push(booklisting);
+
+                            if (categoryList.contains(category)) {
+                                console.log(category +" is already stored.");
+                            }
+                            else {
+                                categoryList.push(category);
+                            }
+                        }
+                    });
+                });
+
+            }
+
+            //renders page
+            res.render("home", {
+                bookList: bookList,
+                categoryList: categoryList
+            });
+        });
     },
 
     //gets current session's userType. useful for validating user permissions
