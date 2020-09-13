@@ -34,11 +34,12 @@ const controller ={
 
                             bookList.push(booklisting);
 
-                            if (categoryList.contains(category)) {
+                            if (categoryList.includes(category)) {
                                 console.log(category +" is already stored.");
                             }
                             else {
                                 categoryList.push(category);
+                                console.log("Category: " + category);
                             }
                         }
                     });
