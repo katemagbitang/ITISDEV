@@ -425,6 +425,7 @@ var requests = [
         status: "Active",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications: 
         ignored_notif_count: 0 
     },
@@ -441,6 +442,7 @@ var requests = [
         status: "Active",
         priority_rating: 0.034,
         quantity: 2,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -457,6 +459,7 @@ var requests = [
         status: "Active",
         priority_rating: 0.034,
         quantity: 2,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -473,6 +476,7 @@ var requests = [
         status: "Active",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -489,6 +493,7 @@ var requests = [
         status: "Active",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -505,6 +510,7 @@ var requests = [
         status: "Cancelled",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -521,6 +527,7 @@ var requests = [
         status: "Cancelled",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -537,6 +544,7 @@ var requests = [
         status: "SoonExpiring",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     }

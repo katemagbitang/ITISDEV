@@ -68,7 +68,8 @@ const requestController = {
                     description : request.description,
                     date_requested : request.date_requested.toDateString(),
                     priority_rating : request.priority_rating,
-                    status : request.status
+                    status : request.status,
+                    override: request.override
                 }
                 if(request.status != "Cancelled" && request.status != "SoonExpiring" && view == "Individual"){
                     requests.push(request);
@@ -101,11 +102,14 @@ const requestController = {
                 });
 
             }
-            
-
         })
+    },
 
-
+    postOverrideRequest: function(req, res){
+        
+        requestModel.update({request_ID: req.params.request_ID}, {$set: {override: true}}, function(){
+            res.redirect('back');
+        });
     }
 
 

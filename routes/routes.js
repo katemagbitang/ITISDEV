@@ -93,9 +93,8 @@ app.get('/Orders/:view', orderController.getOrdersByStatus);
 
 app.get('/addProducts',adminController.getAddProduct);
 app.get('/adminRequestsList',adminController.getAdminRequestList);
-// app.get('/adminRequestsList/Collective',adminController.getAdminRequestListCollective);
-// app.get('/adminRequestsList/Individual',adminController.getAdminRequestListIndividual);
-// app.get('/adminRequestsList/Individual/:something',adminController.getAdminRequestListIndividual);
 app.get('/adminRequestsList/:view',requestController.getRequestsForAdmin);
+
+app.post('/override/:request_ID', requestController.postOverrideRequest);
 
 module.exports = app;

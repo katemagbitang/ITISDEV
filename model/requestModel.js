@@ -55,6 +55,11 @@ const requestSchema = new Schema({
         required: [true,'Required'],
         default: 1
     },
+    override:{
+        type: Boolean,
+        required: [true, 'Required'],
+        default: false
+    },
     notifications:[{
         type: String //notic objid to-follow
         // ,
