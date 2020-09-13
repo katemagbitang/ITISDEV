@@ -98,15 +98,15 @@ const orderController = {
 
                                                     cartitemscount++;
                                                     if(cartitemscount == cartItemsResult.items.length){
-                                                        console.log("PUSH CART");
+                                                        // console.log("PUSH CART");
 
                                                         var totalamount = 0;
                                                         for(i = 0; i<itemslist.length; i++){
-                                                            console.log("o");
+                                                            // console.log("o");
                                                             totalamount += itemslist[i].quantity * itemslist[i].price;
 
                                                         }
-                                                        console.log(totalamount);
+                                                        // console.log(totalamount);
 
                                                         orders.push({
                                                             order_ID: order_ID,
@@ -114,16 +114,20 @@ const orderController = {
                                                             status: status,
                                                             totalamount: totalamount
                                                         });
-                                                        // console.log("ORDERS: " + orders);
+                                                        // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
 
                                                     }
 
+                                                    
+                                                        
+
                                                     ordersmodelcount++;
-                                                    if(ordersmodelcount == cartItemsResult.items.length){
+                                                    if(ordersmodelcount == ordersModelResult.length){
                                                         // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
-                                                        // console.log(ordersmodelcount);
-                                                        // console.log(cartItemsResult.items.length);
+                                                        // console.log("ordersmodelcount: " + ordersmodelcount);
+                                                        // console.log("cartItemsResult.items.length: " + cartItemsResult.items.length);
                                                         // res.render("userOrdersToPay",{orders: orders});
+                                                        
                                                         if(view == "Pending"){
                                                             res.render("userOrdersToPay",{orders: orders});
                                                         }else if(view == "Processing"){
@@ -133,7 +137,13 @@ const orderController = {
                                                         }else if ( view == "Cancelled"){
                                                             res.render("userOrdersCancelled",{orders: orders});
                                                         }
+                                                        
+                                                        // res.render("userOrdersToPay",{orders: orders});
+
+
                                                     }
+
+
 
                                                                     
 
@@ -156,7 +166,7 @@ const orderController = {
             }
 
             
-
+            // res.render("userOrdersToPay",{orders: orders});
 
         });
 
