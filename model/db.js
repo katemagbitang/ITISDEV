@@ -7,6 +7,8 @@ const options = {
     useNewUrlParser: true
 };
 
+mongoose.set('useCreateIndex', true);
+
 // defines an object which contains necessary database functions
 const database = {
 
