@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 const cartItemSchema = new Schema({
     username: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "User",
         required: [true, 'Required']
     },
@@ -24,10 +24,9 @@ const cartItemSchema = new Schema({
     }]
     ,
     isActive: {
-        type: String,
-        enum: ['No','Yes'],
+        type: Boolean,
         required: [true, 'Required']
     }
 });
 
-module.exports = mongoose.model('CartItems',cartItemSchema);
+module.exports = mongoose.model('cartitems',cartItemSchema);

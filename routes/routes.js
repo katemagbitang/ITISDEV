@@ -7,6 +7,7 @@ const adminController = require('../controllers/adminController.js');
 const messageController = require('../controllers/messageController.js');
 const bookController = require('../controllers/bookController.js');
 const requestController = require('../controllers/requestController.js');
+const cartController = require('../controllers/cartController.js');
 
 // const validation = require('../helpers/validation.js');
 
@@ -39,13 +40,9 @@ app.post('/composenewmessage', messageController.composenewmessage);
 
 app.post('/signup',userController.postSignup);
 
-app.get('/cart',function(req,res){
-	res.render("cart",{});
-});
+app.get('/cart', cartController.getCart);
 
-app.get('/checkout',function(req,res){
-	res.render("checkout",{});
-});
+app.get('/checkout', cartController.postCheckout);
 
 app.get('/requestbook',function(req,res){
 	res.render("requestform",{});

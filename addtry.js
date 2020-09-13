@@ -565,7 +565,7 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "Yes"
+        isActive: true
     },
     {
         // [1]
@@ -581,7 +581,7 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "No"
+        isActive: false
     },
     {
         // [2]
@@ -593,7 +593,7 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "No"
+        isActive: false
     },
     {
         // [3]
@@ -605,7 +605,7 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "No"
+        isActive: false
     },
     {
         // [4]
@@ -617,7 +617,7 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "No"
+        isActive: false
     },
     {
         // [5]
@@ -629,7 +629,7 @@ var cartItems = [
                 quantity: 3
             }
         ],
-        isActive: "No"
+        isActive: false
     }
 ]
 
