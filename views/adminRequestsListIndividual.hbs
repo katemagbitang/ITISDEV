@@ -77,8 +77,11 @@
                                 <td>{{override}}</td>
                                 <td>{{status}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-danger override-btn" >Override</button>
-                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button>
+                                    <form method="post" action = "/override/{{request_ID}}">
+                                        <input class="form-control mr-sm-2" type="text" name = "request_ID" value = "{{request_ID}}" hidden>
+                                        <button type="submit" class="btn btn-sm btn-danger override-btn" >Override</button>
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button>
+                                    </form>
                                 </td>
                             </tr>
                         {{/each}}

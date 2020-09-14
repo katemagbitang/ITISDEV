@@ -96,5 +96,6 @@ app.get('/adminRequestsList',adminController.getAdminRequestList);
 app.get('/adminRequestsList/:view',requestController.getRequestsForAdmin);
 
 app.post('/override/:request_ID', requestController.postOverrideRequest);
+app.post('/requestbook', requestController.postRequestABook);
 
 module.exports = app;

@@ -28,7 +28,8 @@ const requestSchema = new Schema({
     isUrgent: {
         type: String,
         enum: ['Yes','No'], //boolean?
-        required: [true,'Required']
+        required: [true,'Required'],
+        default: 'No'
     },
     maxPrice: {
         type: Number,
