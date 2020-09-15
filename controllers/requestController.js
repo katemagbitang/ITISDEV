@@ -61,6 +61,12 @@ function computePriorityRating(maxPrice, date_requested, isUrgent){
     totalrating = base + urgent + pricerating + timerating;
     totalrating = Math.round(totalrating*1000)/1000; // round to 3 decimal places
 
+    
+    // console.log("\n#######################");
+    // console.log("maxPrice: " + maxPrice);
+    // console.log("date_requested: " + date_requested);
+    // console.log("isUrgent: " + isUrgent);
+
     // console.log("\nBase: "  + base);
     // console.log("Urgent: " + urgent);
     // console.log("pricerating: " + pricerating);
@@ -73,12 +79,29 @@ function computePriorityRating(maxPrice, date_requested, isUrgent){
 
 }
 
+// This function updates the priority rating of all requests
+function updatePriorityRating(){
+
+    requestModel.find({}, function(err, requestModelResult){
+
+        requestModelResult.forEach(function(request, err){
+            var priority_rating = computePriorityRating(request.maxPrice, request.date_requested, request.isUrgent);
+            requestModel.updateOne({request_ID: request.request_ID}, {$set: {priority_rating: priority_rating}}, function(){
+                return 1;
+            });
+        })
+    })
+}
+
 
 const requestController = {
     getRequestsForRegular: function(req,res){
 
         var status = req.params.status;
         var requests = [];
+
+        //updates the priority ratings first
+        updatePriorityRating();
 
         requestModel.find({status:status, username:req.session.username}, function(err, requestModelResult){
 
@@ -120,9 +143,16 @@ const requestController = {
         var requests = [];
         // var status = "null";
 
+        //updates the priority ratings first
+        updatePriorityRating();
+
         requestModel.find({}, function(err, requestModelResult){
 
             requestModelResult.forEach(function(request, err){
+
+                var priority_rating = computePriorityRating(request.maxPrice, request.date_requested, request.isUrgent);
+
+                
                 var request = {
                     request_ID : request.request_ID,
                     requester : request.username,
@@ -133,7 +163,7 @@ const requestController = {
                     quantity : request.quantity, 
                     description : request.description,
                     date_requested : request.date_requested.toDateString(),
-                    priority_rating : request.priority_rating,
+                    priority_rating : priority_rating,
                     status : request.status,
                     override: request.override
                 }
@@ -144,11 +174,9 @@ const requestController = {
                 }else if(view == "Collective"){
                     // enter codes here
                 }
-                    
-                
             })
 
-            console.log(requests);
+            // console.log(requests);
         
             if(view == "Collective"){
                 res.render("adminRequestsListCollective",{
@@ -158,15 +186,12 @@ const requestController = {
             }else if (view == "Individual"){
                 res.render("adminRequestsListIndividual",{
                     requestList: requests
-                    
                 });
                 
             }else if(view == "SoonExpiring"){
                 res.render("adminRequestsListSTBC",{
                     requestList: requests
-
                 });
-
             }
         })
     },
@@ -195,8 +220,6 @@ const requestController = {
         var quantity = req.body.quantity;
         var priority_rating = computePriorityRating(maxPrice, date_requested, isUrgent);
 
-        
-
         var request = new requestModel({
             request_ID:request_ID,
             username : username,
@@ -215,7 +238,7 @@ const requestController = {
         request.save();
         
 
-        console.log(" New request: "+ JSON.stringify(request, null, ' '));
+        // console.log(" New request: "+ JSON.stringify(request, null, ' '));
         res.redirect('back');
     }
 

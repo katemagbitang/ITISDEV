@@ -418,7 +418,7 @@ var requests = [
         // bookversion_ID: bookVersions[0].bookVersion_ID,
         book_title: "Rogue One: A Star Wars Story",
         book_author: "Alexander Freed",
-        isUrgent: "No",
+        isUrgent: "Yes",
         maxPrice: 1000.00,
         description: "Hard Cover version",
         date_requested: new Date("2020-08-30T10:13:19.873+00:00"),
