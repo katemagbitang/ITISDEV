@@ -7,6 +7,7 @@ const ObjectId = require('mongodb').ObjectID;
 const mongoose = require('mongoose');
 const { version } = require('os');
 const { title } = require('process');
+const { text } = require('express');
 const url = 'mongodb://localhost:27017/chapterone';
 
 const bookController = {
@@ -65,6 +66,7 @@ const bookController = {
 
             //renders the page
             res.render("productpage",{
+                header: 'All Books',
                 bookList: bookList
             });
         });
@@ -72,7 +74,6 @@ const bookController = {
     },
     getBookByCategory: function(req, res){
         var category = req.params.category;
-
         var bookList = []; // stores all info for the listing
 
         //vars need for rendering: bookCover, title, aName, sellingPrice, 
@@ -117,16 +118,15 @@ const bookController = {
                                 //adds each booklisting into the bookList array || the bookList array contains all info needed per listing
                                 bookList.push(booklisting);
                                  
-                            })  
+                            });  
                         }
                     });
-                })
+                });
             }
-
-           
 
             //renders the page
             res.render("productpage",{
+                header: category,
                 bookList: bookList
             });
         });

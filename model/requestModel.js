@@ -28,7 +28,8 @@ const requestSchema = new Schema({
     isUrgent: {
         type: String,
         enum: ['Yes','No'], //boolean?
-        required: [true,'Required']
+        required: [true,'Required'],
+        default: 'No'
     },
     maxPrice: {
         type: Number,
@@ -54,6 +55,11 @@ const requestSchema = new Schema({
         type: Number,
         required: [true,'Required'],
         default: 1
+    },
+    override:{
+        type: Boolean,
+        required: [true, 'Required'],
+        default: false
     },
     notifications:[{
         type: String //notic objid to-follow

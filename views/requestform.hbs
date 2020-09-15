@@ -23,11 +23,11 @@
       <div id="request-row" class="row justify-content-center align-items-center">
           <div id="request-column" class="col-md-6">
               <div id="request-box" class="col-md-12">
-                  <form id="request-form" class="form" action="" method="post">
+                  <form id="request-form" class="form" method="post">
                       <h3 class="text-center text-info">Book Request</h3>
                       <div class="form-group">
                           <label for="btitle" class="text-info">Book Title</label><br>
-                          <input type="text" name="btitle" id="btitle" class="form-control"><!--required-->
+                          <input type="text" name="title" id="title" class="form-control"><!--required-->
                       </div>
                       <div class="form-group">
                         <label for="authors" class="text-info">Author(s)</label><br>
@@ -35,22 +35,22 @@
                       </div>
                       <div class="form-group">
                         <label for="description" class="text-info">Description</label><br>
-                        <input type="text" name="description" id="description" class="form-control">
+                        <textarea type="text" name="description" id="description" class="form-control" style = "resize: none; height: 100px"></textarea>
                       </div>
                       <div class="form-group">
                         <label for="price" class="text-info">Price willing to pay</label><br>
-                        <input type="text" name="price" id="price" class="form-control">
+                        <input type="number" name="price" id="price" class="form-control">
                       </div>
                       <div class="form-group">
                         <label for="quantity" class="text-info">Quantity</label><br>
                         <input type="number" name="quantity" id="quantity" class="form-control">
                       </div>
                       <div class="form-group">
-                        <label for="urgent" class="text-info">Urgent</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input class="form-check-input position-static" type="checkbox" name="urgent" id="urgent" value="option1" aria-label="...">
+                        <label for="isUrgent" class="text-info">Urgent</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input class="form-check-input position-static" type="checkbox" name="isUrgent" id="isUrgent" value="Yes" >
                       </div>
                       <div class="form-group">
-                          <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit" formaction="requests.html">
+                          <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit" >
                       </div>
                   </form>
               </div>

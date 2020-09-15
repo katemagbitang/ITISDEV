@@ -56,8 +56,9 @@
                             <th> Description</th>
                             <th>Date Requested</th> 
                             <th >Priority Rating</th>
+                            <th>Override</th>
                             <th> Status</th>
-                            <th> Action </th>
+                            <th > Action </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,8 +74,16 @@
                                 <td> {{description}}</td>
                                 <td>{{date_requested}}</td> 
                                 <td>{{priority_rating}}</td>
+                                <td>{{override}}</td>
                                 <td>{{status}}</td>
-                                <td><button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button></td>
+                                <td>
+                                    <form method="post" action = "/override/{{request_ID}}">
+                                        <input class="form-control mr-sm-2" type="text" name = "request_ID" value = "{{request_ID}}" hidden>
+                                        <button type="submit" class="btn btn-sm btn-danger override-btn" >Override</button>
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button>
+                                    </form>
+                                    
+                                </td>
                             </tr>
                         {{/each}}
                     </tbody>

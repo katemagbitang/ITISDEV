@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-4">
                 <div class="text-center img-thumbnail">
-                <img src="{{bookCover}}" height="290px" width="250px" alt="{{title}}">
+                <img src="{{{bookCover}}}" height="290px" width="250px" alt="{{{title}}}">
                 </div>
             </div>
             <div class="col-8">
@@ -30,7 +30,7 @@
                         <h6 class="card-subtitle mb-2 text-muted">{{aName}}</h6> <br>
 
                         <h5 style="color: #DC3545">₱{{sellingPrice}}</h5> <hr>
-                        <p class="card-subtitle mb-2 text-muted">{{quantity}}</p>
+                        <p class="card-subtitle mb-2 text-muted">Stocks Left: {{quantity}}</p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button">-</button>
@@ -51,9 +51,9 @@
                 <div class="card-body"> <br>
                     <h6 class="card-subtitle mb-2 text-muted">Product Details</h6> <hr><br>
 
-                    <p class="card-text"> Book Synopsis <br>{{bookSynopsis}}</p> <br><br>
+                    <p class="card-text"> <b>Book Synopsis</b> <br><br>{{bookSynopsis}}</p> <br><br>
 
-                    <h6 class="card-subtitle mb-2 text-muted">More Information</h6> <hr><br>
+                    <h6 class="card-subtitle mb-2 text-muted">More Information</h6> <br>
                     
                     <table class="table table-hover" >
                         <tr><th>Book Title: </th>

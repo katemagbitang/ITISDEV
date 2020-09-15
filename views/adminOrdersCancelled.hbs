@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>head}}
+    <link rel="stylesheet" href="../css/messagesStyle.css">
+    <title>My Transactions</title>
+</head>
+<body>
+    {{!-- NAVBARS START --}}
+    <div id= "navvisit">
+        {{> navvisit}}
+    </div>
+    <div id = "navadmin">
+         {{> navadmin}}
+    </div>
+    <div id = "navuser">
+       {{> navuser}}
+    </div>
+    {{!-- NAVBARS END --}}
+
+
+    <div class="container-fluid-nopadding" >
+
+        <div class="card text-center">
+            <div class="card-header-center bg-light">
+                <h4>My Orders</h4>
+            </div>
+
+            <div class="card-header card-header-tabs bg-light">
+                <ul class="nav nav-tabs  bg-light">
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/Orders/Pending">Payment Pending</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/Orders/Processing">Payment Processing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/Orders/Confirmed">Confirmed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/Orders/Cancelled">Cancelled</a>
+                    </li>
+                </ul>
+            </div>
+                
+
+            <div class="card-body-orders  overflow-auto vh80"  >
+                
+
+
+                <table class=" table table-bordered table-hover ">
+                    <thead class="thead-light">
+                        <tr>
+                            <th >Order Number</th>
+                            <th style="min-width: 300px">Order Details</th>
+                            <th >Total Amount</th>
+                            <th> Shipping Details</th>
+                            <th >Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each orders}}
+                            <tr>
+                                <th scope="row">{{order_ID}}</th>
+                                <td>
+                                    <table class=" table ">
+                                    <tr>
+                                        <th >Book </th>
+                                        <th>Author/s</th>
+                                        <th >Quality</th>
+                                        <th >Edition</th>
+                                        <th >Type</th>
+                                        <th >Qty</th>
+                                        <th> Price</th>
+                                    </tr>
+                                    {{#each items}}
+                                    <tr>
+                                        <td >{{title}} </td>
+                                        <td> {{author}} </td>
+                                        <td >{{quality}}</td>
+                                        <td >{{edition}}</td>
+                                        <td >{{type}}</td>
+                                        <td >{{quantity}}</td>
+                                        <td> {{price}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </table>
+                                </td>
+                                <td>{{totalamount}}</td>
+                                <td> </td>
+                                <td>{{status}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</body>
+</html>

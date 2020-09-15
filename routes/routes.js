@@ -7,6 +7,7 @@ const adminController = require('../controllers/adminController.js');
 const messageController = require('../controllers/messageController.js');
 const bookController = require('../controllers/bookController.js');
 const requestController = require('../controllers/requestController.js');
+const cartController = require('../controllers/cartController.js');
 
 /*
 const multer = require('multer');
@@ -25,7 +26,7 @@ const upload = multer({storage: storage});
 
 const app = express();
 
-app.get('/',controller.getIndex);
+app.get('/',controller.getHome);
 app.get('/home',controller.getHome);
 
 app.get('/signup',userController.getSignUp);
@@ -52,13 +53,9 @@ app.post('/composenewmessage', messageController.composenewmessage);
 
 app.post('/signup',userController.postSignup);
 
-app.get('/cart',function(req,res){
-	res.render("cart",{});
-});
+app.get('/cart', cartController.getCart);
 
-app.get('/checkout',function(req,res){
-	res.render("checkout",{});
-});
+app.get('/checkout', cartController.postCheckout);
 
 app.get('/requestbook',function(req,res){
 	res.render("requestform",{});
@@ -112,9 +109,9 @@ app.get('/addProducts',adminController.getAddProduct);
 
 
 app.get('/adminRequestsList',adminController.getAdminRequestList);
-// app.get('/adminRequestsList/Collective',adminController.getAdminRequestListCollective);
-// app.get('/adminRequestsList/Individual',adminController.getAdminRequestListIndividual);
-// app.get('/adminRequestsList/Individual/:something',adminController.getAdminRequestListIndividual);
 app.get('/adminRequestsList/:view',requestController.getRequestsForAdmin);
+
+app.post('/override/:request_ID', requestController.postOverrideRequest);
+app.post('/requestbook', requestController.postRequestABook);
 
 module.exports = app;

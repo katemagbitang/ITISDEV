@@ -418,13 +418,14 @@ var requests = [
         // bookversion_ID: bookVersions[0].bookVersion_ID,
         book_title: "Rogue One: A Star Wars Story",
         book_author: "Alexander Freed",
-        isUrgent: "No",
+        isUrgent: "Yes",
         maxPrice: 1000.00,
         description: "Hard Cover version",
-        date_requested: Date(),
+        date_requested: new Date("2020-08-30T10:13:19.873+00:00"),
         status: "Active",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications: 
         ignored_notif_count: 0 
     },
@@ -437,10 +438,11 @@ var requests = [
         isUrgent:"No",
         maxPrice: 1000.00,
         description: "none",
-        date_requested: Date(),
+        date_requested: new Date("2020-09-01T10:13:19.873+00:00"),
         status: "Active",
         priority_rating: 0.034,
         quantity: 2,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -453,10 +455,11 @@ var requests = [
         isUrgent:"No",
         maxPrice: 1500.00,
         description: "none",
-        date_requested: Date(),
+        date_requested: new Date("2020-09-02T10:13:19.873+00:00"),
         status: "Active",
         priority_rating: 0.034,
         quantity: 2,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -469,10 +472,11 @@ var requests = [
         isUrgent:"No",
         maxPrice: 1000.00,
         description: "none",
-        date_requested: Date(),
+        date_requested: new Date("2020-09-05T10:13:19.873+00:00"),
         status: "Active",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -485,10 +489,11 @@ var requests = [
         isUrgent:"No",
         maxPrice: 1000.00,
         description: "none",
-        date_requested: Date(),
+        date_requested: new Date("2020-09-07T10:13:19.873+00:00"),
         status: "Active",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -501,10 +506,11 @@ var requests = [
         isUrgent:"No",
         maxPrice: 1000.00,
         description: "none",
-        date_requested: Date(),
+        date_requested: new Date("2020-09-09T10:13:19.873+00:00"),
         status: "Cancelled",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -517,10 +523,11 @@ var requests = [
         isUrgent:"Yes",
         maxPrice: 1000.00,
         description: "none",
-        date_requested: Date(),
+        date_requested: new Date("2020-09-12T10:13:19.873+00:00"),
         status: "Cancelled",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     },
@@ -533,10 +540,11 @@ var requests = [
         isUrgent:"Yes",
         maxPrice: 1000.00,
         description: "none",
-        date_requested: Date(),
+        date_requested: new Date(),
         status: "SoonExpiring",
         priority_rating: 0.034,
         quantity: 1,
+        override: false,
         //notifications:
         ignored_notif_count: 0,
     }
@@ -565,7 +573,7 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "Yes"
+        isActive: true
     },
     {
         // [1]
@@ -581,7 +589,7 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "No"
+        isActive: false
     },
     {
         // [2]
@@ -593,7 +601,7 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "No"
+        isActive: false
     },
     {
         // [3]
@@ -605,7 +613,7 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "No"
+        isActive: false
     },
     {
         // [4]
@@ -617,7 +625,19 @@ var cartItems = [
                 quantity: 2
             }
         ],
-        isActive: "No"
+        isActive: false
+    },
+    {
+        // [5]
+        CartItems_ID: ObjectId(),
+        username: "willowsmith",
+        items: [
+            {
+                bookVersion: bookVersions[3].bookVersion_ID,
+                quantity: 3
+            }
+        ],
+        isActive: false
     }
 ]
 
@@ -648,7 +668,14 @@ var Orders = [
         order_ID: ObjectId(),
         username: "willowsmith",
         status: "Confirmed"
+    },
+    {
+        // [4]
+        order_ID: ObjectId(),
+        username: "willowsmith",
+        status: "Pending"
     }
+
 ]
 mongodb.insertMany(ordersCollections, Orders);
 
@@ -676,6 +703,12 @@ var OrderItems = [
         OrderItems_ID : ObjectId(),
         order_ID : Orders[3].order_ID,
         CartItems_ID: cartItems[4].CartItems_ID
+    },
+    {
+        // [4]
+        OrderItems_ID : ObjectId(),
+        order_ID : Orders[4].order_ID,
+        CartItems_ID: cartItems[5].CartItems_ID
     }
 ]
 mongodb.insertMany(orderItemsCollections, OrderItems);
