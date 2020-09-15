@@ -8,6 +8,19 @@ const messageController = require('../controllers/messageController.js');
 const bookController = require('../controllers/bookController.js');
 const requestController = require('../controllers/requestController.js');
 
+/*
+const multer = require('multer');
+const storage = multer.diskStorage({
+	destination: function(req, file, cb) {
+		cb(null, './public/img/')
+	},
+	filename: function(req, file, cb) {
+		cb(null, file.originalname)
+	}
+});
+const upload = multer({storage: storage});
+*/
+
 // const validation = require('../helpers/validation.js');
 
 const app = express();
@@ -94,7 +107,10 @@ app.get('/Orders/:view', orderController.getOrdersByStatus);
 // app.get('/Orders/Confirmed',orderController.getOrdersConfirmed);
 // app.get('/Orders/Cancelled',orderController.getOrdersCancelled);
 
+app.post('/addProducts',adminController.postProduct);
 app.get('/addProducts',adminController.getAddProduct);
+
+
 app.get('/adminRequestsList',adminController.getAdminRequestList);
 // app.get('/adminRequestsList/Collective',adminController.getAdminRequestListCollective);
 // app.get('/adminRequestsList/Individual',adminController.getAdminRequestListIndividual);

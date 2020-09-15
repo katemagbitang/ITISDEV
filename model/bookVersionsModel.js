@@ -40,7 +40,7 @@ const bookVersionSchema = new Schema({
         required: [true,'Required']
     },
     bookCover: {
-        type: String,
+        type: String
     }
 });
 
