@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>head}}
+    <link rel="stylesheet" href="../css/messagesStyle.css">
+    <title>My Transactions</title>
+</head>
+<body>
+    {{!-- NAVBARS START --}}
+    <div id= "navvisit">
+        {{> navvisit}}
+    </div>
+    <div id = "navadmin">
+         {{> navadmin}}
+    </div>
+    <div id = "navuser">
+       {{> navuser}}
+    </div>
+    {{!-- NAVBARS END --}}
+    <div class="container-fluid-nopadding" >
+
+        <div class="card text-center">
+            <div class="card-header-center bg-light">
+                <h4>My Orders</h4>
+            </div>
+
+            <div class="card-header card-header-tabs bg-light">
+                <ul class="nav nav-tabs  bg-light">
+                    <li class="nav-item ">
+                        <a class="nav-link active" href="/Orders/Pending">Payment Pending</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/Orders/Processing">Payment Processing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/Orders/Confirmed">Confirmed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/Orders/Cancelled">Cancelled</a>
+                    </li>
+                </ul>
+            </div>
+                
+
+            <div class="card-body-orders  overflow-auto vh80"  >
+                
+
+
+                <table class=" table table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th >Order Number</th>
+                            <th style="min-width: 300px">Order Details</th>
+                            <th> Shipping Details</th>
+                            <th >Total Amount</th>
+                            <th >Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each orders}}
+                            <tr>
+                                <th scope="row">{{order_ID}}</th>
+                                <td>
+                                    <table class=" table ">
+                                    <tr>
+                                        <th >Book </th>
+                                        <th>Author/s</th>
+                                        <th >Quality</th>
+                                        <th >Edition</th>
+                                        <th >Type</th>
+                                        <th >Qty</th>
+                                        <th> Price</th>
+                                    </tr>
+                                    {{#each items}}
+                                    <tr>
+                                        <td >{{title}} </td>
+                                        <td> {{author}} </td>
+                                        <td >{{quality}}</td>
+                                        <td >{{edition}}</td>
+                                        <td >{{type}}</td>
+                                        <td >{{quantity}}</td>
+                                        <td> {{price}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </table>
+                                </td>
+                                <td> </td>
+                                <td>{{totalamount}}</td>
+                                <td>{{status}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+    </div>
+
+{{!-- Modal for Send Payment --}}
+    <div class="modal fade" id="sendPaymentForm" tabindex="-1" role="dialog" aria-labelledby="sendPaymentFormTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="sendPaymentFormTitle">Send Payment Form</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+            <div class="form-group row">
+                <label for="Order Number" class="col-sm-5 col-form-label">Order Number</label>
+                <div class="col-sm-7">
+                <input type="text" readonly class="form-control-plaintext" id="SendPaymentOrderNumber" value="0123456789">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Bank Name" class="col-sm-5 col-form-label">Bank Name</label>
+                <div class="col-sm-7">
+                <input type="text" class="form-control" id="SendPaymentBankName" placeholder="Bank Name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Reference Number" class="col-sm-5 col-form-label">Reference/OR Number</label>
+                <div class="col-sm-7">
+                <input type="text" class="form-control" id="SendPaymentRefNum" placeholder="Reference Number">
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger">Send</button>
+        </div>
+        </div>
+    </div>
+    </div>
+{{!-- END Modal for Send Payment --}}
+
+    
+
+
+
+
+
+</body>
+</html>
