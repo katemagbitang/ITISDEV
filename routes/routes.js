@@ -8,6 +8,7 @@ const messageController = require('../controllers/messageController.js');
 const bookController = require('../controllers/bookController.js');
 const requestController = require('../controllers/requestController.js');
 const cartController = require('../controllers/cartController.js');
+const searchController = require('../controllers/searchController.js');
 
 /*
 const multer = require('multer');
@@ -55,6 +56,8 @@ app.get('/logout',userController.getLogout);
 
 app.get('/getUsername', userController.getUsername);
 app.get('/getEmail', userController.getEmail);
+
+app.post('/search', searchController.postSearch);
 
 app.get('/notification', function(req,res) {
 	res.render("notification", {});
