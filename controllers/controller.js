@@ -101,6 +101,9 @@ const controller ={
         else // if noone is logged in
             res.json({userType:"Visitor"});
     },
+    getAboutUs: function(req,res) {
+        res.render("aboutus");
+    },
     getDummyUpload: function(req, res){
         res.render("dummyupload");
     },
