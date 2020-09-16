@@ -63,6 +63,8 @@ app.get('/getEmail', userController.getEmail);
 
 app.post('/search', searchController.postSearch);
 
+app.get('/aboutus', controller.getAboutUs);
+
 app.get('/notification', function(req,res) {
 	res.render("notification", {});
 });
