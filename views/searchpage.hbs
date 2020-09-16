@@ -1,0 +1,56 @@
+<head>
+    {{>head}}
+    <title>Search | Chapter One</title>
+</head>
+<body>
+    {{!-- NAVBARS START --}}
+    <div id= "navvisit">
+        {{> navvisit}}
+    </div>
+    <div id = "navadmin">
+         {{> navadmin}}
+    </div>
+    <div id = "navuser">
+       {{> navuser}}
+    </div>
+    {{!-- NAVBARS END --}}
+
+
+    <br><br><hr> {{!-- Search Results --}}
+        <div class="container">
+        <div class="row">
+            <div class="col center-block text-center">
+            <h3>{{header}}</h3>
+            <h5>You searched for: {{userinput}}</h5>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            {{#each searchList}}
+            <div class="col-3">
+            <div class="card text-center">
+                <a href="books/{{{bookVersion_ID}}}"style = " color: black">
+                <img class="card-img-top" src="{{{bookCover}}}" height="200px" width="180px" alt="Card image cap">
+                <div class="card-body">
+                <p class="card-text"><b>{{title}}</b></p>
+                <p classes="card-text">{{aName}}</p>
+                <p classes="card-text">Php {{sellingPrice}}</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+                
+                </div>
+                </a>
+            </div>
+            </div>
+            {{/each}}
+        </div>
+        </div>
+
+        <br><br><hr>
+        <div class="container">
+        <div class="row">
+            <div class="col center-block text-center">
+            <h3>Chapter One. 2019</h3>
+            </div>
+        </div>
+        </div>
+</body>
