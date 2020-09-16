@@ -1,8 +1,51 @@
 
-const db = require('../model/db.js');
+// const db = require('../model/db.js');
 const dummyModel = require('../model/dummyModel.js');
 const bookVersionsModel = require('../model/bookVersionsModel.js');
 const booksModel = require('../model/booksModel.js');
+
+
+const path = require('path');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const aws = require('aws-sdk');
+
+aws.config.update({
+    
+});
+
+//Set Storage Engine
+const storage = multer.diskStorage({
+    destination: './public/img',
+    filename: function( req, file, callback){
+        callback(null, file.fieldname + '-' + Date.now() +  path.extname(file.originalname));
+    }
+});
+
+//init upload 
+const upload = multer({
+    storage: storage,
+    fileFilter: function(req, file, callback){
+        checkFileType(file, callback);
+    }
+}).single('myImage');
+
+// check file type
+function checkFileType(file , callback){
+    // allowed extensions
+    const filetypes = /jpeg|jpg|png/;
+    // check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    //check mimetype
+    const mimetype = filetypes.test(file.mimetype);
+
+    if(mimetype && extname){
+        return callback(null, true);
+    }else{
+        callback("Error: Images only");
+    }
+}
+
 
 const controller ={
     getIndex: function(req,res){
@@ -67,18 +110,64 @@ const controller ={
         res.render("dummyupload");
     },
     postDummyUpload: function(req, res){
-        
+        upload(req, res, (err) =>{
+            if(err){
+                res.render('dummyupload',{
+                    msg:err,
+                })
+            }else{
+                console.log(req.file);
+                if(req.file == undefined){
+                    res.render('dummyupload',{
+                        msg:"Error: no file selected",
+                    })
+                }else{
+                    res.render('dummyupload', {
+                        msg:"File upload successful",
+                        image: `img/${req.file.filename}`
+                    })
+                }
+            }
+        });
+    },
+    postDummyUploadToS3: function(req, res){
+        res.render('dummyupload',{
 
-        var filepath = '../img/' + filename;
-        console.log(filepath);
+        })
+    },
+    getDummyUploadToS3: function(req, res){
+        res.render('dummyupload',{
+            
+        })
+    },
+
+    dummyphoto: function(req, res){
+        db.collection('mycollection').find().toArray((err, result) => {
+ 
+            const imgArray= result.map(element => element._id);
+                  console.log(imgArray);
+       
+         if (err) return console.log(err)
+         res.send(imgArray)
+       
+        })
+     
+
+    },
+
+    dummyphotobyID: function(req, res){
+        var filename = req.params.id;
+ 
+        db.collection('mycollection').findOne({'_id': ObjectId(filename) }, (err, result) => {
         
-        var dummy = new dummyModel({
-            image: filepath
+            if (err) return console.log(err)
+        
+        res.contentType('image/jpeg');
+        res.send(result.image.buffer)
+        
+            
         })
 
-        dummy.save();
-
-        res.render("dummyupload");
     }
 
 }

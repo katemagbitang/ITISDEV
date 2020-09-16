@@ -20,13 +20,25 @@
     </div>
     {{!-- NAVBARS END --}}
    
+    {{!-- <!--  SINGLE FILE -->
+    <form action="/uploadfile" enctype="multipart/form-data" method="POST"> 
+    <input type="file" name="myFile" />
+    <input type="submit" value="Upload a file"/>
+    </form> --}}
 
-    <form id = "createrecipe" class = "createrecipe" action = "/dummyupload" method = "POST" enctype="multipart/form-data">
-        <label for = "recipe_img">Upload an Image: <br></label><input type="file" id="recipe_img" name="recipe_img" accept="image/*" onchange="readURL(this);" required>
-        
-        <center><input type="submit" class="submitbtn" id="submitbtn" value="Post"></center>
+<br><br>
+    <!--   PHOTO-->
+    {{msg}}
+
+    <form action="/dummyupload" enctype="multipart/form-data" method="POST"> 
+        <input type="file" name="myImage" accept="image/*" />
+        <input type="submit" value="Upload Photo"/>
     </form>
+    <br>
+    
+    {{#if image }} <img src="{{image}}" > {{/if}}
 
+    
 
 
 

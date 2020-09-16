@@ -710,6 +710,7 @@ var OrderItems = [
         order_ID : Orders[4].order_ID,
         CartItems_ID: cartItems[5].CartItems_ID
     }
+
 ]
 mongodb.insertMany(orderItemsCollections, OrderItems);
 

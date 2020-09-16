@@ -24,6 +24,21 @@ const upload = multer({storage: storage});
 
 // const validation = require('../helpers/validation.js');
 
+//for MULTER / PHOTO upload
+    // SET STORAGE
+
+    const multer = require('multer');
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+        cb(null, 'uploads')
+        },
+        filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now())
+        }
+    })
+	var upload = multer({ storage: storage })
+	
+
 const app = express();
 
 app.get('/',controller.getHome);
@@ -73,8 +88,11 @@ app.get('/requestlist/:status', requestController.getRequestsForRegular);
 
 
 app.get('/dummyupload', controller.getDummyUpload);
-app.post('/dummyupload', controller.postDummyUpload);
-
+app.post('/dummyupload',  controller.postDummyUpload);
+app.get('/dummyphoto', controller.dummyphoto);
+app.get('/dummyphoto/:id', controller.dummyphotobyID);
+app.get('/dummyuploadtos3', controller.getDummyUploadToS3);
+app.post('/dummyuploadtos3',  controller.postDummyUploadToS3);
 
 
 app.get('/productdetailspage',bookController.getOneBook);
@@ -103,10 +121,7 @@ app.get('/salesreport',function(req,res){
 
 app.get('/Orders',orderController.getOrders);
 app.get('/Orders/:view', orderController.getOrdersByStatus);
-// app.get('/Orders/ToPay',orderController.getOrdersToPay);
-// app.get('/Orders/PaymentProcessing',orderController.getOrdersPayment);
-// app.get('/Orders/Confirmed',orderController.getOrdersConfirmed);
-// app.get('/Orders/Cancelled',orderController.getOrdersCancelled);
+app.post('sendpaymnet', orderController.postSendPayment);
 
 app.post('/addProducts',adminController.postProduct);
 app.get('/addProducts',adminController.getAddProduct);
