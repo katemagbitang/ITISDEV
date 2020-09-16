@@ -17,11 +17,11 @@ const paymentSchema = new Schema({
         ref: 'Orders',
         required: [true,'Required']
     },
-    status: {
-        type: Boolean,
-        enum: ['Pending', 'Accepted', 'Rejected'],
-        required: [true,'Required']
-    },
+    // status: {
+    //     type: Boolean,
+    //     enum: ['Pending', 'Accepted', 'Rejected'],
+    //     required: [true,'Required']
+    // },
     bank_name: {
         type: String,
         required: [true,'Required']
@@ -29,10 +29,11 @@ const paymentSchema = new Schema({
     ref_num: {
         type: Number,
         required: [true,'Required']
-    }
-    // proof_img: {
+    },
+    proof_image: {
+        type: String,
 
-    // }
+    }
 });
 
 module.exports = mongoose.model('paymentdetails',paymentSchema);

@@ -10,34 +10,38 @@ const requestController = require('../controllers/requestController.js');
 const cartController = require('../controllers/cartController.js');
 const searchController = require('../controllers/searchController.js');
 
-/*
+const path = require('path');
 const multer = require('multer');
+
+
+//Set Storage Engine
 const storage = multer.diskStorage({
-	destination: function(req, file, cb) {
-		cb(null, './public/img/')
-	},
-	filename: function(req, file, cb) {
-		cb(null, file.originalname)
-	}
+    destination: './public/img',
+    filename: function( req, file, callback){
+        callback(null, filename =  file.fieldname + '-' + Date.now() +  path.extname(file.originalname));
+    }
 });
-const upload = multer({storage: storage});
-*/
 
-// const validation = require('../helpers/validation.js');
+//init upload 
+const upload = multer({
+    storage: storage
+})
 
-//for MULTER / PHOTO upload
-    // SET STORAGE
+// check file type
+function checkFileType(file , callback){
+    // allowed extensions
+    const filetypes = /jpeg|jpg|png/;
+    // check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    //check mimetype
+    const mimetype = filetypes.test(file.mimetype);
 
-    const multer = require('multer');
-    var storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-        cb(null, 'uploads')
-        },
-        filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now())
-        }
-    })
-	var upload = multer({ storage: storage })
+    if(mimetype && extname){
+        return callback(null, true);
+    }else{
+        callback("Error: Images only");
+    }
+}
 	
 
 const app = express();
@@ -124,7 +128,9 @@ app.get('/salesreport',function(req,res){
 
 app.get('/Orders',orderController.getOrders);
 app.get('/Orders/:view', orderController.getOrdersByStatus);
-app.post('sendpaymnet', orderController.postSendPayment);
+app.post('/sendpayment', upload.single('myImage'), orderController.postSendPayment);
+
+app.post('/uploadphoto',  controller.uploadPhoto);
 
 app.post('/addProducts',adminController.postProduct);
 app.get('/addProducts',adminController.getAddProduct);

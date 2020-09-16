@@ -719,9 +719,9 @@ var paymentDetails = [
         payment_ID: ObjectId(),
         username: "willowsmith",
         order_ID: Orders[0].order_ID,
-        status: "Pending",
         bank_name: "BPI",
-        ref_num: "11812345678",
+        ref_num: 11812345678,
+        proof_image: "proof_image_1.jpg"
     }
 ]
 

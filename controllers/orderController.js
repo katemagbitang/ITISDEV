@@ -6,23 +6,75 @@ const bookVersionsModel = require('../model/bookVersionsModel.js');
 const booksModel = require('../model/booksModel.js');
 const authorModel = require('../model/authorModel.js');
 const cartItemsModel = require('../model/cartItemsModel.js');
+const paymentModel = require('../model/paymentModel.js');
 
 const MongoClient = require('mongodb').MongoClient
 const myurl = 'mongodb://localhost:27017/chapterone';
 
 
+const path = require('path');
+const multer = require('multer');
 
-function renderOrder(res, view, orders){
-    if(view == "Pending"){
-        res.render("userOrdersToPay",{orders: orders});
-    }else if(view == "Processing"){
-        res.render("userOrdersPaymentProcessing",{orders: orders});
-    }else if (view == "Confirmed"){
-        res.render("userOrdersConfirmed",{orders: orders});
-    }else if ( view == "Cancelled"){
-        res.render("userOrdersCancelled",{orders: orders});
+
+//Set Storage Engine
+const storage = multer.diskStorage({
+    destination: './public/img',
+    filename: function( req, file, callback){
+        callback(null, filename =  file.fieldname + '-' + Date.now() +  path.extname(file.originalname));
+    }
+});
+
+//init upload 
+const upload = multer({
+    storage: storage,
+    fileFilter: function(req, file, callback){
+        checkFileType(file, callback);
+    }
+}).single('myImage');
+
+// check file type
+function checkFileType(file , callback){
+    // allowed extensions
+    const filetypes = /jpeg|jpg|png/;
+    // check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    //check mimetype
+    const mimetype = filetypes.test(file.mimetype);
+
+    if(mimetype && extname){
+        return callback(null, true);
+    }else{
+        callback("Error: Images only");
     }
 }
+
+
+
+function renderOrder(res, view, orders, userType){
+    if(userType == "Regular"){
+        if(view == "Pending"){
+            res.render("userOrdersToPay",{orders: orders});
+        }else if(view == "Processing"){
+            res.render("userOrdersPaymentProcessing",{orders: orders});
+        }else if (view == "Confirmed"){
+            res.render("userOrdersConfirmed",{orders: orders});
+        }else if ( view == "Cancelled"){
+            res.render("userOrdersCancelled",{orders: orders});
+        }
+    }else if(userType == "Admin"){
+        if(view == "Pending"){
+            res.render("adminOrdersToPay",{orders: orders});
+        }else if(view == "Processing"){
+            res.render("adminOrdersPaymentProcessing",{orders: orders});
+        }else if (view == "Confirmed"){
+            res.render("adminOrdersConfirmed",{orders: orders});
+        }else if ( view == "Cancelled"){
+            res.render("adminOrdersCancelled",{orders: orders});
+        }
+    }
+}
+
+
 
 
 const orderController = {
@@ -51,8 +103,8 @@ const orderController = {
                         
                         // console.log("order_ID: " + order_ID);
                         // console.log("ordersmodelcount: " + ordersmodelcount);
-                        console.log("lengrth: " + ordersModelResult.length);
-                        console.log("ITERATE            %%%%%%%%%%%%%%%%");
+                        // console.log("lengrth: " + ordersModelResult.length);
+                        // console.log("ITERATE            %%%%%%%%%%%%%%%%");
                         
                         orderItemsModel.findOne({order_ID: order_ID}, function(err, orderItemsResult){
                             if(orderItemsResult != null){
@@ -123,7 +175,7 @@ const orderController = {
                                                             });
 
                                                         //    console.log("2");
-                                                           console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
+                                                        //    console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
                                                         //    itemslist.splice(0,itemslist.length);
 
                                                             
@@ -132,22 +184,16 @@ const orderController = {
                                                         }
                                                         
                                                         ordersmodelcount++;
-                                                        console.log("\nordersmodelcount: " + ordersmodelcount);
-                                                        console.log("ordersModelResult.length: " + ordersModelResult.length);
+                                                        // console.log("\n ordersmodelcount: " + ordersmodelcount);
+                                                        // console.log("ordersModelResult.length: " + ordersModelResult.length);
                                                         if(ordersmodelcount == ordersModelResult.length){
                                                             // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
                                                             // console.log("ordersmodelcount: " + ordersmodelcount);
                                                             // console.log("cartItemsResult.items.length: " + cartItemsResult.items.length);
                                                             // res.render("userOrdersToPay",{orders: orders});
                                                             
-                                                            console.log(view +'\n');
-
-                                                            if (view == "Pending"){
-                                                                    ordersModel.updateOne({order_ID: ObjectId('5f619755ba56e05870b63d6e'), $set: {status: "Cancelled"}}, function(){
-                                                                    renderOrder(res, view, orders);
-                                                                })
-                                                            }else
-                                                                renderOrder(res, view, orders);
+                                                            
+                                                                renderOrder(res, view, orders, req.session.userType);
                                                             
                                                             
                                                             // res.render("userOrdersToPay",{orders: orders});
@@ -167,7 +213,7 @@ const orderController = {
                     
                 }else{
                     // else if no data
-                    renderOrder(res, view, orders);
+                    renderOrder(res, view, orders, req.session.userType);
 
                 }
 
@@ -264,22 +310,23 @@ const orderController = {
 
                                                         ordersmodelcount++;
                                                         if(ordersmodelcount == ordersModelResult.length){
-                                                            console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
+                                                            // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
                                                             // console.log("ordersmodelcount: " + ordersmodelcount);
                                                             // console.log("cartItemsResult.items.length: " + cartItemsResult.items.length);
                                                             // res.render("userOrdersToPay",{orders: orders});
                                                             
                                                            
 
-                                                            if(view == "Pending"){
-                                                                res.render("adminOrdersToPay",{orders: orders});
-                                                            }else if(view == "Processing"){
-                                                                res.render("adminOrdersPaymentProcessing",{orders: orders});
-                                                            }else if (view == "Confirmed"){
-                                                                res.render("adminOrdersConfirmed",{orders: orders});
-                                                            }else if ( view == "Cancelled"){
-                                                                res.render("adminOrdersCancelled",{orders: orders});
-                                                            }
+                                                            // if (view == "Pending"){
+                                                            //     ordersModel.updateOne({order_ID: ObjectId('5f61a01e278b4630c87e77e9'), $set: {status: "Processing"}}, function(){
+                                                            //     console.log("UPDATEDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+                                                            //     renderOrder(res, view, orders);
+                                                            //     })
+                                                            // }
+                                                            // else
+                                                                renderOrder(res, view, orders, req.session.userType);
+                                                            
+                                                            
                                                             
                                                             // res.render("userOrdersToPay",{orders: orders});
 
@@ -294,6 +341,8 @@ const orderController = {
                             }
                         })
                     })
+                }else{
+                    renderOrder(res, view, orders, req.session.userType);
                 }
             });
             
@@ -303,9 +352,33 @@ const orderController = {
     ,
     postSendPayment: function (req, res){
 
+        var username = req.session.username;
+        var order_ID = req.body.SendPaymentOrderNumber;
+        var bank_name = req.body.SendPaymentBankName;
+        var ref_num = req.body.SendPaymentRefNum;
+        var proof_image = req.file.filename; 
+
+        var paymentdetails = new paymentModel({
+            payment_ID : ObjectId(),
+            username: username,
+            order_ID: ObjectId(order_ID),
+            bank_name: bank_name,
+            ref_num: ref_num,
+            proof_image: proof_image
+        });
+
+        // console.log(paymentDetails)
+
+        paymentdetails.save();
+
+        ordersModel.updateOne({order_ID: order_ID}, {$set: {status: "Processing"}}, function (err, result){
+           
+            res.redirect('/Orders/Processing');
+
+        })
 
 
-
+        
 
 
 

@@ -7,12 +7,7 @@ const booksModel = require('../model/booksModel.js');
 
 const path = require('path');
 const multer = require('multer');
-const multerS3 = require('multer-s3');
-const aws = require('aws-sdk');
 
-aws.config.update({
-    
-});
 
 //Set Storage Engine
 const storage = multer.diskStorage({
@@ -167,6 +162,30 @@ const controller ={
         
             
         })
+
+    },
+
+    uploadPhoto: function (req, res){
+
+        console.log(req.file);
+        upload(req, res, (err) =>{
+            if(err){
+                res.send("error");
+
+            }else{
+                console.log(req.file);
+                if(req.file == undefined){
+                    res.send("error");
+                }else{
+                    // res.render('dummyupload', {
+                    //     msg:"File upload successful",
+                    //     image: `img/${req.file.filename}`
+                    // })
+                    res.send({img: req.file.filename})
+                }
+            }
+        });
+
 
     }
 
