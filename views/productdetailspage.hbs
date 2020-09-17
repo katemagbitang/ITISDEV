@@ -30,17 +30,21 @@
                         <h6 class="card-subtitle mb-2 text-muted">{{aName}}</h6> <br>
 
                         <h5 style="color: #DC3545">₱{{sellingPrice}}</h5> <hr>
-                        <p class="card-subtitle mb-2 text-muted">Stocks Left: {{quantity}}</p>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="button">-</button>
+                        <p class="card-subtitle mb-2 text-muted ">Stocks Left: <span id="stocks">{{quantity}}</span></p>
+                        
+                        <form method = "POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <h5 style = "padding-right: 15px">Quantity </h5>
+                                    <button class="btn btn-outline-secondary" id="minusBtn" type="button">-</button>
+                                </div>
+                                <input type="number" id="quantity" name = "quantity" value="1" min="1" max= "{{quantity}}" style="text-align:center; width: 50px; height:40px; pointer-events: none "  >
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" id="plusBtn" type="button">+</button>
+                                    <button type = "submit" class="btn btn-danger" style="width: 170px; height:40px;">Add to Cart</button>
+                                </div>
                             </div>
-                            <input type="text" placeholder="0" style="text-align:center; width: 103px">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                        </div>
-                        <a href="#" class="btn btn-danger" style="width: 170px">Add to Cart</a>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -86,4 +90,34 @@
             </div>
         </div>
     </div><br>
+
+
+    <script>
+
+        
+           
+
+
+        $("#minusBtn").on('click', function(){
+
+            var quantity =  parseInt ( $("#quantity").val() );
+            if(quantity >1)
+                $("#quantity").val(quantity-1);
+            
+        })
+
+        $("#plusBtn").on('click', function(){
+
+            var quantity =  parseInt ( $("#quantity").val() );
+            var max =  parseInt( $('#stocks').text() );
+            {{!-- alert(max); --}}
+            
+            if(quantity < max ) 
+                $("#quantity").val(quantity+1);
+            
+        })
+
+    </script>
+
+
 </body>

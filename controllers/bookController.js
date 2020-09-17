@@ -134,7 +134,6 @@ const bookController = {
     },
     getOneBook: function(req,res) {
 
-        console.log("ENTER")
         //vars need for rendering: bookCover, title, aName, sellingPrice, publisher, year, quantity, bookSynopsis, quality, quantity, edition, type, category
             //      from versionsresult:  bookCover, sellingPrice, quantity, type, quality, edition **book_ID
             //      from booksresult: title, publisher, year, category, bookSynopsis, author(contains _id of authors)
@@ -188,6 +187,7 @@ const bookController = {
             }
         });
     }
+    
 
 
     

@@ -11,6 +11,8 @@ const paymentModel = require('../model/paymentModel.js');
 const MongoClient = require('mongodb').MongoClient
 const myurl = 'mongodb://localhost:27017/chapterone';
 
+
+
 // for image upload
 const path = require('path');
 const multer = require('multer');
@@ -365,6 +367,11 @@ const orderController = {
         paymentdetails.save();
 
         ordersModel.updateOne({order_ID: ObjectId(order_ID)}, {$set: {status: "Processing"}}, function (err, result){
+
+
+            
+            
+                
             res.redirect('/Orders/Processing');
             console.log("err update: " + err);
         })

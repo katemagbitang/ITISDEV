@@ -93,7 +93,7 @@ const cartController = {
                                             // console.log("cartItemsList: "+ JSON.stringify(cartItemsList, null, ' '));
                                             res.render("cart",{
                                                 cartItemsList: cartItemsList,
-                                                grandtotal: grandtotal
+                                                grandtotal: grandtotal.toFixed(2)
                                             });
                                         }
                                     });
@@ -196,6 +196,8 @@ const cartController = {
                         if(count == activeCartItems.items.length){
                             // updates cart status isActive to false! 
                             cartItemsModel.update({username : username,  isActive: true}, {$set: {isActive: false}}, function(){
+
+                                
                                 res.render('cart', {
                                     msg: `Your cart was successfully checked out. Thank you! `
                                 });
@@ -205,14 +207,82 @@ const cartController = {
 
                     })
                 })
-                
-
             })
-
-
         })
+    },
+    postAddToCart: function(req, res){
+        var username = req.session.username;
+        var bookVersion_ID = req.params.bookVersion_ID;
+        var quantity = req.body.quantity ;
 
         
+
+
+        console.log("bookVersion_ID: " + bookVersion_ID);
+        console.log("quantity: " + quantity);
+
+        cartItemsModel.findOne({username: username, isActive: true}, function(err, cartResult){
+            // console.log("\n\ncartResult: " + cartResult);
+            //If there is an existing Active cart si username
+            if(cartResult != null){
+                //push the the bookVersion and wuiantity to the item array of the cartItem
+
+                var item = {
+                    bookVersion: ObjectId(bookVersion_ID),
+                    quantity: parseInt(quantity)
+                }
+
+                count = 0;
+                alreadyinside = false;
+                cartResult.items.forEach(function(v, err){
+
+                    //checks if meron nang same item in the cart, if true increment the qunatity nalang
+                    if(v.bookVersion == bookVersion_ID){
+                        v.quantity += parseInt(quantity);
+                        alreadyinside = true;
+                    }
+
+                    count++;
+                    if(count == cartResult.items.length ){
+                        if(alreadyinside == false){
+                            //if the item is not in the cart yet, push new item
+                            cartResult.items.push(item);
+                        }
+
+                        console.log(cartResult.items);
+                        cartItemsModel.updateOne({username: username, isActive: true}, {$set: {items: cartResult.items}}, function(){
+                            res.redirect("/cart");
+                        })
+                    }
+                })
+
+
+            }
+            //else if Walang active cart si user
+            else{
+
+                // create a new cart with isActive = true then add the necessary deets
+
+                var cart = new cartItemsModel({
+                    CartItems_ID : new ObjectId(),
+                    username:  username,
+                    items : [
+                        {
+                            bookVersion: ObjectId(bookVersion_ID),
+                            quantity:  parseInt(quantity)
+                        }
+                    ],
+                    isActive: true
+                });
+
+                cart.save();
+
+                res.redirect("/cart");
+                
+            }
+        })
+
+
     }
 
 }
