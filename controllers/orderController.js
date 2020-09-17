@@ -11,7 +11,7 @@ const paymentModel = require('../model/paymentModel.js');
 const MongoClient = require('mongodb').MongoClient
 const myurl = 'mongodb://localhost:27017/chapterone';
 
-
+// for image upload
 const path = require('path');
 const multer = require('multer');
 
@@ -73,6 +73,7 @@ function renderOrder(res, view, orders, userType){
         }
     }
 }
+
 
 
 
@@ -317,27 +318,11 @@ const orderController = {
 
                                                         ordersmodelcount++;
                                                         if(ordersmodelcount == ordersModelResult.length){
-                                                            // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
-                                                            // console.log("ordersmodelcount: " + ordersmodelcount);
-                                                            // console.log("cartItemsResult.items.length: " + cartItemsResult.items.length);
-                                                            // res.render("userOrdersToPay",{orders: orders});
-                                                            
-                                                           
 
-                                                            // if (view == "Pending"){
-                                                            //     ordersModel.updateOne({order_ID: ObjectId('5f61a01e278b4630c87e77e9'), $set: {status: "Processing"}}, function(){
-                                                            //     console.log("UPDATEDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-                                                            //     renderOrder(res, view, orders);
-                                                            //     })
-                                                            // }
-                                                            // else
-                                                                renderOrder(res, view, orders, req.session.userType);
                                                             
-                                                            
-                                                            
-                                                            // res.render("userOrdersToPay",{orders: orders});
+                                                            renderOrder(res, view, orders, req.session.userType);
 
-
+                                                            
                                                         }
                                                     })
                                                 })
@@ -363,18 +348,9 @@ const orderController = {
         var order_ID = req.body.SendPaymentOrderNumber;
         var bank_name = req.body.SendPaymentBankName;
         var ref_num = req.body.SendPaymentRefNum;
-        var proof_image = req.file.filename; 
 
-        var paymentdetailsPrint = {
-            payment_ID : ObjectId(),
-            username: username,
-            order_ID: ObjectId(order_ID),
-            bank_name: bank_name,
-            ref_num: ref_num,
-            proof_image: proof_image
-        };
+        var proof_image = req.file.filename; //get filename
 
-        console.log(paymentdetailsPrint);
         var paymentdetails = new paymentModel({
             payment_ID : ObjectId(),
             username: username,

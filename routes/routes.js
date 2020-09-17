@@ -130,7 +130,8 @@ app.get('/salesreport',function(req,res){
 
 app.get('/Orders',orderController.getOrders);
 app.get('/Orders/:view', orderController.getOrdersByStatus);
-app.post('/sendpayment', upload.single('myImage'), orderController.postSendPayment);
+
+app.post('/sendpayment', upload.single('myImage'), orderController.postSendPayment); //contains image upload
 
 app.post('/uploadphoto',  controller.uploadPhoto);
 

@@ -113,6 +113,8 @@
                 </button>
             </div>
 
+            {{!-- form send payment --}}
+            {{!-- enctype important for image upload --}}
             <form action = "/sendpayment" enctype="multipart/form-data" method="POST">
                 <div class="modal-body">
                     <div class="form-group row">
@@ -146,6 +148,7 @@
                     <button type="submit" class="btn btn-danger" data-toggle="sendPhoto" data-target="#sendPaymentForm" >Send</button>
                 </div>
             </form>
+            {{!-- END form send payment --}}
 
         </div>
     </div>
