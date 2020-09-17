@@ -17,7 +17,6 @@ const cartController = {
     getCart: function(req,res){
 
         var username = req.session.username;
-        console.log("username: " + username);
 
         /*
             ##  quantity
@@ -37,7 +36,7 @@ const cartController = {
             if(cartItemsResult != null){
                 var cartItemsCount = 0;
                 simpleitems = cartItemsResult.items
-                console.log("cartItemsResult: " + simpleitems);
+                // console.log("cartItemsResult: " + simpleitems);
                 var bookVersionTry = [];
                 var grandtotal = 0; 
 
@@ -45,7 +44,7 @@ const cartController = {
 
                     var quantity = simpleitem.quantity;
 
-                    console.log("simpleitem.bookVersion :  " + simpleitem.bookVersion);
+                    // console.log("simpleitem.bookVersion :  " + simpleitem.bookVersion);
                     bookVersionsModel.findOne({bookVersion_ID: simpleitem.bookVersion}, function (err, versionsresult) {
                         if (versionsresult != null) {
                             var book_ID = versionsresult.book_ID;
@@ -91,7 +90,7 @@ const cartController = {
                                         cartItemsCount++;
                                         if(cartItemsCount == simpleitems.length){
 
-                                            console.log("cartItemsList: "+ JSON.stringify(cartItemsList, null, ' '));
+                                            // console.log("cartItemsList: "+ JSON.stringify(cartItemsList, null, ' '));
                                             res.render("cart",{
                                                 cartItemsList: cartItemsList,
                                                 grandtotal: grandtotal
@@ -119,7 +118,6 @@ const cartController = {
 
     postCheckout: function (req, res){
 
-        console.log("post")
         /*
             1.  find active cart
             2. create billing address
@@ -178,15 +176,38 @@ const cartController = {
             }
             mongodb.insertOne("orderitems", orderItems);
 
-            cartItemsModel.update({username : username,  isActive: true}, {$set: {isActive: false}}, function(){
-                res.render('cart', {
-                    msg: `Your cart was successfully checked out. Thank you! `
-                });
-    
+            // console.log("activeCartItems: " + activeCartItems);
+            // console.log("activeCartItems.items: " + activeCartItems.items);
 
-            });
+            var count = 0;
+            activeCartItems.items.forEach(function(v, err){
+                // console.log("\n\nactiveCartItems.items.bookVersion: " + v.bookVersion);
+                // console.log("activeCartItems.items.quantity: " + v.quantity);
+
+                bookVersionsModel.findOne({bookVersion_ID:v.bookVersion}, function(err, result){
+                    var originalQuantity = result.quantity;
+                    var quantity = originalQuantity - v.quantity;
+                    bookVersionsModel.updateOne({bookVersion_ID:v.bookVersion}, {$set: {quantity: quantity}}, function(){
+                        
+                        
+
+                        
+                        count++; // so that this will only run after the  activeCartItems.items.forEach is done
+                        if(count == activeCartItems.items.length){
+                            // updates cart status isActive to false! 
+                            cartItemsModel.update({username : username,  isActive: true}, {$set: {isActive: false}}, function(){
+                                res.render('cart', {
+                                    msg: `Your cart was successfully checked out. Thank you! `
+                                });
+                            });
+                        }
 
 
+                    })
+                })
+                
+
+            })
 
 
         })
