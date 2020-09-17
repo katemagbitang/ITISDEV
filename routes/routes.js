@@ -82,6 +82,7 @@ app.post('/composenewmessage', messageController.composenewmessage);
 app.post('/signup',userController.postSignup);
 
 app.get('/cart', cartController.getCart);
+app.post("/checkout", cartController.postCheckout);
 
 app.get('/checkout', cartController.postCheckout);
 

@@ -1,4 +1,5 @@
 const db = require('../model/db.js');
+const mongodb = require('../model/mongodb.js');
 const ObjectId = require('mongodb').ObjectID;
 const ordersModel = require('../model/ordersModel.js');
 const orderItemsModel = require('../model/orderItemsModel.js');
@@ -6,6 +7,9 @@ const bookVersionsModel = require('../model/bookVersionsModel.js');
 const booksModel = require('../model/booksModel.js');
 const authorModel = require('../model/authorModel.js');
 const cartItemsModel = require('../model/cartItemsModel.js');
+const paymentModel = require('../model/paymentModel.js');
+const billingAddressModel = require('../model/billingAddressModel.js');
+const adminController = require('./adminController.js');
 
 
 
@@ -114,6 +118,79 @@ const cartController = {
     },
 
     postCheckout: function (req, res){
+
+        console.log("post")
+        /*
+            1.  find active cart
+            2. create billing address
+            3.  create order 
+                    order_ID
+                    username
+                    status = "Pending"
+            4, create orderItems
+                    OrderItems_ID
+                    order_ID   (from 2)
+                    CartItems_ID    (if active)
+            
+            5. update cartitems isActive to "No"
+        */
+
+        username = req.session.username;
+        fullname = req.body.fullname;
+        contactNum = req.body.contactNum;
+        address = req.body.address;
+        city = req.body.city;
+        barangay = req.body.barangay;
+        zip = req.body.zip;
+
+        cartItemsModel.findOne({username : username,  isActive: true}, function(err, activeCartItems){
+            // console.log(activeCartItems)
+            CartItems_ID = activeCartItems.CartItems_ID;
+
+            // creates the billingaddress object
+            var billingAddress = new billingAddressModel({
+                billingAddress_ID: new ObjectId(),
+                fullname: fullname,
+                contactNum: contactNum,
+                address: address,
+                city: city,
+                barangay: barangay,
+                zip: zip
+            })
+            mongodb.insertOne("billingaddress", billingAddress);
+
+            // creates the billingAddress_ID object with reference to billingaddress
+            var billingAddress_ID = billingAddress.billingAddress_ID;
+            var order = {
+                order_ID: new ObjectId(),
+                username: username,
+                status: "Pending",
+                billingAddress_ID: ObjectId(billingAddress_ID)
+            }
+
+            mongodb.insertOne("orders", order);
+
+            // creates the billingAddress_ID object with reference to orders and active cartitems id
+            var orderItems = {
+                OrderItems_ID: new ObjectId(),
+                order_ID: order.order_ID,
+                CartItems_ID: CartItems_ID
+            }
+            mongodb.insertOne("orderitems", orderItems);
+
+            cartItemsModel.update({username : username,  isActive: true}, {$set: {isActive: false}}, function(){
+                res.render('cart', {
+                    msg: `Your cart was successfully checked out. Thank you! `
+                });
+    
+
+            });
+
+
+
+
+        })
+
         
     }
 

@@ -14,9 +14,12 @@ const orderSchema = new Schema({
     },
     status: {
         type : String,
-        enum: ['Payment Pending','Processing', 'Confirmed', 'Cancelled'],
+        enum: ['Pending','Processing', 'Confirmed', 'Cancelled'],
         required: [true, 'Required']
         
+    },
+    billingAddress: {
+        type: Schema.Types.ObjectId
     }
 });
 
