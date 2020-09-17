@@ -91,11 +91,14 @@ const orderController = {
         //FOR REGULAR USER
         if(req.session.userType == "Regular"){
             ordersModel.find({username : username, status: view}, function(err, ordersModelResult){
+
+                console.log(ordersModelResult.length);
                 var orders = [];
                
                 
-                if(ordersModelResult != null){
+                if(ordersModelResult.length != 0){
                     
+                    var ordersmodelcount = 0;
                     ordersModelResult.forEach(function(omr, err){
                         var order_ID = omr.order_ID;
                         var status = omr.status;
@@ -111,7 +114,7 @@ const orderController = {
                                 var CartItems_ID = orderItemsResult.CartItems_ID; 
                                 // console.log("CartItems_ID: " + CartItems_ID);
                                 cartItemsModel.findOne({CartItems_ID: CartItems_ID}, function (err, cartItemsResult){
-                                    var ordersmodelcount = 0;
+                                    
                                     var cartitemscount = 0;
                                     
                                     cartItemsResult.items.forEach(function(items, err){
@@ -186,13 +189,16 @@ const orderController = {
                                                         ordersmodelcount++;
                                                         // console.log("\n ordersmodelcount: " + ordersmodelcount);
                                                         // console.log("ordersModelResult.length: " + ordersModelResult.length);
+                                                        console.log("b4 END");
+                                                        console.log("ordersmodelcount: " + ordersmodelcount);
+                                                        console.log("ordersModelResult.length: " + ordersModelResult.length);
                                                         if(ordersmodelcount == ordersModelResult.length){
                                                             // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
                                                             // console.log("ordersmodelcount: " + ordersmodelcount);
                                                             // console.log("cartItemsResult.items.length: " + cartItemsResult.items.length);
                                                             // res.render("userOrdersToPay",{orders: orders});
                                                             
-                                                            
+                                                                console.log("END");
                                                                 renderOrder(res, view, orders, req.session.userType);
                                                             
                                                             
@@ -213,6 +219,7 @@ const orderController = {
                     
                 }else{
                     // else if no data
+                    console.log("No Data");
                     renderOrder(res, view, orders, req.session.userType);
 
                 }
@@ -228,8 +235,8 @@ const orderController = {
             ordersModel.find({status: view}, function(err, ordersModelResult){
                 var orders = [];
                 
-                
-                if(ordersModelResult != null){
+                var ordersmodelcount = 0;
+                if(ordersModelResult.length != 0){
                     ordersModelResult.forEach(function(omr, err){
                         
                         var order_ID = omr.order_ID;
@@ -244,7 +251,7 @@ const orderController = {
                                 var CartItems_ID = orderItemsResult.CartItems_ID; 
                                 // console.log("CartItems_ID: " + CartItems_ID);
                                 cartItemsModel.findOne({CartItems_ID: CartItems_ID}, function (err, cartItemsResult){
-                                    var ordersmodelcount = 0;
+                                    
                                     var cartitemscount = 0;
                                     
                                     cartItemsResult.items.forEach(function(items, err){
@@ -358,6 +365,16 @@ const orderController = {
         var ref_num = req.body.SendPaymentRefNum;
         var proof_image = req.file.filename; 
 
+        var paymentdetailsPrint = {
+            payment_ID : ObjectId(),
+            username: username,
+            order_ID: ObjectId(order_ID),
+            bank_name: bank_name,
+            ref_num: ref_num,
+            proof_image: proof_image
+        };
+
+        console.log(paymentdetailsPrint);
         var paymentdetails = new paymentModel({
             payment_ID : ObjectId(),
             username: username,
@@ -371,16 +388,10 @@ const orderController = {
 
         paymentdetails.save();
 
-        ordersModel.updateOne({order_ID: order_ID}, {$set: {status: "Processing"}}, function (err, result){
-           
+        ordersModel.updateOne({order_ID: ObjectId(order_ID)}, {$set: {status: "Processing"}}, function (err, result){
             res.redirect('/Orders/Processing');
-
+            console.log("err update: " + err);
         })
-
-
-        
-
-
 
     }
 
