@@ -84,7 +84,13 @@
                                     {{/each}}
                                 </table>
                                 </td>
-                                <td> </td>
+                                <td align = "left">
+                                    {{#with shippingdetails}}
+                                        <Strong>Full Name: </Strong>{{fullname}} <br>
+                                        <Strong>Contact no:</Strong> {{contactNum}} <br>
+                                        <Strong>Shipping Address:</Strong> {{address}}, {{barangay}}, {{city}}, {{zip}}
+                                    {{/with}}
+                                </td>
                                 <td>{{totalamount}}</td>
                                 <td>{{status}}</td>
                             </tr>

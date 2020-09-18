@@ -51,8 +51,9 @@
                         <tr>
                             <th >Order Number</th>
                             <th style="min-width: 300px">Order Details</th>
+                            <th>Shipping Details</th>
+                            <th style="min-width: 250px">Payment Details</th>
                             <th >Total Amount</th>
-                            <th> Shipping Details</th>
                             <th >Status</th>
                         </tr>
                     </thead>
@@ -84,8 +85,21 @@
                                     {{/each}}
                                 </table>
                                 </td>
+                                <td align = "left">
+                                    {{#with shippingdetails}}
+                                        <Strong>Full Name: </Strong>{{fullname}} <br>
+                                        <Strong>Contact no:</Strong> {{contactNum}} <br>
+                                        <Strong>Shipping Address:</Strong> {{address}}, {{barangay}}, {{city}}, {{zip}}
+                                    {{/with}}
+                                </td>
+                                <td align = "left"> 
+                                    {{#with paymentdetails}}
+                                        <Strong>Bank Name:</Strong> {{bank_name}} <br>
+                                        <Strong>Reference No.:</Strong> {{ref_num}} <br>
+                                        <a href= "../img/{{proof_image}}" target="_blank"><img src="../img/{{proof_image}}" style = "max-width: 200px;"></a>
+                                    {{/with}}
+                                </td>
                                 <td>{{totalamount}}</td>
-                                <td> </td>
                                 <td>{{status}}</td>
                             </tr>
                         {{/each}}
