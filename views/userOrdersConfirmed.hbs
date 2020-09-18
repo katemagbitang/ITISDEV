@@ -52,7 +52,7 @@
                             <th >Order Number</th>
                             <th style="min-width: 300px">Order Details</th>
                             <th>Shipping Details</th>
-                            <th>Payment Details</th>
+                            <th style="min-width: 250px">Payment Details</th>
                             <th >Total Amount</th>
                             <th >Status</th>
                         </tr>
@@ -96,10 +96,10 @@
                                     {{#with paymentdetails}}
                                         <Strong>Bank Name:</Strong> {{bank_name}} <br>
                                         <Strong>Reference No.:</Strong> {{ref_num}} <br>
-                                        <a href= "../img/{{proof_image}}" target="_blank"><img src="../img/{{proof_image}}" style = "max-width: 150px;"></a>
+                                        <a href= "../img/{{proof_image}}" target="_blank"><img src="../img/{{proof_image}}" style = "max-width: 200px;"></a>
                                     {{/with}}
                                 </td>
-                                <td>{{totalamount}}</td>
+                                <td align = "right">{{totalamount}}</td>
                                 <td>{{status}}</td>
                             </tr>
                         {{/each}}
