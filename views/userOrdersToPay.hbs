@@ -100,6 +100,16 @@
                                     <td><button type="button" id ="sendPaymentToggleBtn" class="btn btn-sm btn-danger sendPaymentToggleBtn" data-toggle="modal" data-target="#sendPaymentForm">Send Payment</button></td>
                                 </tr>
                             {{/each}}
+
+                            {{#if orders}}
+                            <tr>
+                                <td colspan="6"><h5>End of List</h5></td>
+                            </tr>
+                            {{else}}
+                            <tr>
+                                <td colspan="6"><h5>No orders to show.</h5></td>
+                            </tr>
+                            {{/if}}
                         </div>
                     </tbody>
                 </table>

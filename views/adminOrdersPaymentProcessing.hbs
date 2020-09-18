@@ -109,11 +109,22 @@
                                     <div class="btn-group-vertical">
 
                                         <button type="button" class="btn btn-sm btn-success confirmBtn"  data-toggle="modal" data-target="#confirmOrderModal">Confirm</button>
-                                        <button type="button" class="btn btn-sm btn-danger rejectBtn">Reject</button>
+                                        <button type="button" class="btn btn-sm btn-danger rejectBtn"  data-toggle="modal" data-target="#confirmOrderModal">Reject</button>
                                     </div>
                                 </td>
                             </tr>
                         {{/each}}
+                        
+                        {{#if orders}}
+                        <tr>
+                            <td colspan="6"><h5>End of List</h5></td>
+                        </tr>
+                        {{else}}
+                        <tr>
+                            <td colspan="6"><h5>No orders to show.</h5></td>
+                        </tr>
+                        {{/if}}
+
                     </tbody>
                 </table>
 

@@ -48,17 +48,15 @@
                         <tr>
                             <th >Request Number</th>
                             <th >Requester</th>
-                            <th >Book Title</th>
-                            <th >Author/s</th>
+                            <th >Requested Book Details</th>
                             <th> Urgent </th>
                             <th> maxPrice </th>
                             <th >Quantity</th>
-                            <th> Description</th>
                             <th>Date Requested</th> 
-                            <th >Priority Rating</th>
                             <th>Override</th>
                             <th> Status</th>
-                            <th > Action </th>
+                            <th >Priority Rating</th>
+                            <th> Action </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,16 +64,18 @@
                             <tr>
                                 <th scope="row">{{request_ID}}</th>   
                                 <td>  {{requester}}</td>
-                                <td>  {{ book_title}}</td>
-                                <td> {{book_author}}</td>
+                                <td align = "left"> 
+                                    <strong>Title: </strong>{{ book_title}} <br>
+                                    <strong>Author:</strong> {{book_author}} <br>
+                                    <strong>Other description:</strong> {{description}}
+                                </td>
                                 <td>{{isUrgent}}</td>
                                 <td>{{maxPrice}}</td>
                                 <td>{{quantity}}</td>
-                                <td> {{description}}</td>
-                                <td>{{date_requested}}</td> 
-                                <td>{{priority_rating}}</td>
+                                <td align = "left">{{date_requested}}</td> 
                                 <td>{{override}}</td>
                                 <td>{{status}}</td>
+                                <td>{{priority_rating}}</td>
                                 <td>
                                     <form method="post" action = "/override/{{request_ID}}">
                                         <input class="form-control mr-sm-2" type="text" name = "request_ID" value = "{{request_ID}}" hidden>
@@ -86,6 +86,15 @@
                                 </td>
                             </tr>
                         {{/each}}
+                        {{#if requestList}}
+                        <tr>
+                            <td colspan="11"><h5>End of the list.</h5></td>
+                        </tr>
+                        {{else}}
+                        <tr>
+                            <td colspan="11"><h5>No request to show.</h5></td>
+                        </tr>
+                        {{/if}}
                     </tbody>
                 </table>
             </div>

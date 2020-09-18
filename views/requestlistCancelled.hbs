@@ -72,6 +72,16 @@
                                 <td>{{status}}</td>
                             </tr>
                         {{/each}}
+
+                        {{#if requests}}
+                        <tr>
+                            <td colspan="11"><h5>End of the list.</h5></td>
+                        </tr>
+                        {{else}}
+                        <tr>
+                            <td colspan="11"><h5>No request to show.</h5></td>
+                        </tr>
+                        {{/if}}
                         
                     </tbody>
                 </table>

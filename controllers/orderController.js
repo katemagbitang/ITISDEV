@@ -326,7 +326,7 @@ const orderController = {
                                                                     edition: edition,
                                                                     type: type,
                                                                     price : price,
-                                                                    quantity: quantity,
+                                                                    quantity: parseInt(quantity),
                                                                     title: title,
                                                                     author: authorslist
                                                                 }
@@ -430,6 +430,36 @@ const orderController = {
             res.send(true)
         })
         
+    },
+    postRejectPayment: function(req, res){
+        
+        var order_ID = req.body.order_ID;
+
+        /*
+            get the bookversion and quantity from cartItems then add them back to inventory
+        */
+        orderItemsModel.findOne({order_ID: order_ID}, function(err, orderItemsResult){
+            cartItemsModel.findOne({CartItems_ID: orderItemsResult.CartItems_ID}, function(err, cartItemsResult){
+                count=0;
+                cartItemsResult.items.forEach(function(i, err){
+                    bookVersionsModel.findOne({bookVersion_ID: i.bookVersion }, function(err, bookVersionResult){
+
+                        var quantity = bookVersionResult.quantity;
+                        quantity += i.quantity;
+
+                        //add back the quantity to the inventory bc cancelled na/rejected payment
+                        bookVersionsModel.updateOne({bookVersion_ID: i.bookVersion }, {$set: {quantity: quantity}}, function(){
+                            count++
+                            if(count == cartItemsResult.items.length ){
+                                ordersModel.updateOne({order_ID: ObjectId(order_ID)}, {$set: {status: "Cancelled"}}, function(err, result){
+                                    res.send(true)
+                                })
+                            }
+                        })
+                    })
+                })
+            })
+        })
     }
 
 }

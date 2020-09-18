@@ -147,5 +147,6 @@ app.post('/override/:request_ID', requestController.postOverrideRequest);
 app.post('/requestbook', requestController.postRequestABook);
 
 app.post('/confirmpayment', orderController.postConfirmPayment);
+app.post('/rejectpayment', orderController.postRejectPayment);
 
 module.exports = app;

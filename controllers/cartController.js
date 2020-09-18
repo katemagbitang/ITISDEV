@@ -157,7 +157,7 @@ const cartController = {
             })
             mongodb.insertOne("billingaddress", billingAddress);
 
-            // creates the billingAddress_ID object with reference to billingaddress
+            // creates the order object with reference to billingaddress
             var billingAddress_ID = billingAddress.billingAddress_ID;
             var order = {
                 order_ID: new ObjectId(),
@@ -168,7 +168,7 @@ const cartController = {
 
             mongodb.insertOne("orders", order);
 
-            // creates the billingAddress_ID object with reference to orders and active cartitems id
+            // 
             var orderItems = {
                 OrderItems_ID: new ObjectId(),
                 order_ID: order.order_ID,
@@ -188,16 +188,10 @@ const cartController = {
                     var originalQuantity = result.quantity;
                     var quantity = originalQuantity - v.quantity;
                     bookVersionsModel.updateOne({bookVersion_ID:v.bookVersion}, {$set: {quantity: quantity}}, function(){
-                        
-                        
-
-                        
                         count++; // so that this will only run after the  activeCartItems.items.forEach is done
                         if(count == activeCartItems.items.length){
                             // updates cart status isActive to false! 
                             cartItemsModel.update({username : username,  isActive: true}, {$set: {isActive: false}}, function(){
-
-                                
                                 res.render('cart', {
                                     msg: `Your cart was successfully checked out. Thank you! `
                                 });
