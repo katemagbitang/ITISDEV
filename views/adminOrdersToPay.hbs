@@ -96,15 +96,15 @@
                             </tr>
                         {{/each}}
 
-                        {{#if orders}}
-                        <tr>
-                            <td colspan="6"><h5>End of List</h5></td>
+                        <tr class = "bg-light">
+                            <td colspan="8">
+                                {{#if orders}}
+                                    <h5>End of the list.</h5>
+                                {{else}}
+                                    <h5>No orders to show.</h5>
+                                {{/if}}
+                            </td>
                         </tr>
-                        {{else}}
-                        <tr>
-                            <td colspan="6"><h5>No orders to show.</h5></td>
-                        </tr>
-                        {{/if}}
                     </tbody>
                 </table>
 

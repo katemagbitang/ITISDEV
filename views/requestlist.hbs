@@ -47,16 +47,14 @@
                         <tr>
                             <th >Request Number</th>
                             <th >Requester</th>
-                            <th >Book Title</th>
-                            <th >Author/s</th>
+                            <th >Book Details</th>
                             <th> Urgent </th>
                             <th> maxPrice </th>
                             <th >Quantity</th>
-                            <th> Description</th>
                             <th>Date Requested</th> 
                             {{!-- <th >Priority Rating</th> --}}
                             <th> Status</th>
-                            <th> Action </th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,12 +63,14 @@
                             <tr>
                                 <th scope="row">{{request_ID}}</th>   
                                 <td>  {{requester}}</td>
-                                <td>  {{ book_title}}</td>
-                                <td> {{book_author}}</td>
+                                <td align = "left">  
+                                    <strong>Title:</strong> {{ book_title}} <br>
+                                    <strong>Author/s:</strong> {{book_author}} <br>
+                                    <strong>Description: </strong> {{description}}
+                                </td>
                                 <td>{{isUrgent}}</td>
                                 <td>{{maxPrice}}</td>
                                 <td>{{quantity}}</td>
-                                <td> {{description}}</td>
                                 <td>{{date_requested}}</td> 
                                 {{!-- <td>{{priority_rating}}</td> --}}
                                 <td>{{status}}</td>
@@ -78,15 +78,13 @@
                             </tr>
                         {{/each}}
 
-                        {{#if requests}}
-                        <tr>
-                            <td colspan="11"><h5>End of the list.</h5></td>
+                        <tr class = "bg-light">
+                            {{#if requests}}
+                                <td colspan="9"><h5>End of the list.</h5></td>
+                            {{else}}
+                                <td colspan="9" ><h5>No request to show.</h5></td>
+                            {{/if}}
                         </tr>
-                        {{else}}
-                        <tr>
-                            <td colspan="11"><h5>No request to show.</h5></td>
-                        </tr>
-                        {{/if}}
                         
                         
                     </tbody>
