@@ -420,6 +420,16 @@ const orderController = {
             console.log("err update: " + err);
         })
 
+    },
+    postConfirmPayment: function(req, res){
+        
+        var order_ID = req.body.order_ID;
+
+        ordersModel.updateOne({order_ID: ObjectId(order_ID)}, {$set: {status: "Confirmed"}}, function(err, result){
+            console.log("order_ID: " + order_ID);
+            res.send(true)
+        })
+        
     }
 
 }

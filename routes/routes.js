@@ -146,4 +146,6 @@ app.get('/adminRequestsList/:view',requestController.getRequestsForAdmin);
 app.post('/override/:request_ID', requestController.postOverrideRequest);
 app.post('/requestbook', requestController.postRequestABook);
 
+app.post('/confirmpayment', orderController.postConfirmPayment);
+
 module.exports = app;
