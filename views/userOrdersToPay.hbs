@@ -53,6 +53,7 @@
                         <tr>
                             <th >Order Number</th>
                             <th style="min-width: 300px">Order Details</th>
+                            <th> Shipping Details</th>
                             <th >Total Amount</th>
                             <th >Status</th>
                             <th >Send Payment</th>
@@ -76,18 +77,25 @@
                                         </tr>
                                         {{#each items}}
                                         <tr>
-                                            <td >{{title}} </td>
-                                            <td> {{author}} </td>
-                                            <td >{{quality}}</td>
-                                            <td >{{edition}}</td>
-                                            <td >{{type}}</td>
+                                            <td align = "left">{{title}} </td>
+                                            <td align = "left"> {{author}} </td>
+                                            <td align = "left">{{quality}}</td>
+                                            <td align = "left">{{edition}}</td>
+                                            <td align = "left">{{type}}</td>
                                             <td >{{quantity}}</td>
                                             <td> {{price}}</td>
                                         </tr>
                                         {{/each}}
                                     </table>
                                     </td>
-                                    <td>{{totalamount}}</td>
+                                    <td align = "left">
+                                        {{#with shippingdetails}}
+                                            <Strong>Full Name: </Strong>{{fullname}} <br>
+                                            <Strong>Contact no:</Strong> {{contactNum}} <br>
+                                            <Strong>Shipping Address:</Strong> {{address}}, {{barangay}}, {{city}}, {{zip}}
+                                        {{/with}}
+                                    </td>
+                                    <td align = "right">{{totalamount}}</td>
                                     <td>{{status}}</td>
                                     <td><button type="button" id ="sendPaymentToggleBtn" class="btn btn-sm btn-danger sendPaymentToggleBtn" data-toggle="modal" data-target="#sendPaymentForm">Send Payment</button></td>
                                 </tr>

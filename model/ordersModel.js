@@ -18,7 +18,7 @@ const orderSchema = new Schema({
         required: [true, 'Required']
         
     },
-    billingAddress: {
+    billingAddress_ID: {
         type: Schema.Types.ObjectId
     }
 });

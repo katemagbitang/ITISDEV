@@ -33,4 +33,4 @@ const billingAddressSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('billingaddress',billingAddressSchema);
+module.exports = mongoose.model('billingaddresses',billingAddressSchema);

@@ -53,8 +53,11 @@
                         <tr>
                             <th >Order Number</th>
                             <th style="min-width: 300px">Order Details</th>
+                            <th> Shipping Details</th>
+                            <th>Payment Details</th>
                             <th >Total Amount</th>
                             <th >Status</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -74,16 +77,30 @@
                                     </tr>
                                     {{#each items}}
                                     <tr>
-                                        <td >{{title}} </td>
-                                        <td> {{author}} </td>
-                                        <td >{{quality}}</td>
-                                        <td >{{edition}}</td>
-                                        <td >{{type}}</td>
+                                        <td align = "left">{{title}} </td>
+                                        <td align = "left"> {{author}} </td>
+                                        <td align = "left">{{quality}}</td>
+                                        <td align = "left">{{edition}}</td>
+                                        <td align = "left">{{type}}</td>
                                         <td >{{quantity}}</td>
                                         <td> {{price}}</td>
                                     </tr>
                                     {{/each}}
                                 </table>
+                                </td>
+                                <td align = "left">
+                                    {{#with shippingdetails}}
+                                        <Strong>Full Name: </Strong>{{fullname}} <br>
+                                        <Strong>Contact no:</Strong> {{contactNum}} <br>
+                                        <Strong>Shipping Address:</Strong> {{address}}, {{barangay}}, {{city}}, {{zip}}
+                                    {{/with}}
+                                </td>
+                                <td align = "left"> 
+                                    {{#with paymentdetails}}
+                                        <Strong>Bank Name:</Strong> {{bank_name}} <br>
+                                        <Strong>Reference No.:</Strong> {{ref_num}} <br>
+                                        <a href= "../img/{{proof_image}}" target="_blank"><img src="../img/{{proof_image}}" style = "max-width: 150px;"></a>
+                                    {{/with}}
                                 </td>
                                 <td>{{totalamount}}</td>
                                 <td>{{status}}</td>

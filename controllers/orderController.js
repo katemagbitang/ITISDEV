@@ -7,6 +7,7 @@ const booksModel = require('../model/booksModel.js');
 const authorModel = require('../model/authorModel.js');
 const cartItemsModel = require('../model/cartItemsModel.js');
 const paymentModel = require('../model/paymentModel.js');
+const billingAddressModel = require('../model/billingAddressModel.js');
 
 const MongoClient = require('mongodb').MongoClient
 const myurl = 'mongodb://localhost:27017/chapterone';
@@ -95,7 +96,7 @@ const orderController = {
         if(req.session.userType == "Regular"){
             ordersModel.find({username : username, status: view}, function(err, ordersModelResult){
 
-                console.log(ordersModelResult.length);
+                // console.log(ordersModelResult.length);
                 var orders = [];
                
                 
@@ -105,119 +106,148 @@ const orderController = {
                     ordersModelResult.forEach(function(omr, err){
                         var order_ID = omr.order_ID;
                         var status = omr.status;
+                        var billingAddress_ID = omr.billingAddress_ID;
                         var itemslist = [];
+                        var shippingdetails = null; // shipping details per order if any
+                        var paymentdetails = null; // shipping details per order if any
                         
-                        // console.log("order_ID: " + order_ID);
+                        console.log("order_ID: " + order_ID);
                         // console.log("ordersmodelcount: " + ordersmodelcount);
                         // console.log("lengrth: " + ordersModelResult.length);
                         // console.log("ITERATE            %%%%%%%%%%%%%%%%");
-                        
-                        orderItemsModel.findOne({order_ID: order_ID}, function(err, orderItemsResult){
-                            if(orderItemsResult != null){
-                                var CartItems_ID = orderItemsResult.CartItems_ID; 
-                                // console.log("CartItems_ID: " + CartItems_ID);
-                                cartItemsModel.findOne({CartItems_ID: CartItems_ID}, function (err, cartItemsResult){
-                                    
-                                    var cartitemscount = 0;
-                                    
-                                    cartItemsResult.items.forEach(function(items, err){
-                                        // console.log("items: "+ items);
-                                        
-                                        var quantity = items.quantity;
+                        // console.log("omr: " + omr);
+                        // console.log("omr.billingAddress_ID: " + omr.billingAddress_ID);
 
-                                        bookVersionsModel.findOne({bookVersion_ID : items.bookVersion}, function (err, bookVersionResult){
-                                            
-                                            if(bookVersionResult){
-                                                // console.log("bookVersionResult: " + bookVersionResult);
-                                                var quality = bookVersionResult.quality;
-                                                var edition = bookVersionResult.edition;
-                                                var type = bookVersionResult.type;
-                                                var price = bookVersionResult.sellingPrice;
-
-                                                booksModel.findOne({book_ID: bookVersionResult.book_ID}, function(err, booksModelResult){
-
-                                                    var title = booksModelResult.title;
-                                                    var authorsID = booksModelResult.author;
-
-                                                    authorModel.find({_id: authorsID}, function(err, authorModelResult){
-                                                        // console.log("authorModelResult:"+ authorModelResult);
-                                                        var authorslist = [];
-                                                        authorModelResult.forEach(function(authors, err){
-                                                            authorslist.push(authors.aName);
-                                                        })
-
-                                                        var item =  {
-                                                            quality: quality,
-                                                            edition: edition,
-                                                            type: type,
-                                                            price : price,
-                                                            quantity: quantity,
-                                                            title: title,
-                                                            author: authorslist
-                                                        }
-
-                                                        itemslist.push(item);
-                                                        // console.log("push")
-                                                        // console.log("items: " + JSON.stringify(itemslist, null, ' '));
-                                                        // console.log("1");
-
-                                                        cartitemscount++;
-                                                        if(cartitemscount == cartItemsResult.items.length){
-                                                            // console.log("PUSH CART");
-
-                                                            var totalamount = 0;
-                                                            for(i = 0; i<itemslist.length; i++){
-                                                                // console.log("o");
-                                                                totalamount += itemslist[i].quantity * itemslist[i].price;
-
-                                                            }
-                                                            // console.log(totalamount);
-
-                                                            orders.push({
-                                                                order_ID: order_ID,
-                                                                items: itemslist,
-                                                                status: status,
-                                                                totalamount: totalamount
-                                                            });
-
-                                                        //    console.log("2");
-                                                        //    console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
-                                                        //    itemslist.splice(0,itemslist.length);
-
-                                                            
-                                                            // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
-
-                                                        }
-                                                        
-                                                        ordersmodelcount++;
-                                                        // console.log("\n ordersmodelcount: " + ordersmodelcount);
-                                                        // console.log("ordersModelResult.length: " + ordersModelResult.length);
-                                                        console.log("b4 END");
-                                                        console.log("ordersmodelcount: " + ordersmodelcount);
-                                                        console.log("ordersModelResult.length: " + ordersModelResult.length);
-                                                        if(ordersmodelcount == ordersModelResult.length){
-                                                            // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
-                                                            // console.log("ordersmodelcount: " + ordersmodelcount);
-                                                            // console.log("cartItemsResult.items.length: " + cartItemsResult.items.length);
-                                                            // res.render("userOrdersToPay",{orders: orders});
-                                                            
-                                                                console.log("END");
-                                                                renderOrder(res, view, orders, req.session.userType);
-                                                            
-                                                            
-                                                            // res.render("userOrdersToPay",{orders: orders});
-
-
-                                                        }
-                                                    })
-                                                })
-                                            }
-                                        })
-                                    })
-                                })
+                        paymentModel.findOne({order_ID: order_ID}, function(err, paymentResult){
+                            if(paymentResult != null){
+                                paymentdetails = paymentResult;
                             }
+
+                            console.log(paymentdetails)
+
+                            //gets billing address
+                            billingAddressModel.findOne({billingAddress_ID: billingAddress_ID}, function(err, billingAddressResult){
+                                if(billingAddressResult != null){
+                                    shippingdetails = billingAddressResult;
+                                }
+                            
+                                orderItemsModel.findOne({order_ID: order_ID}, function(err, orderItemsResult){
+                                    if(orderItemsResult != null){
+                                        var CartItems_ID = orderItemsResult.CartItems_ID; 
+                                        // console.log("CartItems_ID: " + CartItems_ID);
+                                        cartItemsModel.findOne({CartItems_ID: CartItems_ID}, function (err, cartItemsResult){
+                                            
+                                            var cartitemscount = 0;
+                                            
+                                            cartItemsResult.items.forEach(function(items, err){
+                                                // console.log("items: "+ items);
+                                                
+                                                var quantity = items.quantity;
+
+                                                bookVersionsModel.findOne({bookVersion_ID : items.bookVersion}, function (err, bookVersionResult){
+                                                    
+                                                    if(bookVersionResult){
+                                                        // console.log("bookVersionResult: " + bookVersionResult);
+                                                        var quality = bookVersionResult.quality;
+                                                        var edition = bookVersionResult.edition;
+                                                        var type = bookVersionResult.type;
+                                                        var price = bookVersionResult.sellingPrice;
+
+                                                        booksModel.findOne({book_ID: bookVersionResult.book_ID}, function(err, booksModelResult){
+
+                                                            var title = booksModelResult.title;
+                                                            var authorsID = booksModelResult.author;
+
+                                                            authorModel.find({_id: authorsID}, function(err, authorModelResult){
+                                                                // console.log("authorModelResult:"+ authorModelResult);
+                                                                var authorslist = [];
+                                                                authorModelResult.forEach(function(authors, err){
+                                                                    authorslist.push(authors.aName);
+                                                                })
+
+                                                                var item =  {
+                                                                    quality: quality,
+                                                                    edition: edition,
+                                                                    type: type,
+                                                                    price : price,
+                                                                    quantity: quantity,
+                                                                    title: title,
+                                                                    author: authorslist
+                                                                }
+
+                                                                itemslist.push(item);
+                                                                // console.log("push")
+                                                                // console.log("items: " + JSON.stringify(itemslist, null, ' '));
+                                                                // console.log("1");
+
+                                                                cartitemscount++;
+                                                                if(cartitemscount == cartItemsResult.items.length){
+                                                                    // console.log("PUSH CART");
+
+                                                                    var totalamount = 0;
+                                                                    for(i = 0; i<itemslist.length; i++){
+                                                                        // console.log("o");
+                                                                        totalamount += itemslist[i].quantity * itemslist[i].price;
+
+                                                                    }
+
+                                                                    totalamount = totalamount.toFixed(2);
+                                                                    // console.log(totalamount);
+
+                                                                    orders.push({
+                                                                        order_ID: order_ID,
+                                                                        items: itemslist,
+                                                                        status: status,
+                                                                        totalamount: totalamount,
+                                                                        shippingdetails: shippingdetails,
+                                                                        paymentdetails: paymentdetails
+                                                                    });
+
+                                                                //    console.log("2");
+                                                                //    console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
+                                                                //    itemslist.splice(0,itemslist.length);
+
+                                                                    
+                                                                    // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
+
+                                                                }
+                                                                
+                                                                ordersmodelcount++;
+                                                                // console.log("\n ordersmodelcount: " + ordersmodelcount);
+                                                                // console.log("ordersModelResult.length: " + ordersModelResult.length);
+                                                                console.log("b4 END");
+                                                                console.log("ordersmodelcount: " + ordersmodelcount);
+                                                                console.log("ordersModelResult.length: " + ordersModelResult.length);
+                                                                if(ordersmodelcount == ordersModelResult.length){
+                                                                    // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
+                                                                    // console.log("ordersmodelcount: " + ordersmodelcount);
+                                                                    // console.log("cartItemsResult.items.length: " + cartItemsResult.items.length);
+                                                                    // res.render("userOrdersToPay",{orders: orders});
+                                                                    
+                                                                        console.log("END");
+                                                                        renderOrder(res, view, orders, req.session.userType);
+                                                                    
+                                                                    
+                                                                    // res.render("userOrdersToPay",{orders: orders});
+
+
+                                                                }
+                                                            })
+                                                        })
+                                                    }
+                                                })
+                                            })
+                                        })
+                                    }
+                                })
+
+
+                            })
+
+
                         })
-                        
+
+
                     })
                     
                 }else{

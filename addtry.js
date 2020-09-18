@@ -13,7 +13,8 @@ const requestsCollections = 'requests';
 const cartItemsCollections = 'cartitems';
 const ordersCollections = 'orders';
 const orderItemsCollections = 'orderitems';
-const paymentDetailsCollections = 'paymentdetails'
+const paymentDetailsCollections = 'paymentdetails';
+const billingAddressCollections = 'billingaddresses';
 
 // it will error IF the collection doesn't exist in the first place
 // it if errors, just run addtry.js again
@@ -28,6 +29,7 @@ mongodb.dropCollection(cartItemsCollections);
 mongodb.dropCollection(ordersCollections);
 mongodb.dropCollection(orderItemsCollections);
 mongodb.dropCollection(paymentDetailsCollections);
+mongodb.dropCollection(billingAddressCollections);
 // end of note
 
 
@@ -644,36 +646,56 @@ var cartItems = [
 mongodb.insertMany(cartItemsCollections, cartItems);
 
 
+var billingadd = [
+    {
+        //0
+        billingAddress_ID: ObjectId(),
+        fullname: "Willow Smith",
+        contactNum: 09171234567,
+        address: "‎2401 Taft Avenue, ‎Malate",
+        city: "Manila",
+        zip: 1001
+
+    }
+]
+
+mongodb.insertMany(billingAddressCollections, billingadd);
+
 var Orders = [
     {
         // [0]
         order_ID: ObjectId(),
         username: "willowsmith",
-        status: "Pending"
+        status: "Pending",
+        billingAddress_ID: billingadd[0].billingAddress_ID
     },
     {
         // [1]
         order_ID: ObjectId(),
         username: "willowsmith",
-        status: "Cancelled"
+        status: "Cancelled",
+        billingAddress_ID: billingadd[0].billingAddress_ID
     },
     {
         // [2]
         order_ID: ObjectId(),
         username: "willowsmith",
-        status: "Processing"
+        status: "Processing",
+        billingAddress_ID: billingadd[0].billingAddress_ID
     },
     {
         // [3]
         order_ID: ObjectId(),
         username: "willowsmith",
-        status: "Confirmed"
+        status: "Confirmed",
+        billingAddress_ID: billingadd[0].billingAddress_ID
     },
     {
         // [4]
         order_ID: ObjectId(),
         username: "willowsmith",
-        status: "Pending"
+        status: "Pending",
+        billingAddress_ID: billingadd[0].billingAddress_ID
     }
 
 ]
@@ -685,6 +707,7 @@ var OrderItems = [
         OrderItems_ID : ObjectId(),
         order_ID : Orders[0].order_ID,
         CartItems_ID: cartItems[1].CartItems_ID
+
     },
     {
         // [1]
@@ -718,9 +741,33 @@ var paymentDetails = [
     {
         payment_ID: ObjectId(),
         username: "willowsmith",
-        order_ID: Orders[0].order_ID,
+        order_ID: Orders[1].order_ID,
         bank_name: "BPI",
-        ref_num: 11812345678,
+        ref_num: 100000009,
+        proof_image: "proof_image_1.jpg"
+    },
+    {
+        payment_ID: ObjectId(),
+        username: "willowsmith",
+        order_ID: Orders[2].order_ID,
+        bank_name: "GCash",
+        ref_num: 200000002,
+        proof_image: "proof_image_1.jpg"
+    },
+    {
+        payment_ID: ObjectId(),
+        username: "willowsmith",
+        order_ID: Orders[3].order_ID,
+        bank_name: "BDO",
+        ref_num: 300000003,
+        proof_image: "proof_image_1.jpg"
+    },
+    {
+        payment_ID: ObjectId(),
+        username: "willowsmith",
+        order_ID: Orders[4].order_ID,
+        bank_name: "BPI",
+        ref_num: 40000004,
         proof_image: "proof_image_1.jpg"
     }
 ]
