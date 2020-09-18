@@ -172,6 +172,48 @@ $(document).ready(function(){
         }
     }
 
+    function validCPassword(cpwname)
+    {
+        // var valid = true;
+
+        if(cpwname.val() == '') 
+        {
+            valid = false;
+            $('#cpassword').css({
+                        'border' : '1.5px solid #FF0000'
+            })
+            $('#errorcpassword').text('* confirmed password is required');
+            disableSubmit();
+        }
+        else if(cpwname.val() != $('#password').val()){
+            valid = false;
+            $('#password').css({
+                        'border' : '1.5px solid #FF0000'
+            })
+            $('#cpassword').css({
+                        'border' : '1.5px solid #FF0000'
+            })
+            $('#errorcpassword').text('* password and confirmed password do not match');
+            disableSubmit();
+
+        }
+        else{
+            $('#password').css({
+                'border' : '1.5px solid #DDDDDD'
+            })
+            $('#cpassword').css({
+                        'border' : '1px solid #DDDDDD'
+            })
+            $('#errorcpassword').text("");
+
+            if(areAllFilled() == true ){
+                enableSubmit();
+            }
+            // valid = true;
+        }
+        // return valid;
+    }
+
     $('#username').keyup(function(){
         // var user = $('#username');
 
@@ -222,6 +264,11 @@ $(document).ready(function(){
     $('#password').keyup(function(){
         // validateField($('#password'));
         validPassword($('#password'));
+    });
+
+    $('#cpassword').keyup(function(){
+        // validateField($('#password'));
+        validCPassword($('#cpassword'));
     });
 
     $('#email').keyup(function(){
