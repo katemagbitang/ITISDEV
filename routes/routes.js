@@ -9,6 +9,7 @@ const bookController = require('../controllers/bookController.js');
 const requestController = require('../controllers/requestController.js');
 const cartController = require('../controllers/cartController.js');
 const searchController = require('../controllers/searchController.js');
+const notificationController = require('../controllers/notificationController.js');
 
 const path = require('path');
 const multer = require('multer');
@@ -65,9 +66,7 @@ app.post('/search', searchController.postSearch);
 
 app.get('/aboutus', controller.getAboutUs);
 
-app.get('/notification', function(req,res) {
-	res.render("notification", {});
-});
+app.get('/notification', notificationController.getNotification);
 
 app.get('/messages', messageController.getMessage);
 app.get('/messages/:username', messageController.getMessageByUsername);
