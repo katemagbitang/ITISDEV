@@ -120,13 +120,9 @@ app.get('/confirmpayment',function(req,res){
 	res.render("confirmpayment",{});
 });
 
-app.get('/generatesalesreport',function(req,res){
-	res.render("generatesalesreport",{});
-});
+app.get('/generatesalesreport',orderController.getGenerateSales);
 
-app.get('/salesreport',function(req,res){
-	res.render("salesreport",{});
-});
+app.post('/salesreport',orderController.postSalesReport);
 
 app.get('/Orders',orderController.getOrders);
 app.get('/Orders/:view', orderController.getOrdersByStatus);
