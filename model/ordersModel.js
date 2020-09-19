@@ -20,7 +20,11 @@ const orderSchema = new Schema({
     },
     billingAddress_ID: {
         type: Schema.Types.ObjectId
-    }
+    },
+    order_date: {
+        type: Date,
+        required: [true, 'Required']
+    } 
 });
 
 module.exports = mongoose.model('orders', orderSchema);

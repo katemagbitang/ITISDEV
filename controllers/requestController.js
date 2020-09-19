@@ -197,7 +197,7 @@ const requestController = {
     },
 
     postOverrideRequest: function(req, res){
-        requestModel.update({request_ID: req.params.request_ID}, {$set: {override: true}}, function(){
+        requestModel.updateOne({request_ID: req.params.request_ID}, {$set: {override: true}}, function(){
             res.redirect('back');
         });
     },
@@ -240,6 +240,11 @@ const requestController = {
 
         // console.log(" New request: "+ JSON.stringify(request, null, ' '));
         res.redirect('back');
+    },
+
+    postFulfillRequest: function(req, res){
+
+        console.log("fulfil req")
     }
 
 

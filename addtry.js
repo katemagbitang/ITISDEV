@@ -667,35 +667,41 @@ var Orders = [
         order_ID: ObjectId(),
         username: "willowsmith",
         status: "Pending",
-        billingAddress_ID: billingadd[0].billingAddress_ID
+        billingAddress_ID: billingadd[0].billingAddress_ID,
+        order_date: new Date("2020-09-12T10:13:19.873+00:00")
+
     },
     {
         // [1]
         order_ID: ObjectId(),
         username: "willowsmith",
         status: "Cancelled",
-        billingAddress_ID: billingadd[0].billingAddress_ID
+        billingAddress_ID: billingadd[0].billingAddress_ID,
+        order_date: new Date("2020-09-1T10:13:19.873+00:00")
     },
     {
         // [2]
         order_ID: ObjectId(),
         username: "willowsmith",
         status: "Processing",
-        billingAddress_ID: billingadd[0].billingAddress_ID
+        billingAddress_ID: billingadd[0].billingAddress_ID,
+        order_date: new Date("2020-09-3T10:13:19.873+00:00")
     },
     {
         // [3]
         order_ID: ObjectId(),
         username: "willowsmith",
         status: "Confirmed",
-        billingAddress_ID: billingadd[0].billingAddress_ID
+        billingAddress_ID: billingadd[0].billingAddress_ID,
+        order_date: new Date("2020-09-5T10:13:19.873+00:00")
     },
     {
         // [4]
         order_ID: ObjectId(),
         username: "willowsmith",
         status: "Pending",
-        billingAddress_ID: billingadd[0].billingAddress_ID
+        billingAddress_ID: billingadd[0].billingAddress_ID,
+        order_date: new Date("2020-09-12T10:13:19.873+00:00")
     }
 
 ]

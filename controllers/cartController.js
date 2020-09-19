@@ -163,7 +163,8 @@ const cartController = {
                 order_ID: new ObjectId(),
                 username: username,
                 status: "Pending",
-                billingAddress_ID: ObjectId(billingAddress_ID)
+                billingAddress_ID: ObjectId(billingAddress_ID),
+                order_date: new Date() 
             }
 
             mongodb.insertOne("orders", order);
