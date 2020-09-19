@@ -24,7 +24,11 @@ const orderSchema = new Schema({
     order_date: {
         type: Date,
         required: [true, 'Required']
-    } 
+    },
+    confirm_date: {
+        type: Date,
+        required: [false, 'Required']
+    }
 });
 
 module.exports = mongoose.model('orders', orderSchema);

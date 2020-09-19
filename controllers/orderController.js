@@ -424,8 +424,10 @@ const orderController = {
     postConfirmPayment: function(req, res){
         
         var order_ID = req.body.order_ID;
+        var confirm_date = new Date();
+        console.log(confirm_date);
 
-        ordersModel.updateOne({order_ID: ObjectId(order_ID)}, {$set: {status: "Confirmed"}}, function(err, result){
+        ordersModel.updateOne({order_ID: ObjectId(order_ID)}, {$set: {status: "Confirmed", confirm_date: new Date(confirm_date)}}, function(err, result){
             console.log("order_ID: " + order_ID);
             res.send(true)
         })
