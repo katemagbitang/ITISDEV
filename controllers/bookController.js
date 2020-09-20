@@ -224,6 +224,7 @@ const bookController = {
                             }
                             
                             res.send({
+                                bookVersion_ID: bookVersion_ID,
                                 title: title,
                                 bookCover: bookCover,
                                 aName: aName,
