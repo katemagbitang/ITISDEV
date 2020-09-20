@@ -21,7 +21,6 @@ $(document).ready(function(){
         }
         return valid;
     }
-
     function isFilled(field){
         // var valid = false;
 
