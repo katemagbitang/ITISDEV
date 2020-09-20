@@ -131,7 +131,7 @@ app.post('/sendpayment', upload.single('myImage'), orderController.postSendPayme
 
 app.post('/uploadphoto',  controller.uploadPhoto);
 
-app.post('/addProducts',adminController.postProduct);
+app.post('/addProducts', upload.single('myImage'), adminController.postProduct);
 app.get('/addProducts',adminController.getAddProduct);
 
 

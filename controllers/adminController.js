@@ -3,6 +3,45 @@ const db = require('../model/db.js');
 const books = require('../model/booksModel.js');
 const BookVersions = require('../model/bookVersionsModel.js');
 const ObjectId = require('mongodb').ObjectID;
+
+// for image upload
+const path = require('path');
+const multer = require('multer');
+
+
+//Set Storage Engine
+const storage = multer.diskStorage({
+    destination: './public/img',
+    filename: function( req, file, callback){
+        callback(null, filename =  file.fieldname + '-' + Date.now() +  path.extname(file.originalname));
+    }
+});
+
+//init upload 
+const upload = multer({
+    storage: storage,
+    fileFilter: function(req, file, callback){
+        checkFileType(file, callback);
+    }
+}).single('myImage');
+
+// check file type
+function checkFileType(file , callback){
+    // allowed extensions
+    const filetypes = /jpeg|jpg|png/;
+    // check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    //check mimetype
+    const mimetype = filetypes.test(file.mimetype);
+
+    if(mimetype && extname){
+        return callback(null, true);
+    }else{
+        callback("Error: Images only");
+    }
+}
+
+
 const adminController = {
     getAddProduct: function(req,res){
         res.render("addproducts",{});
@@ -36,7 +75,7 @@ const adminController = {
         var sellingPrice = req.body.sellingPrice;
         var priceBought = req.body.priceBought;
 
-        //var bookCover = 'img/' + req.file.fieldname;
+        var bookCover = req.file.filename; 
 
         var item = {
             book_ID: ObjectId(),
@@ -57,7 +96,7 @@ const adminController = {
             edition : edition,
             type : type,
             quantity : quantity,
-            bookCover : 'bookCover'
+            bookCover : bookCover
         }
         
         db.insertOne(books, item);
