@@ -462,6 +462,107 @@ const orderController = {
                 })
             })
         })
+    },
+    getGenerateSales: function(req,res){
+        if (req.session.userType == "Admin") {
+            res.render("generatesalesreport",{});
+        }
+        else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
+    },
+    postSalesReport: function(req,res){
+        
+        var startingdate = req.body.startingdate;
+        var sd = new Date (startingdate);
+        console.log("Starting date: " + sd);
+        var endingdate = req.body.endingdate;
+        var ed = new Date (endingdate);
+        console.log("Ending date: " + ed);
+        var status = "Confirmed";
+
+        var salesList= []; //what is needed: date, customer, product, qty, price
+        
+        if (req.session.userType == "Admin") {
+            
+            ordersModel.find({status: status}, function(err, ordersResult) {
+                if (ordersResult != null) {
+                    ordersResult.forEach(function(result, err) {
+                        var order_ID = result.order_ID;
+                        var itemlist = [];
+                        var confirm_date = result.confirm_date; //date is here
+
+                        if (confirm_date >= sd && confirm_date <= ed) {
+                            console.log("Confirm Date: " + confirm_date + " is included.");
+
+                            orderItemsModel.findOne({order_ID: order_ID}, function(err, itemsResult) {
+                                if (itemsResult != null) {
+                                    var CartItems_ID = itemsResult.CartItems_ID;
+                                    console.log("Cart Items ID: " + CartItems_ID);
+
+                                    cartItemsModel.findOne({CartItems_ID: CartItems_ID}, function(err, cartItemsResult) {
+                                        var customer = cartItemsResult.username; // customer is here
+                                        console.log("Customer: " + customer);
+                                        console.log("Cart Items: " + cartItemsResult.items);
+
+                                        cartItemsResult.items.forEach(function(items, err){
+                                            var quantity = parseInt(items.quantity); // qty is here
+                                            console.log("Quantity: " + quantity);
+
+                                            bookVersionsModel.findOne({bookVersion_ID : items.bookVersion}, function (err, bookVersionResult) {
+                                                if (bookVersionResult) {
+                                                    var price = parseInt(bookVersionResult.sellingPrice); //price is here
+                                                    //var priceBought = bookVersionResult.priceBought;
+                                                    var book_ID = bookVersionResult.book_ID;
+                                                    console.log("Selling Price: " + price);
+                                                    //console.log("Price Bought: " + priceBought);
+                                                    console.log("book_ID: " + book_ID);
+
+                                                    booksModel.findOne({book_ID: book_ID}, function(err, booksModelResult) {
+                                                        var title = booksModelResult.title; //product is here
+                                                        console.log("Title: " + title);
+
+                                                        var item = {
+                                                            title: title,
+                                                            price: price,
+                                                            //priceBought: priceBought,
+                                                            quantity: quantity
+                                                        }
+
+                                                        itemlist.push(item);
+                                                        console.log("item: " + JSON.stringify(itemlist, null, ' '));
+                                                    });
+                                                }
+                                            });
+                                        });
+
+                                        var sale = {
+                                            confirm_date: confirm_date,
+                                            customer: customer,
+                                            itemlist: itemlist
+                                        }
+
+                                        salesList.push(sale);
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+
+            res.render("salesreport",{
+                startingdate: startingdate,
+                endingdate: endingdate,
+                salesList: salesList
+            });
+        }
+        else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
     }
 
 }
