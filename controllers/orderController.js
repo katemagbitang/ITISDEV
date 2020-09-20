@@ -542,6 +542,7 @@ const orderController = {
                                             customer: customer,
                                             itemlist: itemlist
                                         }
+                                        console.log("sale: " + sale);
 
                                         salesList.push(sale);
                                     });
