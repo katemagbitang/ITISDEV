@@ -62,27 +62,26 @@
                     <tbody>
                         {{#each requestList}}
                             <tr>
-                                <th scope="row">{{request_ID}}</th>   
-                                <td>  {{requester}}</td>
-                                <td align = "left"> 
+                                <th scope="row" class="requestID">{{request_ID}}</th>   
+                                <td class = "requester">  {{requester}}</td>
+                                <td align = "left" class="requestedBookDetails"> 
                                     <strong>Title: </strong>{{ book_title}} <br>
                                     <strong>Author:</strong> {{book_author}} <br>
                                     <strong>Other description:</strong> {{description}}
                                 </td>
                                 <td>{{isUrgent}}</td>
                                 <td>{{maxPrice}}</td>
-                                <td>{{quantity}}</td>
+                                <td class="requestedBookQuantity">{{quantity}}</td>
                                 <td align = "left">{{date_requested}}</td> 
                                 <td>{{override}}</td>
-                                <td>{{status}}</td>
+                                <td class = "status">{{status}}</td>
                                 <td>{{priority_rating}}</td>
                                 <td>
                                     <form method="post" action = "/override/{{request_ID}}">
                                         <input class="form-control mr-sm-2" type="text" name = "request_ID" value = "{{request_ID}}" hidden>
                                         <button type="submit" class="btn btn-sm btn-danger override-btn" >Override</button>
-                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button>
+                                        <button type="button" class="btn btn-sm btn-danger fulfill-btn" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button>
                                     </form>
-                                    
                                 </td>
                             </tr>
                         {{/each}}
@@ -123,34 +122,61 @@
             <div class="form-group row">
                 <label for="requester" class="col-sm-5 col-form-label">Requester</label>
                 <div class="col-sm-7">
-                <input type="text" readonly class="form-control-plaintext" id="FulfillReqeuster" value="John Smith">
+                <p id="FulfillRequester" ></p>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="Book title" class="col-sm-5 col-form-label">Book Title</label>
+                <label for="Book title" class="col-sm-5 col-form-label">Book Details</label>
                 <div class="col-sm-7">
-                <input type="text" readonly class="form-control-plaintext" id="FulfillBookTitle" value="Animal Farm">
+                <p id="FulfillBookDetails"></p>
+                <strong>Quantity:</strong> <span id="FulfillBookQuantity"></span>
+
                 </div>
             </div>
-            <div class="form-group row">
+            {{!-- <div class="form-group row">
                 <label for="Author" class="col-sm-5 col-form-label">Author/s
                 </label>
                 <div class="col-sm-7">
                 <input type="text" readonly class="form-control-plaintext" id="FulfillAuthor" value="George ORwell">
                 </div>
-            </div>
+            </div> --}}
             <div class="form-group row">
                 <label for="Author" class="col-sm-5 col-form-label">Book Item Reference ID
                 </label>
                 <div class="col-sm-7">
                 <input type="text" class="form-control" id="FulfillBookID" placeholder="">
+                <p id="FulfillError" style="color: red"></p>
                 </div>
             </div>
             </form>
+
+
+            <div class="card text-center" id = "validateBook" hidden>
+                <table>
+                <tr>
+                    <th>
+                        <img class="card-img-top" id="validateBookCover" src="{{{bookCover}}}" height="145px" width="125px" alt="Card image cap">
+                    </th>
+
+                    <th>
+                        <div class="card-body">
+                            <p class="card-text text-left" id="validateTitle"></p>
+                            <p class="card-text text-left" id="validateAuthor"></p>
+                            <p class="card-text text-left" id="validatePrice"></p>
+                        </div>
+                    </th>
+                </tr>
+                </table>
+                <h5>Click send to fulfill the request with this book.</h5>
+                
+            </div>
+
+
+          
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger">Send</button>
+            <button type="button" class="btn btn-danger" id= "SendFulfillBtn" data-dismiss="modal" disabled>Send</button>
         </div>
         </div>
     </div>

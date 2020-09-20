@@ -71,10 +71,10 @@
                                 </td>
                                 <td>{{isUrgent}}</td>
                                 <td>{{maxPrice}}</td>
-                                <td>{{quantity}}</td>
+                                <td class="requestedBookQuantity">{{quantity}}</td>
                                 <td align = "left">{{date_requested}}</td> 
                                 <td>{{override}}</td>
-                                <td>{{status}}</td>
+                                <td class = "status">{{status}}</td>
                                 <td>{{priority_rating}}</td>
                                 <td>
                                     <form method="post" action = "/override/{{request_ID}}">
@@ -129,6 +129,7 @@
                 <label for="Book title" class="col-sm-5 col-form-label">Book Details</label>
                 <div class="col-sm-7">
                 <p id="FulfillBookDetails"></p>
+                <strong>Quantity:</strong> <span id="FulfillBookQuantity"></span>
 
                 </div>
             </div>
@@ -144,13 +145,38 @@
                 </label>
                 <div class="col-sm-7">
                 <input type="text" class="form-control" id="FulfillBookID" placeholder="">
+                <p id="FulfillError" style="color: red"></p>
                 </div>
             </div>
             </form>
+
+
+            <div class="card text-center" id = "validateBook" hidden>
+                <table>
+                <tr>
+                    <th>
+                        <img class="card-img-top" id="validateBookCover" src="{{{bookCover}}}" height="145px" width="125px" alt="Card image cap">
+                    </th>
+
+                    <th>
+                        <div class="card-body">
+                            <p class="card-text text-left" id="validateTitle"></p>
+                            <p class="card-text text-left" id="validateAuthor"></p>
+                            <p class="card-text text-left" id="validatePrice"></p>
+                        </div>
+                    </th>
+                </tr>
+                </table>
+                <h5>Click send to fulfill the request with this book.</h5>
+                
+            </div>
+
+
+          
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger" id= "SendFulfillBtn" data-dismiss="modal">Send</button>
+            <button type="button" class="btn btn-danger" id= "SendFulfillBtn" data-dismiss="modal" disabled>Send</button>
         </div>
         </div>
     </div>

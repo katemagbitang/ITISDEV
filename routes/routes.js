@@ -140,6 +140,8 @@ app.get('/adminRequestsList/:view',requestController.getRequestsForAdmin);
 
 app.post('/override/:request_ID', requestController.postOverrideRequest);
 app.post('/requestbook', requestController.postRequestABook);
+app.post('/fulfillrequest', requestController.postFulfillRequest);
+app.post('/postOneBookVersion', bookController.postOneBookVersion);
 
 app.post('/confirmpayment', orderController.postConfirmPayment);
 app.post('/rejectpayment', orderController.postRejectPayment);

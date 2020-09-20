@@ -61,11 +61,11 @@ const requestSchema = new Schema({
         required: [true, 'Required'],
         default: false
     },
-    notifications:[{
-        type: String //notic objid to-follow
-        // ,
-        // required: [true,'Required']
-    }],
+    // notifications:[{
+    //     type: String //notic objid to-follow
+    //     // ,
+    //     // required: [true,'Required']
+    // }],
     ignored_notif_count:{
         type: Number,
         required: [true,'Required'],

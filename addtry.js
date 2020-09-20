@@ -15,6 +15,8 @@ const ordersCollections = 'orders';
 const orderItemsCollections = 'orderitems';
 const paymentDetailsCollections = 'paymentdetails';
 const billingAddressCollections = 'billingaddresses';
+const notifCollections = 'notifications';
+const fulfillmentCollections = 'fulfillments';
 
 // it will error IF the collection doesn't exist in the first place
 // it if errors, just run addtry.js again
@@ -30,6 +32,9 @@ mongodb.dropCollection(ordersCollections);
 mongodb.dropCollection(orderItemsCollections);
 mongodb.dropCollection(paymentDetailsCollections);
 mongodb.dropCollection(billingAddressCollections);
+mongodb.dropCollection(notifCollections);
+mongodb.dropCollection(fulfillmentCollections);
+
 // end of note
 
 
@@ -784,3 +789,20 @@ var paymentDetails = [
 ]
 
 mongodb.insertMany(paymentDetailsCollections, paymentDetails);
+
+var notif = [
+    {
+        //dummy
+    }
+]
+
+mongodb.insertMany(notifCollections, notif);
+
+
+var fulfillment = [
+    {
+        //dummy
+    }
+]
+
+mongodb.insertMany(fulfillmentCollections, fulfillment);

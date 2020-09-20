@@ -3,8 +3,7 @@ var Schema = mongoose.Schema;
 
 const fulfillmentSchema = new Schema({
     fulfillment_ID:{
-        type: Number,
-        unique: true,
+        type: Schema.Types.ObjectId,
         required: [true,'Required']
     },
     request_ID:{
@@ -15,10 +14,6 @@ const fulfillmentSchema = new Schema({
     bookVersion_ID:{
         type:Schema.Types.ObjectId,
         ref: 'BookVersions',
-        required: [true,'Required']
-    },
-    status:{
-        type: String,
         required: [true,'Required']
     }
 });

@@ -186,7 +186,66 @@ const bookController = {
                 });
             }
         });
+    },
+    postOneBookVersion: function(req,res) {
+        // !! used in fulfill validation
+
+        //vars need for rendering: bookCover, title, aName, sellingPrice, publisher, year, quantity, bookSynopsis, quality, quantity, edition, type, category
+            //      from versionsresult:  bookCover, sellingPrice, quantity, type, quality, edition **book_ID
+            //      from booksresult: title, publisher, year, category, bookSynopsis, author(contains _id of authors)
+            //      from authorsresult: aName
+        
+        var bookVersion_ID = req.body.bookVersion_ID;
+        bookVersionsModel.findOne({bookVersion_ID: bookVersion_ID}, function (err, versionsresult) {
+            if (versionsresult != null) {
+                var book_ID = versionsresult.book_ID;
+                var bookCover = versionsresult.bookCover;
+                var sellingPrice = versionsresult.sellingPrice;
+                var quantity = versionsresult.quantity;
+                var type = versionsresult.type;
+                var quality = versionsresult.quality;
+                var edition = versionsresult.edition;
+
+                booksModel.findOne({book_ID: book_ID}, function (err, booksresult) {
+                    if (booksresult != null) {
+                        var authorsID = booksresult.author;
+                        var title = booksresult.title;
+                        var publisher = booksresult.publisher;
+                        var year = booksresult.year;
+                        var category = booksresult.category;
+                        var bookSynopsis = booksresult.bookSynopsis;
+
+                        authorModel.find({_id:authorsID}, function (err, authorsresult) {
+                            if (authorsresult != null) {
+                                var aName = []; //because there can be multiple authors
+                                authorsresult.forEach(function(authors, err){
+                                    aName.push(authors.aName);
+                                })
+                            }
+                            
+                            res.send({
+                                title: title,
+                                bookCover: bookCover,
+                                aName: aName,
+                                sellingPrice: sellingPrice,
+                                quantity: quantity,
+                                bookSynopsis: bookSynopsis,
+                                quality: quality,
+                                edition: edition,
+                                type: type,
+                                year: year,
+                                publisher: publisher,
+                                category: category
+                            });
+                        });
+                    }
+                });
+            }else{
+                res.send(null);
+            }
+        });
     }
+    
     
 
 

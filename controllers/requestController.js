@@ -1,6 +1,9 @@
 const db = require('../model/db.js');
 const assert = require('assert');
 const requestModel = require('../model/requestModel.js');
+const fulfillmentModel = require('../model/fulfillmentModel.js');
+const notifModel = require('../model/notifModel.js');
+const cartItemsModel = require('../model/cartItemsModel.js');
 const userModel = require('../model/userModel.js');
 const ObjectId = require('mongodb').ObjectID;
 const mongoose = require('mongoose');
@@ -244,7 +247,125 @@ const requestController = {
 
     postFulfillRequest: function(req, res){
 
-        console.log("fulfil req")
+        var request_ID = req.body.request_ID;
+        var bookVersion_ID = req.body.bookVersion_ID;
+        var username = req.body.requester;
+        var quantity = req.body.quantity ;
+
+
+        console.log("request_ID: " + request_ID);
+        console.log("bookVersion_ID: " + bookVersion_ID);
+        console.log("quantity: " + quantity);
+
+        /*
+            1. update request status to "Fulfilled"
+            2. create fulfillment (fulfillment_ID, request_ID(fk, bookVersion_ID (NOT fk)))
+            3. create notifications (request_ID (fk), date, type [Fulfillment/Update])
+            4. add item to users cart
+        */
+
+        // 1
+        requestModel.updateOne({request_ID: Object(request_ID)}, {$set: {status: "Fulfilled"}}, function(){
+
+
+
+
+            var fulfillment = new fulfillmentModel({
+                fulfillment_ID: new ObjectId(),
+                request_ID: ObjectId(request_ID),
+                bookVersion_ID: ObjectId(bookVersion_ID)
+
+            })
+            fulfillment.save();     // 2
+
+            var notification = new notifModel({
+                notif_ID: new ObjectId(),
+                request_ID : ObjectId(request_ID),
+                date : Date.now(),
+                type: "Fulfillment"
+            })
+            notification.save();     // 3
+
+            console.log("fulfillment: " + fulfillment);
+            console.log("notification: " + notification);
+
+            //  4
+            cartItemsModel.findOne({username: username, isActive: true}, function(err, cartResult){
+
+                console.log("4 PASOK")
+                // console.log("\n\ncartResult: " + cartResult);
+                //If there is an existing Active cart si username
+                if(cartResult != null){
+                    //push the the bookVersion and wuiantity to the item array of the cartItem
+    
+                    var item = {
+                        bookVersion: ObjectId(bookVersion_ID),
+                        quantity: parseInt(quantity)
+                    }
+    
+                    count = 0;
+                    alreadyinside = false;
+                    cartResult.items.forEach(function(v, err){
+    
+                        //checks if meron nang same item in the cart, if true increment the qunatity nalang
+                        if(v.bookVersion == bookVersion_ID){
+                            v.quantity += parseInt(quantity);
+                            alreadyinside = true;
+                        }
+    
+                        count++;
+                        if(count == cartResult.items.length ){
+                            if(alreadyinside == false){
+                                //if the item is not in the cart yet, push new item
+                                cartResult.items.push(item);
+                            }
+    
+                            console.log("cartResult.items: " + cartResult.items);
+                            console.log("username: " + username);
+                            cartItemsModel.updateOne({username: username, isActive: true}, {$set: {items: cartResult.items}}, function(){
+                                // res.redirect("/cart");
+
+
+                                ///END HERe
+                                console.log("ADDED EXISTING");
+                                res.send(true);
+                            })
+                        }
+                    })
+    
+    
+                }
+                //else if Walang active cart si user
+                else{
+    
+                    // create a new cart with isActive = true then add the necessary deets
+    
+                    var cart = new cartItemsModel({
+                        CartItems_ID : new ObjectId(),
+                        username:  username,
+                        items : [
+                            {
+                                bookVersion: ObjectId(bookVersion_ID),
+                                quantity:  parseInt(quantity)
+                            }
+                        ],
+                        isActive: true
+                    });
+    
+                    cart.save();
+
+                    ///END HERe
+                    console.log("ADDED NEW CART");
+                    res.send(true);
+    
+                    
+                }
+            })
+
+
+        })
+
+
     }
 
 
