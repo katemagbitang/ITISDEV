@@ -30,10 +30,10 @@
             {{#each salesList}}
             <tr><td>{{confirm_date}}</td>
                 <td>{{customer}}</td>
-                {{#each itemlist}}
+                {{#each itemList}}
                 <td>{{title}}</td>
                 <td>{{quantity}}</td>
-                <td>₱ {{price}}</td>
+                <td style="text-align: right;">₱ {{price}}</td>
                 {{/each}}
             </tr>
             {{/each}}
