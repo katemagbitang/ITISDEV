@@ -81,6 +81,7 @@ $(document).ready(function () {
                 $('#validateAuthor').html(result.aName);
                 $('#validatePrice').html('Php ' +result.sellingPrice);
                 $("#validateBookCover").attr("src",result.bookCover);
+                $('#fulfillMsg').html("Click send to fulfill the request with this book.");
                 
                 console.log("result: " + JSON.stringify(result.book));
 
@@ -91,6 +92,7 @@ $(document).ready(function () {
                 $('#SendFulfillBtn').prop('disabled', true);
                 $('#FulfillError').html("Book does not exist!");
                 $('#validateBook').prop('hidden', true);
+                $('#fulfillMsg').html("");
                 console.log("result: " + result.title);
             }
         })
