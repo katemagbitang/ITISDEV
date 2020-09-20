@@ -80,7 +80,7 @@ $(document).ready(function () {
                 $('#validateTitle').html(result.title);
                 $('#validateAuthor').html(result.aName);
                 $('#validatePrice').html('Php ' +result.sellingPrice);
-                $("#validateBookCover").attr("src",result.bookCover);
+                // $("#validateBookCover").attr("src",result.bookCover);
                 $('#fulfillMsg').html("Click send to fulfill the request with this book.");
                 
                 console.log("result: " + JSON.stringify(result.book));
@@ -96,7 +96,7 @@ $(document).ready(function () {
                                 </tr>
                                 <tr>
                                     <th>
-                                        <img class="card-img-top" id="validateBookCover" src="${result.bookCover}" style = "width: 150px" alt="Card image cap">
+                                        <img class="card-img-top" id="validateBookCoverr" src="${result.bookCover}" style = "width: 150px" alt="Card image cap">
                                     </th>
                                     <th>
                                         <p class="card-text">
