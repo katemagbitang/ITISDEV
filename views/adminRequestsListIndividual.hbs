@@ -103,20 +103,18 @@
 
 {{!-- Modal for fulfilment --}}
     <div class="modal fade " id="sendPaymentForm" tabindex="-1" role="dialog" aria-labelledby="sendPaymentFormTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="sendPaymentFormTitle">Fulfill Request Form</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
+        <div class="modal-dialog modal-dialog-centered " role="document" style = "min-width: 75vw">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sendPaymentFormTitle">Fulfill Request Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
                 <div class="modal-body">
-
                     <div class="row">
-                        <div class="col-8 col-sm-6">
+                        <div class="col-9 col-sm-6">
                             <form name = "Fulfillment-Form">
                                 <div class="form-group row">
                                     <label for="Request Number" class="col-sm-5 col-form-label">Request Number</label>
@@ -139,7 +137,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Author" class="col-sm-5 col-form-label">Book Item Reference ID
+                                    <label for="Author" class="col-sm-5 col-form-label">bookVersion_ID
                                     </label>
                                     <div class="col-sm-7">
                                     <input type="text" class="form-control" id="FulfillBookID" placeholder="">
@@ -148,71 +146,39 @@
                                 </div>
                             </form>
 
-
                             <div class="card text-center" id = "validateBook" hidden>
-                                {{!-- <div class="row"> --}}
-                                    <h5>Book to be linked to the request:</h5>
-                                {{!-- </div> --}}
-                                <div class="row">
-                                    <div class="col-8 col-sm-6">
-                                        <img class="card-img-top" id="validateBookCover" src="{{{bookCover}}}" alt="Card image cap">
-                                    </div>
-                                    <div class="col-8 col-sm-6">
-                                        <div class="card-body">
-                                            <p class="card-text text-left" id="validateTitle"></p>
-                                            <p class="card-text text-left" id="validateAuthor"></p>
-                                            <p class="card-text text-left" id="validatePrice"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
+                                    {{!-- this has the book details of the bookVersion_ID inputted --}}
                             </div>
 
                             <div class="modal-footer">
+                                <span class="text-left" id = "fulfillMsg" ></span>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-danger" id= "SendFulfillBtn" data-dismiss="modal" disabled>Send</button>
-                                <span class="text-left" id = "fulfillMsg" ></span>
-                                
                             </div>
-                            
                         </div>
 
-
-                        <div class="col-4 col-sm-6" style = "border-left: 2px solid #dddddd;">
+                        <div class="col-9 col-sm-6" style = "border-left: 2px solid #dddddd;">
                             <h4 class = "text-center">Search book in the database</h4>
                             <form>
                                 <div class="form-group row">
                                     <label for="searchFulfill" class="col-sm-5 col-form-label">Search book in the database</label>
                                     <div class="col-sm-7">
-                                    <input type="text" readonly class="form-control-plaintext" id="searchFulfill" placeholder="Title">
+                                    <input type="text"  class="form-control-plaintext" id="searchFulfill" placeholder="Title">
                                     </div>
                                 </div>
                             </form>
-                            
-                            
+
+                            {{!-- for the searchresult --}}
+                                <div id="fulfillsearchresults" style = "height: 600px; overflow-y: scroll; overflow-x: hidden;">
+
+                                </div>
+                            {{!-- end for the searchresult --}}
+
                         </div>
                     </div>
-
-
                 </div>
-
-
-            
-
-
-
-            {{!-- <div class="modal-footer">
-                <div class="row">
-                    <div class="col-8 col">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" id= "SendFulfillBtn" data-dismiss="modal" disabled>Send</button>
-                    </div>
-                </div>
-                <span class="text-left" id = "fulfillMsg" ></span>
-                
-            </div> --}}
+            </div>
         </div>
-    </div>
     </div>
 {{!-- END Modal for fulfillment --}}
 
