@@ -503,29 +503,23 @@ const orderController = {
 
                                     cartItemsModel.findOne({CartItems_ID: CartItems_ID}, function(err, cartItemsResult) {
                                         var customer = cartItemsResult.username; // customer is here
-                                        console.log("Customer: " + customer);
-                                        console.log("Cart Items: " + cartItemsResult.items);
 
                                         cartItemsResult.items.forEach(function(items, err){
                                             var quantity = parseInt(items.quantity); // qty is here
-                                            console.log("Quantity: " + quantity);
 
                                             bookVersionsModel.findOne({bookVersion_ID : items.bookVersion}, function (err, bookVersionResult) {
                                                 if (bookVersionResult) {
-                                                    var price = parseInt(bookVersionResult.sellingPrice); //price is here
+                                                    var sellingPrice = parseInt(bookVersionResult.sellingPrice); //price is here
                                                     //var priceBought = bookVersionResult.priceBought;
                                                     var book_ID = bookVersionResult.book_ID;
-                                                    console.log("Selling Price: " + price);
                                                     //console.log("Price Bought: " + priceBought);
-                                                    console.log("book_ID: " + book_ID);
 
                                                     booksModel.findOne({book_ID: book_ID}, function(err, booksModelResult) {
                                                         var title = booksModelResult.title; //product is here
-                                                        console.log("Title: " + title);
 
                                                         var item = {
                                                             title: title,
-                                                            price: price,
+                                                            sellingPrice: sellingPrice,
                                                             //priceBought: priceBought,
                                                             quantity: quantity
                                                         }
@@ -542,22 +536,26 @@ const orderController = {
                                             customer: customer,
                                             itemlist: itemlist
                                         }
-                                        console.log("sale: " + sale);
+
+                                        console.log("sale: " + JSON.stringify(sale, null, ' '));
 
                                         salesList.push(sale);
+                                        console.log("sales list: " + JSON.stringify(salesList, null, ' '));
                                     });
                                 }
                             });
                         }
                     });
+
+                    console.log("sales list: " + JSON.stringify(salesList, null, ' '));
+
+                    res.render("salesreport",{
+                        startingdate: startingdate,
+                        endingdate: endingdate,
+                        salesList: salesList
+                    });
+    
                 }
-            });
-
-
-            res.render("salesreport",{
-                startingdate: startingdate,
-                endingdate: endingdate,
-                salesList: salesList
             });
         }
         else {
