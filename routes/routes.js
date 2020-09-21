@@ -147,4 +147,7 @@ app.post('/postSearchBookForFulfillment', searchController.postSearchNoRender);
 app.post('/confirmpayment', orderController.postConfirmPayment);
 app.post('/rejectpayment', orderController.postRejectPayment);
 
+app.get('/editprofile', userController.getProfile);
+app.post('/editprofile', userController.postEditProfile);
+
 module.exports = app;
