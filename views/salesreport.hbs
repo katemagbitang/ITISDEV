@@ -21,21 +21,24 @@
 
     <div class="col-10  card card-body" style="margin: 0 auto">
         <table class="table table-hover">
-            <tr><th>Date</th>
+            <tr>
+                <th>Date</th>
                 <th>Customer</th>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Total Amount</th>
             </tr>
+
             {{#each salesList}}
-            <tr><td>{{confirm_date}}</td>
-                <td>{{customer}}</td>
-                {{#each itemList}}
-                <td>{{title}}</td>
-                <td>{{quantity}}</td>
-                <td style="text-align: right;">₱ {{price}}</td>
-                {{/each}}
-            </tr>
+                <tr>
+                    <td>{{confirm_date}}</td>
+                    <td>{{customer}}</td>
+                    {{#each itemlist}}  {{!-- {{#each itemList}} --}}
+                        <td>{{title}}</td>
+                        <td>{{quantity}}</td>
+                        <td style="text-align: right;">₱ {{sellingPrice}}</td>
+                    {{/each}}
+                </tr>
             {{/each}}
         </table>
     </div>

@@ -488,6 +488,7 @@ const orderController = {
             
             ordersModel.find({status: status}, function(err, ordersResult) {
                 if (ordersResult != null) {
+                    ordersResultCount = 0; // count orders, used so that it only renders when all orders are pushed na
                     ordersResult.forEach(function(result, err) {
                         var order_ID = result.order_ID;
                         var itemlist = [];
@@ -504,6 +505,7 @@ const orderController = {
                                     cartItemsModel.findOne({CartItems_ID: CartItems_ID}, function(err, cartItemsResult) {
                                         var customer = cartItemsResult.username; // customer is here
 
+                                        itemsCount = 0; // used in if,, inside forEach
                                         cartItemsResult.items.forEach(function(items, err){
                                             var quantity = parseInt(items.quantity); // qty is here
 
@@ -525,35 +527,45 @@ const orderController = {
                                                         }
 
                                                         itemlist.push(item);
-                                                        console.log("item: " + JSON.stringify(itemlist, null, ' '));
+                                                        
+                                                        itemsCount++;
+                                                        if(itemsCount == cartItemsResult.items.length){
+                                                            var sale = {
+                                                                confirm_date: confirm_date,
+                                                                customer: customer,
+                                                                itemlist: itemlist
+                                                            }
+                                                            // console.log("sale: " + JSON.stringify(sale, null, ' '));
+                                                            salesList.push(sale);
+
+                                                            ordersResultCount++; //
+                                                            if(ordersResultCount == ordersResult.length){
+                                                                // console.log("salesList: " + JSON.stringify(salesList, null, '  '));
+                                                                // console.log("IFFFFFFFFFFFFFFF");
+                                                                res.render("salesreport",{
+                                                                    startingdate: startingdate,
+                                                                    endingdate: endingdate,
+                                                                    salesList: salesList
+                                                                });
+                                                            }
+                                                        }
                                                     });
                                                 }
                                             });
                                         });
-
-                                        var sale = {
-                                            confirm_date: confirm_date,
-                                            customer: customer,
-                                            itemlist: itemlist
-                                        }
-
-                                        console.log("sale: " + JSON.stringify(sale, null, ' '));
-
-                                        salesList.push(sale);
-                                        console.log("sales list: " + JSON.stringify(salesList, null, ' '));
                                     });
                                 }
                             });
                         }
                     });
 
-                    console.log("sales list: " + JSON.stringify(salesList, null, ' '));
+                    // console.log("salesList!!!!!!!!!: " + JSON.stringify(salesList, null, ' '));
 
-                    res.render("salesreport",{
-                        startingdate: startingdate,
-                        endingdate: endingdate,
-                        salesList: salesList
-                    });
+                    // res.render("salesreport",{
+                    //     startingdate: startingdate,
+                    //     endingdate: endingdate,
+                    //     salesList: salesList
+                    // });
     
                 }
             });

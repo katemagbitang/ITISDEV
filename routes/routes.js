@@ -120,7 +120,7 @@ app.get('/confirmpayment',function(req,res){
 	res.render("confirmpayment",{});
 });
 
-app.get('/generatesalesreport',orderController.getGenerateSales);
+app.get('/generatesalesreport', orderController.getGenerateSales);
 
 app.post('/salesreport',orderController.postSalesReport);
 
