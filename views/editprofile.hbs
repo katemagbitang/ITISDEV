@@ -1,0 +1,54 @@
+<head>
+    {{>head}}
+    <title>Edit Profile | Chapter One</title>
+</head>
+<body>
+    {{!-- NAVBARS START --}}
+    <div id= "navvisit">
+        {{> navvisit}}
+    </div>
+    <div id = "navadmin">
+         {{> navadmin}}
+    </div>
+    <div id = "navuser">
+       {{> navuser}}
+    </div>
+    {{!-- NAVBARS END --}}
+
+    <br>
+    <div class="col-10  card card-body" style="margin: 0 auto">
+        <br><h5 class="card-title" style="text-align:center; color:#DC3545">Profile</h5>
+        <h6>{{save_success}}</h6>
+
+        <form method = "POST">
+            <table class="table table-hover">
+                <tr><th>Username: </th>
+                    <td><input class="form-control mr-sm-2" value="{{{username}}}" id="username" name="username" readonly></td>
+                </tr>
+                <tr><th>First Name: </th>
+                    <td><input class="form-control mr-sm-2" value="{{{firstName}}}" id="firstName" name="firstName"></td>
+                </tr>
+                <tr><th>Last Name: </th>
+                    <td><input class="form-control mr-sm-2" value="{{{lastName}}}" id="lastName" name="lastName"></td>
+                </tr>
+                <tr><th>Email: </th>
+                    <td><input class="form-control mr-sm-2" value="{{{email}}}" id="email" name="email"></td>
+                </tr>
+                <tr><th>Password: </th>
+                    <td><input class="form-control mr-sm-2" type="password" placeholder="Password" id="password" name="password"></td>
+                    <p id="cpError" class="error">{{passError}}</p>
+                </tr>
+                <tr><th>Confirm Password: </th>
+                    <td><input class="form-control mr-sm-2" type="password" placeholder="Confirm Password" id="cpassword" name="cpassword"></td>
+                    <p id="cpError" class="error">{{pError}}</p>
+                </tr>
+
+                <tr>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="reset">Reset</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Save</button>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</body>
