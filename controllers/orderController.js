@@ -485,27 +485,32 @@ const orderController = {
         var salesList= []; //what is needed: date, customer, product, qty, price
         
         if (req.session.userType == "Admin") {
+
+            
             
             ordersModel.find({status: status}, function(err, ordersResult) {
                 if (ordersResult != null) {
+
+                    
                     ordersResultCount = 0; // count orders, used so that it only renders when all orders are pushed na
                     ordersResult.forEach(function(result, err) {
+
                         var order_ID = result.order_ID;
                         var itemlist = [];
                         var confirm_date = result.confirm_date; //date is here
 
                         if (confirm_date >= sd && confirm_date <= ed) {
-                            console.log("Confirm Date: " + confirm_date + " is included.");
+                            // console.log("Confirm Date: " + confirm_date + " is included.");
 
                             orderItemsModel.findOne({order_ID: order_ID}, function(err, itemsResult) {
                                 if (itemsResult != null) {
                                     var CartItems_ID = itemsResult.CartItems_ID;
-                                    console.log("Cart Items ID: " + CartItems_ID);
+                                    // console.log("Cart Items ID: " + CartItems_ID);
 
                                     cartItemsModel.findOne({CartItems_ID: CartItems_ID}, function(err, cartItemsResult) {
                                         var customer = cartItemsResult.username; // customer is here
 
-                                        itemsCount = 0; // used in if,, inside forEach
+                                        var itemsCount = 0; // used in if,, inside forEach
                                         cartItemsResult.items.forEach(function(items, err){
                                             var quantity = parseInt(items.quantity); // qty is here
 
@@ -522,6 +527,7 @@ const orderController = {
                                                         var item = {
                                                             title: title,
                                                             sellingPrice: sellingPrice,
+                                                            subtotal: sellingPrice*quantity,
                                                             //priceBought: priceBought,
                                                             quantity: quantity
                                                         }
@@ -530,29 +536,33 @@ const orderController = {
                                                         
                                                         itemsCount++;
                                                         if(itemsCount == cartItemsResult.items.length){
+                                                            
                                                             var sale = {
-                                                                confirm_date: confirm_date,
+                                                                confirm_date: confirm_date.toDateString(),
                                                                 customer: customer,
                                                                 itemlist: itemlist
                                                             }
-                                                            // console.log("sale: " + JSON.stringify(sale, null, ' '));
                                                             salesList.push(sale);
-
-                                                            ordersResultCount++; //
-                                                            if(ordersResultCount == ordersResult.length){
-                                                                // console.log("salesList: " + JSON.stringify(salesList, null, '  '));
-                                                                // console.log("IFFFFFFFFFFFFFFF");
-                                                                res.render("salesreport",{
-                                                                    startingdate: startingdate,
-                                                                    endingdate: endingdate,
-                                                                    salesList: salesList
-                                                                });
-                                                            }
                                                         }
+
+                                                        ordersResultCount++; //
+                                                        if(ordersResultCount == ordersResult.length){
+
+                                                            console.log("salesList: " + JSON.stringify(salesList, null, ' '))
+                                                            res.render("salesreport",{
+                                                                startingdate: startingdate,
+                                                                endingdate: endingdate,
+                                                                salesList: salesList
+                                                            });
+                                                        }
+
                                                     });
                                                 }
                                             });
                                         });
+
+                                        
+                                        
                                     });
                                 }
                             });

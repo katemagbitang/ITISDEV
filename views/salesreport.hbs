@@ -33,11 +33,11 @@
                 <tr>
                     <td>{{confirm_date}}</td>
                     <td>{{customer}}</td>
-                    {{#each itemlist}}  {{!-- {{#each itemList}} --}}
-                        <td>{{title}}</td>
-                        <td>{{quantity}}</td>
-                        <td style="text-align: right;">₱ {{sellingPrice}}</td>
-                    {{/each}}
+                    {{!-- {{#each itemlist}}   --}}
+                        <td> {{#each itemlist}} {{title}} <br>{{/each}}</td>
+                        <td>{{#each itemlist}} {{quantity}}<br>{{/each}}</td>
+                        <td style="text-align: right;">{{#each itemlist}} ₱ {{subtotal}}<br>{{/each}}</td>
+                    {{!-- {{/each}} --}}
                 </tr>
             {{/each}}
         </table>
