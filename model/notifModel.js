@@ -25,6 +25,10 @@ const notifSchema = new Schema({
         type: String,
         enum: ['Fulfillment', 'Update'],
         required: [true,'Required']
+    },
+    username: {
+        type: String,
+        required: [true,'Required']
     }
 });
 

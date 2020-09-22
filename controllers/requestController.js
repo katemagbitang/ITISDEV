@@ -282,7 +282,8 @@ const requestController = {
                 notif_ID: new ObjectId(),
                 request_ID : ObjectId(request_ID),
                 date : Date.now(),
-                type: "Fulfillment"
+                type: "Fulfillment",
+                username: username
             })
             notification.save();     // 3
 
