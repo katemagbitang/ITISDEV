@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     {{>head}}
     <link rel="stylesheet" href="../css/cart.css">
@@ -40,7 +38,7 @@
                             <tbody >
                             
                                 {{#each cartItemsList}}
-                                <tr>
+                                <tr id="{{{bookVersion_ID}}}">
                                     <td>
                                         <img src="./img/{{bookCover}}" height="150px" width="150px" alt="Card image cap">
                                     </td>
@@ -53,9 +51,9 @@
                                     </td>
                                     <td>{{price}}</td>
                                     <td>{{quantity}}</td>
-                                    <td>{{subtotal}} </td>
+                                    <td id="subtotal">{{subtotal}} </td>
                                     <td>
-                                        <a class="btn btn-danger btn-sm" role="button" href="#">Remove</a>
+                                        <button type="button" id = "{{{bookVersion_ID}}}" onClick = "deleteThis(this.id)" class="btn btn-danger btn-sm btn-delete">Remove</button>
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -70,7 +68,7 @@
                                     </td>
                                     <td></td>
                                     <td style = "color: white"><strong>Grand Total</strong></td>
-                                    <td style = "color: white"><strong>{{grandtotal}}</strong> </td>
+                                    <td style = "color: white" id="grandtotal"><strong>{{grandtotal}}</strong> </td>
                                     <td> </td>
                                 </tr>
                             {{else}}
@@ -203,8 +201,26 @@
     </div>
 
 
-    
+    <script>
+        $(".btn-delete").click(function(){
+            $(this).parent().parent().remove();
+        });
 
+        function deleteThis(clicked) {
+            
+            fetch("/removeBook/" + clicked, {method: 'POST'})
+                    .then(function(response) {
+                        if(response.ok) {
+                            console.log('Click was recorded');
+                            window.location.assign("/cart");
+                        }
+                        throw new Error('Request failed.');
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                    return false;
+        }
+    </script>
 
 </body>
-</html>
