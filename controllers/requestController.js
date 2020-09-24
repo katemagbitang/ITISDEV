@@ -367,6 +367,18 @@ const requestController = {
         })
 
 
+    },
+    getAutoCancelRequests: function(req, res) { 
+
+        /*
+            cancels all qualified request 
+            2 qualifications:
+                1. a user hasnt logged in in 30days.
+                2. 4 notifications has been ignored (we condition it to if 5 ignored_notif_count tho to give time to user to answer the 4th )
+        */
+
+        
+
     }
 
 

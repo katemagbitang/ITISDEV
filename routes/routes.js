@@ -67,6 +67,8 @@ app.post('/search', searchController.postSearch);
 app.get('/aboutus', controller.getAboutUs);
 
 app.get('/notification', notificationController.getNotification);
+app.get('/sendnotification', notificationController.getSendNotification);
+
 
 app.get('/messages', messageController.getMessage);
 app.get('/messages/:username', messageController.getMessageByUsername);
@@ -93,6 +95,7 @@ app.get('/requestlist',function(req,res){
 	res.render("requestlist",{});
 });
 app.get('/requestlist/:status', requestController.getRequestsForRegular);
+app.get('/autocancelrequests', requestController.getAutoCancelRequests);
 
 
 

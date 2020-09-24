@@ -34,6 +34,12 @@ const upload = multer({
     storage: storage
 }).single('myImage');
 
+//helper used if a variable is equal to a value
+hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
+
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + "/public"));

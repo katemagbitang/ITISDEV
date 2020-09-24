@@ -406,15 +406,11 @@ const orderController = {
             proof_image: proof_image
         });
 
-        // console.log(paymentDetails)
+        console.log(paymentdetails);
 
         paymentdetails.save();
 
         ordersModel.updateOne({order_ID: ObjectId(order_ID)}, {$set: {status: "Processing"}}, function (err, result){
-
-
-            
-            
                 
             res.redirect('/Orders/Processing');
             console.log("err update: " + err);
