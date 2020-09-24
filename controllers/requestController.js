@@ -10,6 +10,19 @@ const mongoose = require('mongoose');
 
 
 /*
+    this function computes for the differnce in days between 2 dates
+*/
+function daysDifference(date1, date2){
+
+    //computes for the difference in days between the date_requested and current_date
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    var days = Math.round(Math.abs((date1 - date2) / oneDay ))  ; 
+
+    return days;
+
+}
+
+/*
     This function computes for the priority rating based on our algorithm in the proposal
         @params     maxPrice            number
         @params     date_requested      Date
@@ -377,7 +390,50 @@ const requestController = {
                 2. 4 notifications has been ignored (we condition it to if 5 ignored_notif_count tho to give time to user to answer the 4th )
         */
 
-        
+        //this is for #1
+        userModel.find({}, function(err, userResult){
+            // console.log("userResult: " + userResult)
+
+            userResult.forEach(function(user, err){
+                var lastLogin = user.lastLogin;
+                var current_date = new Date();
+                var username = user.username;
+
+                // console.log("lastLogin: " + lastLogin)
+
+                var days = daysDifference(lastLogin, current_date);
+                console.log("days: " + days);
+
+
+                if(days >= 30 ){
+
+                    console.log( "OK MORE THAN 30 days si " + user.username);
+                    //cancel all requests
+                    requestModel.updateMany({username: username}, {$set: {status: "Cancelled"}}, function(err, updateResult){
+                        console.log("err: " + err);
+                        console.log("updateResult: "+ JSON.stringify(updateResult, null, " "));
+                    })
+
+
+
+
+                }else{
+                    //do nothing
+                    console.log( "OK pa si " + user.username);
+
+
+                }
+
+
+
+
+
+            })
+            
+
+        })
+
+
 
     }
 

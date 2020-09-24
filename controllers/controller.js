@@ -47,7 +47,7 @@ const controller ={
         res.render("index", {});
     },
     getHome: function(req,res){
-        console.log("GETTING HOME");
+        // console.log("GETTING HOME");
 
         var categoryList = []; //what is needed: category
         var bookList = []; //what is needed: bookCover, title, bookVersion_ID
@@ -73,11 +73,11 @@ const controller ={
                             bookList.push(booklisting);
 
                             if (categoryList.includes(category)) {
-                                console.log(category +" is already stored.");
+                                // console.log(category +" is already stored.");
                             }
                             else {
                                 categoryList.push(category);
-                                console.log("Category: " + category);
+                                // console.log("Category: " + category);
                             }
                         }
                     });

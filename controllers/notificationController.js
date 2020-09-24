@@ -56,7 +56,7 @@ const notificationController ={
         
 
         requestModel.find({status: "Active"}, function(err, ActiveRequests){
-            console.log("ActiveRequests: " + ActiveRequests);
+            // console.log("ActiveRequests: " + ActiveRequests);
 
             ActiveRequestsCount = 0;
             ActiveRequests.forEach(function(ActiveRequest, err){
@@ -73,8 +73,8 @@ const notificationController ={
                 var isEligible = days%14;
 
                 // console.log("\n\nActiveRequest: " + ActiveRequest);
-                console.log("days: " + days);
-                console.log("isEligible: " + isEligible);
+                // console.log("days: " + days);
+                // console.log("isEligible: " + isEligible);
 
 
 
@@ -82,18 +82,18 @@ const notificationController ={
                 if(isEligible == 0 && days!= 0){
                     //finds all Update Notifications for that
 
-                    console.log("days: " + days);
-                    console.log("isEligible: " + isEligible);
+                    // console.log("days: " + days);
+                    // console.log("isEligible: " + isEligible);
 
                     
                     notifModel.find({request_ID: request_ID, type: "Update"}, function(err, notifsResult){
 
-                        console.log("notifsResult.length: "+ notifsResult.length);
+                        // console.log("notifsResult.length: "+ notifsResult.length);
 
                         //if may laman na notifs
                         if(notifsResult.length != 0){
 
-                            console.log("may update na")
+                            // console.log("may update na")
                             notifsResultCount = 0;
                             notifsResult.forEach(function(n, err){
                                 // if meron nang notif made on current_date
@@ -101,7 +101,7 @@ const notificationController ={
                                     //do nothing //end na
 
 
-                                    console.log("pasok    if( Math.round(Math.abs((n.date - current_date) / oneDay )) == 0 ")
+                                    // console.log("pasok    if( Math.round(Math.abs((n.date - current_date) / oneDay )) == 0 ")
 
                                     // console.log("notifsResult: "+ notifsResult);
 
