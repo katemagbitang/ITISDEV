@@ -139,6 +139,7 @@ app.post('/uploadphoto',  controller.uploadPhoto);
 app.post('/addProducts', upload.single('myImage'), adminController.postProduct);
 app.get('/addProducts',adminController.getAddProduct);
 
+app.post('/removeBook/:bookVersion_ID', cartController.postRemoveBook);
 
 app.get('/adminRequestsList',adminController.getAdminRequestList);
 app.get('/adminRequestsList/:view',requestController.getRequestsForAdmin);

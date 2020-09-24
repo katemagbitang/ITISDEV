@@ -35,11 +35,12 @@ const cartController = {
         cartItemsModel.findOne({username:username, isActive: true}, function(err, cartItemsResult){
             if(cartItemsResult != null){
                 var cartItemsCount = 0;
-                simpleitems = cartItemsResult.items
+                simpleitems = cartItemsResult.items;
                 // console.log("cartItemsResult: " + simpleitems);
                 var bookVersionTry = [];
                 var grandtotal = 0; 
-
+                
+                if (simpleitems === null) { console.log("nothing");} else {
                 simpleitems.forEach(function(simpleitem, err){
 
                     var quantity = simpleitem.quantity;
@@ -102,7 +103,7 @@ const cartController = {
                         }
                     });
                 })
-            }else{
+            }}else{
                 res.render("cart",{});
 
             }
@@ -292,9 +293,39 @@ const cartController = {
             }else{
                 res.send("0");
             }
-        })
+        });
+    },
+    
+    //update the database about the removed books
+    postRemoveBook: function(req, res) {
+        console.log("Removing book from cart");
+        var username = req.session.username;
+        var parambookVersion_ID = req.params.bookVersion_ID;
+        console.log("book to be removed: " + parambookVersion_ID);
+        var bookList = [];
 
+        cartItemsModel.findOne({username: username, isActive: true}, function(err, cartItemsResult) {
+            if (cartItemsResult != null) {
+                var cartlist = cartItemsResult.items;
+                console.log("Cart List: " + cartlist);
 
+                cartlist.forEach(function(bookitem, err) {
+                    if (bookitem.bookVersion == parambookVersion_ID) {
+                        console.log("Found");
+                    }
+                    else {
+
+                        bookList.push(bookitem);
+                        console.log("Book List: " + bookitem);
+                    }
+                });
+            }
+            console.log("BookList Items: " + bookList);
+
+            cartItemsModel.updateOne({username: username, isActive: true}, {$set: {items: bookList}}, function() {
+                res.redirect("/cart");
+            });
+        });
     }
 
 }
