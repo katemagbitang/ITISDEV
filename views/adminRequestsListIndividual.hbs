@@ -28,9 +28,9 @@
 
             <div class="card-header card-header-tabs bg-light">
                 <ul class="nav nav-tabs  bg-light">
-                    <li class="nav-item">
+                    {{!-- <li class="nav-item">
                         <a class="nav-link " href="/adminRequestsList/Collective">Collective</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item ">
                         <a class="nav-link active" href="/adminRequestsList/Individual">Individual</a>
                     </li>
@@ -79,8 +79,12 @@
                                 <td>
                                     <form method="post" action = "/override/{{request_ID}}">
                                         <input class="form-control mr-sm-2" type="text" name = "request_ID" value = "{{request_ID}}" hidden>
+                                        {{#ifEquals override false}}
                                         <button type="submit" class="btn btn-sm btn-danger override-btn" >Override</button>
+                                        {{/ifEquals}}
+                                        {{#ifEquals status "Active"}}
                                         <button type="button" class="btn btn-sm btn-danger fulfill-btn" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button>
+                                        {{/ifEquals}}
                                     </form>
                                 </td>
                             </tr>
