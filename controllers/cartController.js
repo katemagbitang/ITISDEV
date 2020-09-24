@@ -286,9 +286,12 @@ const cartController = {
         var username = req.session.username;
 
         cartItemsModel.findOne({username: username, isActive: true}, function(err, cartItemsResult){
-            var CartItemsCount = cartItemsResult.items.length;
-
-            res.send(CartItemsCount.toString());
+            if(cartItemsResult){
+                var CartItemsCount = cartItemsResult.items.length;
+                res.send(CartItemsCount.toString());
+            }else{
+                res.send("0");
+            }
         })
 
 

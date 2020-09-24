@@ -29,6 +29,12 @@ const notifSchema = new Schema({
     username: {
         type: String,
         required: [true,'Required']
+    },
+    seen: {
+        type: Boolean,
+        required: [true,'Required'],
+        default: false
+
     }
 });
 

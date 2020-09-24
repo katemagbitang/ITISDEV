@@ -30,7 +30,13 @@ $(document).ready(function (req, res) {
             console.log("data: " + data);
             console.log("status: " + status);
 
-            $('.navcartitemscount').html(data)
+            $('.navcartitemscount').html(data);
+        })
+
+        $.get('/getUnseenNotifsCount', function(data, status){
+            $('.navnotifcount').html(data);
+
+
         })
 
 
