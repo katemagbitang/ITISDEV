@@ -402,42 +402,32 @@ const requestController = {
                 // console.log("lastLogin: " + lastLogin)
 
                 var days = daysDifference(lastLogin, current_date);
-                console.log("days: " + days);
-
+                // console.log("days: " + days);
 
                 if(days >= 30 ){
-
-                    console.log( "OK MORE THAN 30 days si " + user.username);
-                    //cancel all requests
+                    //cancel all requests made by users who hasnt logged in for 30 days or more
                     requestModel.updateMany({username: username}, {$set: {status: "Cancelled"}}, function(err, updateResult){
-                        console.log("err: " + err);
-                        console.log("updateResult: "+ JSON.stringify(updateResult, null, " "));
+
                     })
-
-
-
-
                 }else{
                     //do nothing
-                    console.log( "OK pa si " + user.username);
-
-
+                    // console.log( "OK pa si " + user.username);
                 }
-
-
-
-
-
             })
-            
-
         })
 
+        // this is for #2
+        requestModel.find({ignored_notif_count: 5}, function (err, requestsResult){
+            // console.log("requestsResult: " + requestsResult)
 
-
+            requestsResult.forEach(function(request, err){
+                var request_ID = request.request_ID;
+                requestModel.updateOne({request_ID:request_ID} , {$set: {status: "Cancelled"}}, function(){
+                    
+                })
+            })
+        })
     }
-
-
 }
 
 module.exports = requestController;
