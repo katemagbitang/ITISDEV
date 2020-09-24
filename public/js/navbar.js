@@ -26,6 +26,13 @@ $(document).ready(function (req, res) {
 
         })
 
+        $.get('/getCartItemsCount', function(data, status){
+            console.log("data: " + data);
+            console.log("status: " + status);
+
+            $('.navcartitemscount').html(data)
+        })
+
 
 
 

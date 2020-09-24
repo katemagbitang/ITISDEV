@@ -278,6 +278,20 @@ const cartController = {
         })
 
 
+    },
+
+    // this sends the number of individual items in the cart  ((quantity doesnt matter))
+    getCartItemsCount: function(req, res){
+
+        var username = req.session.username;
+
+        cartItemsModel.findOne({username: username, isActive: true}, function(err, cartItemsResult){
+            var CartItemsCount = cartItemsResult.items.length;
+
+            res.send(CartItemsCount.toString());
+        })
+
+
     }
 
 }

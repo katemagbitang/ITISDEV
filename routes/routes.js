@@ -86,6 +86,7 @@ app.get('/cart', cartController.getCart);
 app.post("/checkout", cartController.postCheckout);
 
 app.get('/checkout', cartController.postCheckout);
+app.get('/getCartItemsCount', cartController.getCartItemsCount);
 
 app.get('/requestbook',function(req,res){
 	res.render("requestform",{});
