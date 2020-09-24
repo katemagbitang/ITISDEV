@@ -2,6 +2,8 @@ const db = require('../model/db.js');
 //const booksModel = require('../model/booksModel.js');
 const books = require('../model/booksModel.js');
 const BookVersions = require('../model/bookVersionsModel.js');
+const BookAuthors = require('../model/bookAuthorsModel.js');
+const Author = require('../model/authorModel.js');
 const ObjectId = require('mongodb').ObjectID;
 
 // for image upload
@@ -59,8 +61,8 @@ const adminController = {
         res.render("adminRequestsListSTBC",{});
     },
     postProduct: function (req,res,next) {
-        //res.render('addproducts', details);
         var book_ID = ObjectId();
+        var author_ID = ObjectId();
         var title = req.body.Book_Title;
         var author = req.body.author;
         var publisher = req.body.publisher;
@@ -78,18 +80,19 @@ const adminController = {
         var bookCover = req.file.filename; 
 
         var item = {
-            book_ID: ObjectId(),
+            book_ID:  book_ID,
             title : title,
-            author : ObjectId(), //??
+            author :  author_ID, //??
             publisher : publisher,
             year : year,
             category : category,
             bookSynopsis : bookSynopsis
         }
+        
 
         var item2 = {
             bookVersion_ID : ObjectId(),
-            book_ID : book_ID,
+            book_ID :book_ID,
             priceBought : priceBought,
             sellingPrice : sellingPrice,
             quality : quality,
@@ -99,9 +102,24 @@ const adminController = {
             bookCover : bookCover
         }
         
+
+        var author ={
+            author_ID : author_ID,
+            aName : author
+        }
+        
+        /*
+        var author2 ={
+            book_ID : 1111111111111111,
+            author_ID : ObjectId(1111111111111111)
+        } 
+        */
         db.insertOne(books, item);
         db.insertOne(BookVersions, item2);
+        db.insertOne(Author, author);
+        //db.insertOne(BookAuthors, author2);
         
+
         res.redirect('/browse');
     }
 }
