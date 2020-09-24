@@ -390,7 +390,7 @@ const requestController = {
                 2. 4 notifications has been ignored (we condition it to if 5 ignored_notif_count tho to give time to user to answer the 4th )
         */
 
-        //this is for #1
+        //this is for #1 !
         userModel.find({}, function(err, userResult){
             // console.log("userResult: " + userResult)
 
@@ -405,8 +405,8 @@ const requestController = {
                 // console.log("days: " + days);
 
                 if(days >= 30 ){
-                    //cancel all requests made by users who hasnt logged in for 30 days or more
-                    requestModel.updateMany({username: username}, {$set: {status: "Cancelled"}}, function(err, updateResult){
+                    //cancel all requests made by users who hasnt logged in for 30 days or more EXCEPT OVERRIDEN REQUESTS
+                    requestModel.updateMany({username: username, override: false}, {$set: {status: "Cancelled"}}, function(err, updateResult){
 
                     })
                 }else{
@@ -416,12 +416,14 @@ const requestController = {
             })
         })
 
-        // this is for #2
-        requestModel.find({ignored_notif_count: 5}, function (err, requestsResult){
+        // this is for #2 !
+        //cancel all requests with 4 ignored notifs EXCEPT OVERRIDEN REQUESTS
+        requestModel.find({ignored_notif_count: 5, override: false}, function (err, requestsResult){
             // console.log("requestsResult: " + requestsResult)
 
             requestsResult.forEach(function(request, err){
                 var request_ID = request.request_ID;
+
                 requestModel.updateOne({request_ID:request_ID} , {$set: {status: "Cancelled"}}, function(){
                     
                 })

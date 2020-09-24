@@ -17,35 +17,43 @@ const notificationController ={
         var notifs = [];
         notifModel.find({username: username}, function(err, notifResults){
 
-            var count = 0;
-            notifResults.forEach(function( v, err){
+            console.log("notifResults.length: "+notifResults.length);
 
-                requestModel.findOne({request_ID: v.request_ID}, function(err, requestResults){
-                    console.log("requestResults: " + requestResults)
+            if(notifResults.length != 0){
+                var count = 0;
+                notifResults.forEach(function( v, err){
 
-                    var notif = {
-                        notifDate : v.date.toDateString(),
-                        type: v.type,
-                        username: username,
-                        title: requestResults.book_title,
-                        aName: requestResults.book_author,
-                        requestDate: requestResults.date_requested.toDateString()
-                    }
-    
-                    notifs.push(notif);
-    
-                    count++;
-                    if(count == notifResults.length){
-                        console.log("notifs: " + JSON.stringify(notifs, null, '   '));
-    
-                        res.render("notification", {
-                            notifs: notifs
-                        });
-    
-                    }
+                    requestModel.findOne({request_ID: v.request_ID}, function(err, requestResults){
+                        console.log("requestResults: " + requestResults)
 
+                        var notif = {
+                            notifDate : v.date.toDateString(),
+                            type: v.type,
+                            username: username,
+                            title: requestResults.book_title,
+                            aName: requestResults.book_author,
+                            requestDate: requestResults.date_requested.toDateString()
+                        }
+        
+                        notifs.push(notif);
+        
+                        count++;
+                        if(count == notifResults.length){
+                            console.log("notifs: " + JSON.stringify(notifs, null, '   '));
+        
+                            res.render("notification", {
+                                notifs: notifs
+                            });
+        
+                        }
+
+                    })
                 })
-            })
+            }else{
+                res.render("notification", {
+                });
+
+            }
         })
     },
     getSendNotification: function(req,res){

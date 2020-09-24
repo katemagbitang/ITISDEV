@@ -42,30 +42,39 @@
                 <td style="width:60%"> Hello {{username}}! Sorry for the delay, our team is working hard to find the book you requested! <br>On {{requestDate}}, you requested {{title}} by {{aName}}. Are you still interested?</td>
                 <td><button class="btn btn-outline-success my-2 my-sm-0" style="width:2cm">Yes</button> <button class="btn btn-outline-success my-2 my-sm-0">No</button></td>
             </tr> --}}
-            {{#each notifs}}
-                {{#ifEquals type "Fulfillment"}}
-                    <tr>
-                        {{!-- this is when the request has been fulfilled --}}
-                        <td style="text-align: right; color:darkgrey">{{notifDate}}</td>
-                        <td style="width:60%"> Hello {{username}}! We have fulfilled your requested book entitled {{title}} by {{aName}} on {{requestDate}}! <br>The item is automatically added to your cart! Check your cart <a href="/cart">here.</a>
-                        </td>
-                    </tr>
-                {{/ifEquals}}
-                {{#ifEquals type "Update"}}
-                    <tr>
-                        {{!-- this is when the request has been fulfilled --}}
-                        <td style="text-align: right; color:darkgrey">{{notifDate}}</td>
-                        <td style="width:60%"> 
-                            Hello {{username}}! On {{requestDate}}, you have requested for the book: {{title}} by {{aName}}. <br>
-                            Are you still interested with the book you've requested? 
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-success my-2 my-sm-0" style="width:2cm">Yes</button>
-                            <button class="btn btn-outline-success my-2 my-sm-0" style="width:2cm">No</button>
-                        </td>
-                    </tr>
-                {{/ifEquals}}
-            {{/each}}
+            {{#if notifs}}
+                {{#each notifs}}
+                    {{#ifEquals type "Fulfillment"}}
+                        <tr>
+                            {{!-- this is when the request has been fulfilled --}}
+                            <td style="text-align: right; color:darkgrey">{{notifDate}}</td>
+                            <td style="width:60%"> Hello {{username}}! We have fulfilled your requested book entitled {{title}} by {{aName}} on {{requestDate}}! <br>The item is automatically added to your cart! Check your cart <a href="/cart">here.</a>
+                            </td>
+                        </tr>
+                    {{/ifEquals}}
+                    {{#ifEquals type "Update"}}
+                        <tr>
+                            {{!-- this is when the request has been fulfilled --}}
+                            <td style="text-align: right; color:darkgrey">{{notifDate}}</td>
+                            <td style="width:60%"> 
+                                Hello {{username}}! On {{requestDate}}, you have requested for the book: {{title}} by {{aName}}. <br>
+                                Are you still interested with the book you've requested? 
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-success my-2 my-sm-0" style="width:2cm">Yes</button>
+                                <button class="btn btn-outline-success my-2 my-sm-0" style="width:2cm">No</button>
+                            </td>
+                        </tr>
+                    {{/ifEquals}}
+                {{/each}}
+            {{else}}
+                <tr>
+                    {{!-- this is when there are no notifications yet--}}
+                    <td > 
+                        No notifications yet.
+                    </td>
+                </tr>
+            {{/if}}
         </table>
     </div>
 
