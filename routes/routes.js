@@ -100,7 +100,7 @@ app.get('/requestlist',function(req,res){
 });
 app.get('/requestlist/:status', requestController.getRequestsForRegular);
 app.get('/autocancelrequests', requestController.getAutoCancelRequests);
-
+app.post('/postcancelrequest', requestController.postCancelRequest);
 
 
 app.get('/dummyupload', controller.getDummyUpload);

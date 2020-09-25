@@ -184,6 +184,22 @@ $(document).ready(function () {
 
     })
 
+
+    // cancels a request
+    $('.cancelRequestBtn').on('click', function(){
+        var request_ID = $(this).parent().parent().find('.request_ID').html();
+        console.log("request_ID from JSSSS: " + JSON.stringify(request_ID));
+        var pointer = $(this).parent().parent();
+
+        $.post('/postCancelRequest', {request_ID: request_ID}, function(data, err){
+
+            if(data == true){
+                pointer.remove();
+                $('#requestUpdateModalBody').html("Your request has been cancelled.");
+            }
+        })
+    })
+
    
 
 });

@@ -429,6 +429,16 @@ const requestController = {
                 })
             })
         })
+    },
+
+    postCancelRequest: function(req, res){
+        var request_ID = req.body.request_ID;
+        console.log("request_ID: " + JSON.stringify(request_ID))
+
+        requestModel.updateOne({request_ID: request_ID}, {$set: {status: "Cancelled"}}, function(){
+            res.send(true);
+        });
+
     }
 }
 
