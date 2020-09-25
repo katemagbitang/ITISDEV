@@ -12,44 +12,93 @@ const notificationController ={
     getNotification: function(req,res){
 
         var username = req.session.username;
-        var notifDate, requestDate, username, aName, title, response;
+        // var notifDate, requestDate, username, aName, title, response;
 
         var notifs = [];
 
         notifModel.updateMany({username:username}, {$set: {seen: true}}, function(){
             notifModel.find({username: username}, function(err, notifResults){
 
-                console.log("notifResults.length: "+notifResults.length);
+                // console.log("notifResults.length: "+notifResults.length);
 
                 if(notifResults.length != 0){
                     var count = 0;
                     notifResults.forEach(function( v, err){
+                        // console.log("v: " + v)
 
-                        requestModel.findOne({request_ID: v.request_ID}, function(err, requestResults){
-                            console.log("requestResults: " + requestResults)
+                        //includes all fulfillment notifs
+                        if(v.type == "Fulfillment" ){
+                            requestModel.findOne({request_ID: v.request_ID}, function(err, requestResults){
+                                // console.log("requestResults: " + requestResults)
 
-                            var notif = {
-                                notifDate : v.date.toDateString(),
-                                type: v.type,
-                                username: username,
-                                title: requestResults.book_title,
-                                aName: requestResults.book_author,
-                                requestDate: requestResults.date_requested.toDateString()
-                            }
-            
-                            notifs.push(notif);
-            
+                                    var notif = {
+                                        notifDate : v.date.toDateString(),
+                                        notif_ID: v.notif_ID,
+                                        type: v.type,
+                                        username: username,
+                                        title: requestResults.book_title,
+                                        aName: requestResults.book_author,
+                                        requestDate: requestResults.date_requested.toDateString()
+                                    }
+                    
+                                    notifs.push(notif);
+                                
+                
+                                count++;
+                                if(count == notifResults.length){
+                                    // console.log("notifs: " + JSON.stringify(notifs, null, '   '));
+                
+                                    res.render("notification", {
+                                        notifs: notifs
+                                    });
+                                }
+                            })
+                        }
+                        //includes update notifs that has no answer yet
+                        else if(v.type == "Update" && v.response == "No Answer"){
+                            requestModel.findOne({request_ID: v.request_ID, status: "Active"}, function(err, requestResults){
+                                // console.log("requestResults: " + requestResults)
+
+                                if(requestResults){
+                                    var notif = {
+                                        notifDate : v.date.toDateString(),
+                                        notif_ID: v.notif_ID,
+                                        type: v.type,
+                                        username: username,
+                                        title: requestResults.book_title,
+                                        aName: requestResults.book_author,
+                                        requestDate: requestResults.date_requested.toDateString()
+                                    }
+                    
+                                    notifs.push(notif);
+                                }
+                
+                                count++;
+                                if(count == notifResults.length){
+                                    // console.log("notifs: " + JSON.stringify(notifs, null, '   '));
+                
+                                    res.render("notification", {
+                                        notifs: notifs
+                                    });
+                                }
+                            })
+
+                        }
+                        //else, it just increases the count so that it still works/renders
+                        else{
                             count++;
                             if(count == notifResults.length){
-                                console.log("notifs: " + JSON.stringify(notifs, null, '   '));
+                                // console.log("notifs: " + JSON.stringify(notifs, null, '   '));
             
                                 res.render("notification", {
                                     notifs: notifs
                                 });
-            
                             }
 
-                        })
+                        }
+                        
+
+
                     })
                 }else{
                     res.render("notification", {
@@ -231,6 +280,42 @@ const notificationController ={
             res.send(notifResult.length.toString());
         })
 
+    },
+
+    postResponseNo: function(req,res){
+        var notif_ID = req.body.notif_ID;
+
+        res.send(notif_ID)
+        notifModel.findOneAndUpdate({notif_ID: notif_ID}, {$set: {response: "No"}},function(notifErr, notifData){
+            // console.log("notifData: " + notifData);
+            // console.log("notifErr: " + notifErr)
+
+            var request_ID = notifData.request_ID;
+            // cancels the request since the user is no longer interested in the book.
+            requestModel.findOneAndUpdate({request_ID: request_ID}, {$set: {status: "Cancelled"}},function(requestErr, requestData){
+                // console.log("requestData: " + requestData);
+                // console.log("requestErr: " + requestErr)
+    
+            })
+        })
+    },
+
+    postResponseYes: function(req,res){
+        var notif_ID = req.body.notif_ID;
+
+        res.send(notif_ID)
+        notifModel.findOneAndUpdate({notif_ID: notif_ID}, {$set: {response: "Yes"}},function(notifErr, notifData){
+            // console.log("notifData: " + notifData);
+            // console.log("notifErr: " + notifErr)
+
+            var request_ID = notifData.request_ID;
+            //sets the ignored_notif_count back to zero ((used in auto cancellation of request ))
+            requestModel.findOneAndUpdate({request_ID: request_ID}, {$set: {ignored_notif_count: 0}},function(requestErr, requestData){
+                // console.log("requestData: " + requestData);
+                // console.log("requestErr: " + requestErr)
+    
+            })
+        })
     }
 }
 

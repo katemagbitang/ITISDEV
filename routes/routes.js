@@ -69,6 +69,8 @@ app.get('/aboutus', controller.getAboutUs);
 app.get('/notification', notificationController.getNotification);
 app.get('/sendnotification', notificationController.getSendNotification);
 app.get('/getUnseenNotifsCount', notificationController.getUnseenNotifsCount);
+app.post('/postResponseNo', notificationController.postResponseNo);
+app.post('/postResponseYes', notificationController.postResponseYes);
 
 
 app.get('/messages', messageController.getMessage);
