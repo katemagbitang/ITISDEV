@@ -40,7 +40,7 @@ const cartController = {
                 var bookVersionTry = [];
                 var grandtotal = 0; 
                 
-                if (simpleitems === null) { console.log("nothing");} else {
+                if (simpleitems.length === 0) {res.render("cart",{});} else {
                 simpleitems.forEach(function(simpleitem, err){
 
                     var quantity = simpleitem.quantity;
@@ -222,29 +222,40 @@ const cartController = {
                     quantity: parseInt(quantity)
                 }
 
-                count = 0;
-                alreadyinside = false;
-                cartResult.items.forEach(function(v, err){
+                //if may laman si active cart, push the item along with existing list of items
+                if(cartResult.items.length !=0){
+                    count = 0;
+                    alreadyinside = false;
+                    cartResult.items.forEach(function(v, err){
 
-                    //checks if meron nang same item in the cart, if true increment the qunatity nalang
-                    if(v.bookVersion == bookVersion_ID){
-                        v.quantity += parseInt(quantity);
-                        alreadyinside = true;
-                    }
-
-                    count++;
-                    if(count == cartResult.items.length ){
-                        if(alreadyinside == false){
-                            //if the item is not in the cart yet, push new item
-                            cartResult.items.push(item);
+                        //checks if meron nang same item in the cart, if true increment the qunatity nalang
+                        if(v.bookVersion == bookVersion_ID){
+                            v.quantity += parseInt(quantity);
+                            alreadyinside = true;
                         }
 
-                        console.log(cartResult.items);
-                        cartItemsModel.updateOne({username: username, isActive: true}, {$set: {items: cartResult.items}}, function(){
-                            res.redirect("/cart");
-                        });
-                    }
-                });
+                        count++;
+                        if(count == cartResult.items.length ){
+                            if(alreadyinside == false){
+                                //if the item is not in the cart yet, push new item
+                                cartResult.items.push(item);
+                            }
+
+                            console.log(cartResult.items);
+                            cartItemsModel.updateOne({username: username, isActive: true}, {$set: {items: cartResult.items}}, function(){
+                                res.redirect("/cart");
+                            });
+                        }
+                    });
+                }
+                //if walang laman si active cart, just push the item
+                else{
+                    cartResult.items.push(item);
+                    cartItemsModel.updateOne({username: username, isActive: true}, {$set: {items: cartResult.items}}, function(){
+                        res.redirect("/cart");
+                    });
+
+                }
 
 
             }
