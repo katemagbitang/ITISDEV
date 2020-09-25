@@ -48,6 +48,7 @@ const cartController = {
                     // console.log("simpleitem.bookVersion :  " + simpleitem.bookVersion);
                     bookVersionsModel.findOne({bookVersion_ID: simpleitem.bookVersion}, function (err, versionsresult) {
                         if (versionsresult != null) {
+                            var bookVersion_ID = versionsresult.bookVersion_ID;
                             var book_ID = versionsresult.book_ID;
                             var bookCover = versionsresult.bookCover;
                             var sellingPrice = versionsresult.sellingPrice;
@@ -71,11 +72,12 @@ const cartController = {
                                             var aName = []; //because there can be multiple authors
                                             authorsresult.forEach(function(authors, err){
                                                 aName.push(authors.aName);
-                                            })
+                                            });
                                         }
 
 
                                         var cartitem = {
+                                            bookVersion_ID: bookVersion_ID,
                                             quantity: quantity,
                                             bookCover: bookCover,
                                             quality: quality,
@@ -102,18 +104,12 @@ const cartController = {
                             });
                         }
                     });
-                })
+                });
             }}else{
                 res.render("cart",{});
 
-            }
-           
-            
-        })
-
-
-
-
+            }    
+        });
         
     },
 
@@ -201,21 +197,19 @@ const cartController = {
                         }
 
 
-                    })
-                })
-            })
-        })
+                    });
+                });
+            });
+        });
     },
+
     postAddToCart: function(req, res){
         var username = req.session.username;
         var bookVersion_ID = req.params.bookVersion_ID;
         var quantity = req.body.quantity ;
 
-        
-
-
-        console.log("bookVersion_ID: " + bookVersion_ID);
-        console.log("quantity: " + quantity);
+        //console.log("bookVersion_ID: " + bookVersion_ID);
+        //console.log("quantity: " + quantity);
 
         cartItemsModel.findOne({username: username, isActive: true}, function(err, cartResult){
             // console.log("\n\ncartResult: " + cartResult);
@@ -248,9 +242,9 @@ const cartController = {
                         console.log(cartResult.items);
                         cartItemsModel.updateOne({username: username, isActive: true}, {$set: {items: cartResult.items}}, function(){
                             res.redirect("/cart");
-                        })
+                        });
                     }
-                })
+                });
 
 
             }
@@ -276,9 +270,7 @@ const cartController = {
                 res.redirect("/cart");
                 
             }
-        })
-
-
+        });
     },
 
     // this sends the number of individual items in the cart  ((quantity doesnt matter))
@@ -299,6 +291,7 @@ const cartController = {
     //update the database about the removed books
     postRemoveBook: function(req, res) {
         console.log("Removing book from cart");
+
         var username = req.session.username;
         var parambookVersion_ID = req.params.bookVersion_ID;
         console.log("book to be removed: " + parambookVersion_ID);
