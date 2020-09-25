@@ -3,6 +3,10 @@
 <head>
     {{>head}}
     <link rel="stylesheet" href="../css/messagesStyle.css">
+
+    
+
+    
     <title>My Transactions</title>
 </head>
 <body>
@@ -28,25 +32,28 @@
 
             <div class="card-header card-header-tabs bg-light">
                 <ul class="nav nav-tabs  bg-light">
+                    {{!-- <li class="nav-item">
+                        <a class="nav-link " href="/adminRequestsList/Collective">Collective</a>
+                    </li> --}}
                     <li class="nav-item ">
                         <a class="nav-link " href="/adminRequestsList/Individual">Individual</a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link active" href="/adminRequestsList/SoonExpiring">Soon Expiring</a>
+                        <a class="nav-link " href="/adminRequestsList/SoonExpiring">Soon Expiring</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="/adminRequestsList/Fulfilled">Fulfilled</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/adminRequestsList/Cancelled">Cancelled</a>
+                        <a class="nav-link active" href="/adminRequestsList/Cancelled">Cancelled</a>
                     </li>
                 </ul>
             </div>
                 
 
             <div class="card-body-orders  overflow-auto vh72"  >
-                <table class=" table table-bordered table-hover ">
+                <table class=" table table-bordered table-hover " id = "requestsTable">
                     <thead class="thead-light">
                         <tr>
                             <th >Request Number</th>
@@ -82,12 +89,17 @@
                                 <td>
                                     <form method="post" action = "/override/{{request_ID}}">
                                         <input class="form-control mr-sm-2" type="text" name = "request_ID" value = "{{request_ID}}" hidden>
+                                        {{#ifEquals override false}}
                                         <button type="submit" class="btn btn-sm btn-danger override-btn" >Override</button>
+                                        {{/ifEquals}}
+                                        {{#ifEquals status "Active"}}
                                         <button type="button" class="btn btn-sm btn-danger fulfill-btn" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button>
+                                        {{/ifEquals}}
                                     </form>
                                 </td>
                             </tr>
                         {{/each}}
+
                         {{#if requestList}}
                         <tr>
                             <td colspan="11"><h5>End of the list.</h5></td>
@@ -101,7 +113,6 @@
                 </table>
             </div>
         </div>
-
     </div>
 
 {{!-- Modal for fulfilment --}}

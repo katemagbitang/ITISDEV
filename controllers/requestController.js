@@ -173,7 +173,7 @@ const requestController = {
                 var priority_rating = computePriorityRating(request.maxPrice, request.date_requested, request.isUrgent);
 
                 
-                var request = {
+                var request1 = {
                     request_ID : request.request_ID,
                     requester : request.username,
                     book_title : request.book_title,
@@ -187,22 +187,27 @@ const requestController = {
                     status : request.status,
                     override: request.override
                 }
-                if(request.status != "Cancelled" && request.status != "SoonExpiring" && view == "Individual"){
-                    requests.push(request);
+                if(request.status == "Active" && view == "Individual"){
+                    requests.push(request1);
                 }else if(request.status == "SoonExpiring"  && view == "SoonExpiring"){
-                    requests.push(request);
-                }else if(view == "Collective"){
-                    // enter codes here
+                    
+                    // soon expiring if the request has 3 ignored notifs and is not overridden
+                    if(request.ignored_notif_count >=3 && request.override == false)
+                        requests.push(request1);
+                        
+                }else if(view == "Fulfilled" && request.status == "Fulfilled"){
+                    requests.push(request1);
+                }else if(view == "Cancelled" && request.status == "Cancelled"){
+                    requests.push(request1);
                 }
             })
 
             // console.log(requests);
         
-            if(view == "Collective"){
-                res.render("adminRequestsListCollective",{
-                    
+            if(view == "Fulfilled"){
+                res.render("adminRequestsListFulfilled",{
+                    requestList: requests
                 });
-    
             }else if (view == "Individual"){
                 res.render("adminRequestsListIndividual",{
                     requestList: requests
@@ -210,6 +215,10 @@ const requestController = {
                 
             }else if(view == "SoonExpiring"){
                 res.render("adminRequestsListSTBC",{
+                    requestList: requests
+                });
+            }else if(view == "Cancelled"){
+                res.render("adminRequestsListCancelled",{
                     requestList: requests
                 });
             }
