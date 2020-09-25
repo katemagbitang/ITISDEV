@@ -428,7 +428,7 @@ var requests = [
         isUrgent: "Yes",
         maxPrice: 1000.00,
         description: "Hard Cover version",
-        date_requested: new Date("2020-09-10T10:13:19.873+00:00"),
+        date_requested: new Date("2020-09-11T10:13:19.873+00:00"),
         status: "Active",
         priority_rating: 0.034,
         quantity: 1,

@@ -303,16 +303,17 @@ const notificationController ={
     postResponseYes: function(req,res){
         var notif_ID = req.body.notif_ID;
 
-        res.send(notif_ID)
+        
         notifModel.findOneAndUpdate({notif_ID: notif_ID}, {$set: {response: "Yes"}},function(notifErr, notifData){
-            // console.log("notifData: " + notifData);
-            // console.log("notifErr: " + notifErr)
+            console.log("notifData: " + notifData);
+            console.log("notifErr: " + notifErr)
 
             var request_ID = notifData.request_ID;
             //sets the ignored_notif_count back to zero ((used in auto cancellation of request ))
             requestModel.findOneAndUpdate({request_ID: request_ID}, {$set: {ignored_notif_count: 0}},function(requestErr, requestData){
-                // console.log("requestData: " + requestData);
-                // console.log("requestErr: " + requestErr)
+                console.log("requestData: " + requestData);
+                console.log("requestErr: " + requestErr)
+                res.send(notif_ID)
     
             })
         })
