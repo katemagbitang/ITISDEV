@@ -66,6 +66,8 @@ $(document).ready(function () {
     //changes input and button UI
     $('#username').keyup(function () {
         fieldsValidate();
+
+
     });
     $('#password').keyup(function () {
         fieldsValidate();

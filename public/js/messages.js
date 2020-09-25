@@ -84,6 +84,23 @@ $(document).ready(function (req, res) {
     })
 
     $("#composeNewMessageRecipient").keyup(function(){
+
+        var username = $('#composeNewMessageRecipient').val();
+        console.log(username);
+
+        $.get('/getusername', {username: username}, function(data){
+            console.log("DATE: " + data.username);
+            if(data.username == undefined){
+                $("#newMessageSubmit").prop("disabled", true);
+                $("#recipientError").html("User does not exist!");
+                $("#composeNewMessageRecipient").css({'border': "4px solid #DB4E35 ","border-radius":"4px"});
+            }else{
+                $("#recipientError").html("");
+
+            }
+        })
+
+
         if($("#composeNewMessageText").val() == ""){
             $("#composeNewMessageText").css({'border': "4px solid #DB4E35 ","border-radius":"4px"});
         }else{
@@ -96,6 +113,9 @@ $(document).ready(function (req, res) {
             $("#composeNewMessageRecipient").css({'border': "4px solid transparent "});
 
         }
+
+        
+
         
         // for the button
        if( $("#composeNewMessageText").val() != "" && $("#composeNewMessageRecipient").val() != ""){
@@ -110,53 +130,6 @@ $(document).ready(function (req, res) {
     
 
 
-
-    // $("#newMessageSubmit").on('click', function(event){
-    //     var receiver =  $("#composeNewMessageRecipient").val();
-    //     var messageText = $("#composeNewMessageRecipientText").val();
-
-    //     alert(receiver + messageText);
-
-    // })
-
-
-//     $(".msg_send_btn").on('click', function(event){
-       
-
-//         var receiver= $(".receiver").val();
-// // ;
-// //         var message = {
-// //          messagesHistory_id :  $(".messagesHistory_id").val() ,
-// //          receiver: $(".receiverUsername").val() ,
-// //          messageText : $(".write_msg").val() ,
-// //          date : Date.now()
-// //         };
-
-//         // console.log(message);
-//         $.post("/messages/"+receiver, {
-//             messagesHistory_id :  $(".messagesHistory_id").val() ,
-//             receiver: receiver ,
-//             messageText : $(".write_msg").val() ,
-//             date : Date.now()
-        
-//         }, function(data, status){
-//             if(status == "success"){
-//                 alert("SUCC");
-//                 $(".messageRightName").appendChild("ASDGASFg");
-
-
-//             }else{
-//                 alert("FAIL");
-
-//             }
-//         })
-
-
-
-
-
-
-//     })
 
 
        

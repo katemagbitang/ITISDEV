@@ -94,7 +94,7 @@
 
        <div class="type_msg">
           <div class="input_msg_write">
-            <form id="sendMessageForm" class="sendMessageForm"  method="post">
+            <form id="sendMessageForm" class="sendMessageForm"  method="post" autocomplete="off" >
               <input type="hidden" class="messagesHistory_id" name="messagesHistory_id" value="{{messagesHistory_id}}">
               <input type="hidden" class="receiver" name="receiver" value="{{activeMessageUsername}}">
               <input type="text" class="write_msg message" name = "message" placeholder="Type a message" />
@@ -121,12 +121,13 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name = "composeNewMessageForm" id ="composeNewMessageForm" method = "post" action= "/composenewmessage">
+            <form name = "composeNewMessageForm" id ="composeNewMessageForm" method = "post" action= "/composenewmessage" autocomplete="off" >
               <div class="modal-body">
                   <div class="form-group row">
                       <label for="Receiver" class="col-sm-5 col-form-label">Recipient</label>
                       <div class="col-sm-7">
                       <input type="text"  class="form-control-plaintext" id="composeNewMessageRecipient" name="composeNewMessageRecipient"placeholder = "Username">
+                      <p id ="recipientError"></p>
                       </div>
                   </div>
                   <div class="form-group row">

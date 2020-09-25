@@ -114,7 +114,7 @@ const userController = {
                 res.send(result);
                 console.log("not null: "+result);
             }else
-                res.send(" null: "+result);
+                res.send(result);
 
         });
     },
