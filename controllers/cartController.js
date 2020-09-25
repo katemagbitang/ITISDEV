@@ -206,11 +206,14 @@ const cartController = {
     postAddToCart: function(req, res){
         var username = req.session.username;
         var bookVersion_ID = req.params.bookVersion_ID;
-        var quantity = req.body.quantity ;
+        var quantity = req.body.quantity;
 
-        //console.log("bookVersion_ID: " + bookVersion_ID);
-        //console.log("quantity: " + quantity);
-
+        if(quantity == null) {
+            quantity = 1; //default quantity is 1, for the add to cart from browse and search results
+        }
+        console.log("Book to be Added: " + bookVersion_ID);
+        console.log("Quantity: " + quantity);
+        
         cartItemsModel.findOne({username: username, isActive: true}, function(err, cartResult){
             // console.log("\n\ncartResult: " + cartResult);
             //If there is an existing Active cart si username
