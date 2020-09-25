@@ -3,6 +3,10 @@
 <head>
     {{>head}}
     <link rel="stylesheet" href="../css/messagesStyle.css">
+
+    
+
+    
     <title>My Transactions</title>
 </head>
 <body>
@@ -43,19 +47,19 @@
                 
 
             <div class="card-body-orders  overflow-auto vh72"  >
-                <table class=" table table-bordered table-hover ">
+                <table class=" table table-bordered table-hover " id = "requestsTable">
                     <thead class="thead-light">
                         <tr>
                             <th >Request Number</th>
-                            <th >Requester</th>
+                            <th id="RequesterTH">Requester <br> <img src='../img/sortIcon.png' style="width:20px"></th>
                             <th >Requested Book Details</th>
                             <th> Urgent </th>
                             <th> maxPrice </th>
                             <th >Quantity</th>
-                            <th>Date Requested</th> 
+                            <th >Date Requested <br> </th> 
                             <th>Override</th>
                             <th> Status</th>
-                            <th >Priority Rating</th>
+                            <th id="PriorityRatingTH">Priority Rating <br> <img src='../img/sortIcon.png' style="width:20px"></th>
                             <th> Action </th>
                         </tr>
                     </thead>
