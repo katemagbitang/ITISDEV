@@ -149,6 +149,10 @@ const requestController = {
                     requests:requests
                 });
                 
+            }else if(status == "Fulfilled"){
+                res.render("requestlistFulfilled",{
+                    requests:requests
+                });
             }
             
         })
