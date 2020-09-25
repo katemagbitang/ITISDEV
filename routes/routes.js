@@ -114,6 +114,8 @@ app.post('/dummyuploadtos3',  controller.postDummyUploadToS3);
 app.get('/books/:bookVersion_ID',bookController.getOneBook);
 app.post('/books/:bookVersion_ID',cartController.postAddToCart);
 
+app.post('/addToCart/:bookVersion_ID', cartController.postAddToCart);
+
 app.get('/pageslist',function(req,res){
 	res.render("pageslist",{});
 });
