@@ -94,7 +94,8 @@ $(document).ready(function () {
             $.post('/fulfillrequest', {bookVersion_ID: bookVersion_ID, request_ID: request_ID , quantity: quantity, requester: requester}, function(result){
 
                 //CHANGES THE ELEMENTS IN THE ROW 
-                pointer.find('.status').html("Fulfilled");
+                pointer.remove();
+
     
     
             })

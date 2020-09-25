@@ -66,7 +66,6 @@
                             <th>Override</th>
                             <th> Status</th>
                             <th id="PriorityRatingTH">Priority Rating <br> <img src='../img/sortIcon.png' style="width:20px"></th>
-                            <th> Action </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,17 +85,6 @@
                                 <td>{{override}}</td>
                                 <td class = "status">{{status}}</td>
                                 <td>{{priority_rating}}</td>
-                                <td>
-                                    <form method="post" action = "/override/{{request_ID}}">
-                                        <input class="form-control mr-sm-2" type="text" name = "request_ID" value = "{{request_ID}}" hidden>
-                                        {{#ifEquals override false}}
-                                        <button type="submit" class="btn btn-sm btn-danger override-btn" >Override</button>
-                                        {{/ifEquals}}
-                                        {{#ifEquals status "Active"}}
-                                        <button type="button" class="btn btn-sm btn-danger fulfill-btn" data-toggle="modal" data-target="#sendPaymentForm">Fulfill</button>
-                                        {{/ifEquals}}
-                                    </form>
-                                </td>
                             </tr>
                         {{/each}}
 
