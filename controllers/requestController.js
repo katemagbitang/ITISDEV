@@ -120,6 +120,15 @@ const requestController = {
         }
     },
 
+    getRequestForm: function(req,res) {
+        if (req.session.userType != "Admin") {
+            res.render("requestform",{});
+        } else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
+    },
+
     getRequestsForRegular: function(req,res){
         if (req.session.userType == "Admin") {
             var status = req.params.status;
