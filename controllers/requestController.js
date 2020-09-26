@@ -111,51 +111,64 @@ function updatePriorityRating(){
 
 
 const requestController = {
+    getRequest: function(req,res) {
+        if (req.session.userType == "Admin") {
+            res.render("requestlist",{});
+        } else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
+    },
+
     getRequestsForRegular: function(req,res){
+        if (req.session.userType == "Admin") {
+            var status = req.params.status;
+            var requests = [];
 
-        var status = req.params.status;
-        var requests = [];
+            //updates the priority ratings first
+            updatePriorityRating();
 
-        //updates the priority ratings first
-        updatePriorityRating();
+            requestModel.find({status:status, username:req.session.username}, function(err, requestModelResult){
 
-        requestModel.find({status:status, username:req.session.username}, function(err, requestModelResult){
-
-            requestModelResult.forEach(function(request, err){
-                var request = {
-                    request_ID : request.request_ID,
-                    requester : request.username,
-                    book_title : request.book_title,
-                    book_author : request.book_author,
-                    isUrgent : request.isUrgent,
-                    maxPrice : request.maxPrice,
-                    quantity : request.quantity, 
-                    description : request.description,
-                    date_requested : request.date_requested.toDateString(),
-                    priority_rating : request.priority_rating,
-                    status : request.status
-                }
-                requests.push(request);
-                
-            })
-        
-            if(status == "Cancelled"){
-                res.render("requestlistCancelled",{
-                    requests:requests
-                });
-    
-            }else if (status == "Active"){
-                res.render("requestlist",{
-                    requests:requests
-                });
-                
-            }else if(status == "Fulfilled"){
-                res.render("requestlistFulfilled",{
-                    requests:requests
-                });
-            }
+                requestModelResult.forEach(function(request, err){
+                    var request = {
+                        request_ID : request.request_ID,
+                        requester : request.username,
+                        book_title : request.book_title,
+                        book_author : request.book_author,
+                        isUrgent : request.isUrgent,
+                        maxPrice : request.maxPrice,
+                        quantity : request.quantity, 
+                        description : request.description,
+                        date_requested : request.date_requested.toDateString(),
+                        priority_rating : request.priority_rating,
+                        status : request.status
+                    }
+                    requests.push(request);
+                    
+                })
             
-        })
+                if(status == "Cancelled"){
+                    res.render("requestlistCancelled",{
+                        requests:requests
+                    });
+        
+                }else if (status == "Active"){
+                    res.render("requestlist",{
+                        requests:requests
+                    });
+                    
+                }else if(status == "Fulfilled"){
+                    res.render("requestlistFulfilled",{
+                        requests:requests
+                    });
+                }
+                
+            });
+        } else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
     },
 
     getRequestsForAdmin: function (req, res) {
