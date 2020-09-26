@@ -422,7 +422,7 @@ const requestController = {
             cancels all qualified request 
             2 qualifications:
                 1. a user hasnt logged in in 30days.
-                2. 4 notifications has been ignored (we condition it to if 5 ignored_notif_count tho to give time to user to answer the 4th )
+                2. 3 notifications has been ignored (we condition it to if 4 ignored_notif_count tho to give time to user to answer the 4th )
         */
 
         //this is for #1 ! 
@@ -439,7 +439,7 @@ const requestController = {
                 var days = daysDifference(lastLogin, current_date);
                 // console.log("days: " + days);
 
-                if(days >= 30 ){
+                if(days >= 21 ){
                     //cancel all requests made by users who hasnt logged in for 30 days or more EXCEPT OVERRIDEN REQUESTS
                     requestModel.updateMany({username: username, override: false}, {$set: {status: "Cancelled"}}, function(err, updateResult){
 
@@ -453,7 +453,7 @@ const requestController = {
 
         // this is for #2 !
         //cancel all requests with 4 ignored notifs EXCEPT OVERRIDEN REQUESTS
-        requestModel.find({ignored_notif_count: 5, override: false}, function (err, requestsResult){
+        requestModel.find({ignored_notif_count: 4, override: false}, function (err, requestsResult){
             // console.log("requestsResult: " + requestsResult)
 
             requestsResult.forEach(function(request, err){
