@@ -46,20 +46,55 @@ function checkFileType(file , callback){
 
 const adminController = {
     getAddProduct: function(req,res){
-        res.render("addproducts",{});
+        if (req.session.userType == "Admin") {
+            res.render("addproducts",{});
+        }
+        else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
     },
+
     getAdminRequestList: function(req,res){
-        res.render("adminRequestsListCollective",{});
+        if (req.session.userType == "Admin") {
+            res.render("adminRequestsListCollective",{});
+        }
+        else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
     },
+
     getAdminRequestListCollective: function(req,res){
-        res.render("adminRequestsListCollective",{});
+        if (req.session.userType == "Admin") {
+            res.render("adminRequestsListCollective",{});
+        }
+        else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
     },
+
     getAdminRequestListIndividual: function(req,res){
-        res.render("adminRequestsListIndividual",{});
+        if (req.session.userType == "Admin") {
+            res.render("adminRequestsListIndividual",{});
+        }
+        else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
     },
+
     getAdminRequestListSTBC: function(req,res){
-        res.render("adminRequestsListSTBC",{});
+        if (req.session.userType == "Admin") {
+            res.render("adminRequestsListSTBC",{});
+        }
+        else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
     },
+    
     postProduct: function (req,res,next) {
         var book_ID = ObjectId();
         var author_ID = ObjectId();
