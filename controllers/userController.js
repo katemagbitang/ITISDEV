@@ -6,6 +6,11 @@ const userModel = require('../model/userModel.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
 const userController = {
     getSignUp: function(req,res){
         res.render("signup",{});
@@ -142,10 +147,6 @@ const userController = {
                 var email = userResult.email;
                 var password = userResult.password;
 
-                console.log(firstName + " " + lastName);
-                console.log("Email: " + email);
-                console.log("Password: " + password);
-
                 res.render("editprofile", {
                     username: username,
                     firstName: firstName,
@@ -164,7 +165,9 @@ const userController = {
         var password = req.body.password;
         var cpassword = req.body.cpassword;
 
-        //Checks if input fields are empty and gives default input
+        console.log(firstName + " " + lastName);
+
+        //Checks if input fields are empty and gives default input if empty
         userModel.findOne({username: username}, function (err, userResult) {
             if (userResult != null) {
                 var defaultfirst = userResult.firstName;
@@ -182,23 +185,68 @@ const userController = {
                 if (email == "") {
                     email = defaultemail;
                 }
+                }
+            
+            // Check if email input is valid
+            if(validateEmail(email) == false) {
+                res.render("editprofile", {
+                    note: "Invalid email format.",
+                    username: username,
+                    firstName: defaultfirst,
+                    lastName: defaultlast,
+                    email: defaultemail
+                });
             }
-        });
+            
+            // User wants to change the password
+            if (password != "" && cpassword != "") {
+                let hash = bcrypt.hashSync(password, saltRounds);
+                //console.log("Hash: " + hash);
 
-        // User wants to change the password
-        if (password != "" && cpassword != "") {
-            let hash = bcrypt.hashSync(password, saltRounds);
-            console.log("Hash: " + hash);
-
-            if(bcrypt.compareSync(cpassword, hash)) {
-                userModel.findOneAndUpdate({username: username}, {firstName: firstName, lastName: lastName, email: email, password: hash}, null, function (err, docs) { 
+                if(bcrypt.compareSync(cpassword, hash)) {
+                    userModel.findOneAndUpdate({username: username}, {firstName: firstName, lastName: lastName, email: email, password: hash}, null, function (err, docs) { 
+                        if (err){ 
+                            console.log(err);
+                        }
+                        else { //all inputs, correct
+                            console.log("success");
+                            res.render("editprofile", {
+                                note: "Edit is saved successfully!",
+                                username: username,
+                                firstName: firstName,
+                                lastName: lastName,
+                                email: email
+                            });
+                        }
+                    });
+                } else { //Password does not match
+                    res.render("editprofile", {
+                        note: "Password and Confirm Password does not match.",
+                        username: username,
+                        firstName: defaultfirst,
+                        lastName: defaultlast,
+                        email: defaultemail
+                    });
+                }
+            } //Only password or confirm password has an input
+            else if ((password != "" && cpassword == "") || (password == "" && cpassword != "")){
+                res.render("editprofile", {
+                    username: username,
+                    firstName: defaultfirst,
+                    lastName: defaultlast,
+                    email: defaultemail,
+                    note: "Input both password and confirm password to save changes."
+                });
+            } //No input for both password and confirm pasword
+            else {
+                userModel.findOneAndUpdate({username: username}, {firstName: firstName, lastName: lastName, email: email}, null, function (err, docs) { 
                     if (err){ 
                         console.log(err);
                     }
                     else {
                         console.log("success");
                         res.render("editprofile", {
-                            save_success: "Edit is saved successfully!",
+                            note: "Edit is saved successfully!",
                             username: username,
                             firstName: firstName,
                             lastName: lastName,
@@ -206,37 +254,10 @@ const userController = {
                         });
                     }
                 });
-            } else {
-                //Password does not match
-                res.render("editprofile", {pError: "Confirm Password does not match Password."});
             }
-        } //Only password or confirm password has a input
-        else if ((password != "" && cpassword == "") || (password == "" && cpassword != "")){
-            res.render("editprofile", {
-                username: username,
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                passError: "Input both password and confirm password to save changes"
-            });
-        } //No input for both password and confirm pasword
-        else {
-            userModel.findOneAndUpdate({username: username}, {firstName: firstName, lastName: lastName, email: email}, null, function (err, docs) { 
-                if (err){ 
-                    console.log(err);
-                }
-                else {
-                    console.log("success");
-                    res.render("editprofile", {
-                        save_success: "Edit is saved successfully!",
-                        username: username,
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email
-                    });
-                }
-            });
-        }
+        });
+
+        
     }
 }
 
