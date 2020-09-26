@@ -95,9 +95,7 @@ app.get('/requestbook',function(req,res){
 	res.render("requestform",{});
 });
 
-app.get('/requestlist',function(req,res){
-	res.render("requestlist",{});
-});
+app.get('/requestlist', requestController.getRequest);
 app.get('/requestlist/:status', requestController.getRequestsForRegular);
 app.get('/autocancelrequests', requestController.getAutoCancelRequests);
 app.post('/postcancelrequest', requestController.postCancelRequest);
