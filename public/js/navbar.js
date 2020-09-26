@@ -14,6 +14,7 @@ $(document).ready(function (req, res) {
                 $("#navvisit").hide();
                 $("#navuser").show();
                 $("#navadmin").hide();
+
             }else if(data.userType == "Admin"){
                 $("#navvisit").hide();
                 $("#navuser").hide();
@@ -23,6 +24,17 @@ $(document).ready(function (req, res) {
                 $("#navuser").hide();
                 $("#navadmin").hide();
             }
+            
+
+            if(data.userType == "Regular"){
+                $('.addTCBtn').prop('disabled', false);
+
+            }else if(data.userType == "Admin"){
+                $('.addTCBtn').hide();
+            }else if(data.userType == "Visitor"){
+                $('.addTCBtn').prop('disabled', true);
+            }
+            
 
         })
 
@@ -38,6 +50,8 @@ $(document).ready(function (req, res) {
 
 
         })
+
+        
 
 
 

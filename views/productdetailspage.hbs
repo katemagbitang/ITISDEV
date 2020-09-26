@@ -41,12 +41,7 @@
                                 <input type="number" id="quantity" name = "quantity" value="1" min="1" max= "{{quantity}}" style="text-align:center; width: 50px; height:40px; pointer-events: none "  >
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" id="plusBtn" type="button">+</button>
-                                    {{#ifEquals userType "Regular"}}
-                                        <button type = "submit" class="btn btn-danger" style="width: 170px; height:40px;">Add to Cart</button>
-                                    {{/ifEquals}}
-                                    {{#ifEquals userType undefined}} 
-                                        <button type = "submit" class="btn btn-danger" style="width: 170px; height:40px;" disabled>Add to Cart</button>
-                                    {{/ifEquals}}
+                                        <button type = "submit" class="btn btn-danger addTCBtn" style="width: 170px; height:40px;">Add to Cart</button>
                                 </div>
                             </div>
                         </form>

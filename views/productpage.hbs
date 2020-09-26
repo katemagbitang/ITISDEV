@@ -149,12 +149,10 @@
               <p classes="card-text">{{aName}}</p>
               <p classes="card-text">Php {{sellingPrice}}</p>
             </a>
-                {{#ifEquals userType "Regular"}}
-                  <button type="button" id="{{{bookVersion_ID}}}" onclick="addBookToCart(this.id)" class="btn btn-primary">Add to Cart</button>
-                {{/ifEquals}}
-                {{#ifEquals userType undefined}} 
-                    <button type = "submit" class="btn btn-danger" style="width: 170px; height:40px;" disabled>Add to Cart</button>
-                {{/ifEquals}}
+                
+                  <button type="button" id="{{{bookVersion_ID}}}" onclick="addBookToCart(this.id)" class="btn btn-primary addTCBtn" >Add to Cart</button>
+                
+                
             </div>
           </div>
         </div>
