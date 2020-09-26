@@ -79,29 +79,19 @@ const adminController = {
 
         var bookCover = req.file.filename; 
 
+        var authorArr = author.split(','); // splits the string for every ',' into an array
+        var authorIDArr = []; // stores author _ids that will be passed to the bookvers as author
 
-
-
-        console.log("author: " + author);
-
-        var authorArr = author.split(',');
-        var authorIDArr = [];
-
-        console.log("authorArr.length: " + authorArr.length);
-        
         authorArrCount = 0;
         authorArr.forEach(function(a, err){
-
-            console.log("a: " + a.trim());
-            var aName = a.trim();
+            var aName = a.trim(); // makes sure there's no space at the start and end (useful in string comparison)
             authorModel.findOne({aName: aName}, function(err, authorResult){
                 if(authorResult){
-                    console.log("if")
                     // if author already exists in the db, push its _ID
                     authorIDArr.push(authorResult._id);
-                    console.log("authorIDArr: " + authorIDArr)
                 }else{
-                    // author DOES NOT exist in the db, make an author object then push its _ID
+                    // else if author DOES NOT exist in the db, make an author object then push its _ID
+
                     var author = new authorModel({
                         _id : new ObjectId(),
                         aName : aName
@@ -109,7 +99,6 @@ const adminController = {
 
                     author.save();
                     authorIDArr.push(author._id);
-                    console.log("authorIDArr: " + authorIDArr)
                 }
 
                 authorArrCount++;
@@ -118,7 +107,7 @@ const adminController = {
                     var item = {
                         book_ID:  book_ID,
                         title : title,
-                        author :  authorIDArr, // passes the IDs
+                        author :  authorIDArr, // passes the IDs array
                         publisher : publisher,
                         year : year,
                         category : category,
@@ -135,67 +124,17 @@ const adminController = {
                         edition : edition,
                         type : type,
                         quantity : quantity,
-                        bookCover : '../img/'+bookCover
+                        bookCover : '../img/'+bookCover // i added ../img/
                     }
-            
-            
-                    
             
                     db.insertOne(books, item);
                     db.insertOne(BookVersions, item2);
-                    // db.insertOne(Author, author);
-                    
             
                     res.redirect('/browse');
 
-
                 }
-
-
-                
             })
-
-
-            
-
-
-
         })
-        
-        
-
-        // var item = {
-        //     book_ID:  book_ID,
-        //     title : title,
-        //     author :  author_ID, //??
-        //     publisher : publisher,
-        //     year : year,
-        //     category : category,
-        //     bookSynopsis : bookSynopsis
-        // }
-        
-
-        // var item2 = {
-        //     bookVersion_ID : ObjectId(),
-        //     book_ID :book_ID,
-        //     priceBought : priceBought,
-        //     sellingPrice : sellingPrice,
-        //     quality : quality,
-        //     edition : edition,
-        //     type : type,
-        //     quantity : quantity,
-        //     bookCover : '../img/'+bookCover
-        // }
-
-
-        
-
-        // // db.insertOne(books, item);
-        // // db.insertOne(BookVersions, item2);
-        // // db.insertOne(Author, author);
-        
-
-        // // res.redirect('/browse');
     }
 }
 
