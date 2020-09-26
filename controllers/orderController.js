@@ -119,9 +119,9 @@ const orderController = {
                         // console.log("omr.billingAddress_ID: " + omr.billingAddress_ID);
 
                         paymentModel.findOne({order_ID: order_ID}, function(err, paymentResult){
-                            if(paymentResult != null){
-                                paymentdetails = paymentResult;
-                            }
+                            // if(paymentResult != null){
+                            //     var paymentdetails = paymentResult;
+                            // }
                             //gets billing address
                             billingAddressModel.findOne({billingAddress_ID: billingAddress_ID}, function(err, billingAddressResult){
                                 if(billingAddressResult != null){
@@ -190,7 +190,10 @@ const orderController = {
 
                                                                     totalamount = totalamount.toFixed(2);
                                                                     // console.log(totalamount);
-
+                                                                    
+                                                                    if(paymentResult != null){
+                                                                        var paymentdetails = paymentResult;
+                                                                    }
                                                                     orders.push({
                                                                         order_ID: order_ID,
                                                                         items: itemslist,
@@ -200,35 +203,19 @@ const orderController = {
                                                                         paymentdetails: paymentdetails
                                                                     });
 
-                                                                //    console.log("2");
-                                                                //    console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
-                                                                //    itemslist.splice(0,itemslist.length);
+                                                                    ordersmodelcount++;
+                                                                    if(ordersmodelcount == ordersModelResult.length){
+                                                                        
+                                                                            console.log("END");
+                                                                            console.log("orders:" + JSON.stringify(orders, null, ' '))
+                                                                            renderOrder(res, view, orders, req.session.userType);
 
-                                                                    
-                                                                    // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
+
+                                                                    }
 
                                                                 }
                                                                 
-                                                                ordersmodelcount++;
-                                                                // console.log("\n ordersmodelcount: " + ordersmodelcount);
-                                                                // console.log("ordersModelResult.length: " + ordersModelResult.length);
-                                                                console.log("b4 END");
-                                                                console.log("ordersmodelcount: " + ordersmodelcount);
-                                                                console.log("ordersModelResult.length: " + ordersModelResult.length);
-                                                                if(ordersmodelcount == ordersModelResult.length){
-                                                                    // console.log("ORDERS: " + JSON.stringify(orders, null, ' '));
-                                                                    // console.log("ordersmodelcount: " + ordersmodelcount);
-                                                                    // console.log("cartItemsResult.items.length: " + cartItemsResult.items.length);
-                                                                    // res.render("userOrdersToPay",{orders: orders});
-                                                                    
-                                                                        console.log("END");
-                                                                        renderOrder(res, view, orders, req.session.userType);
-                                                                    
-                                                                    
-                                                                    // res.render("userOrdersToPay",{orders: orders});
-
-
-                                                                }
+                                                                
                                                             })
                                                         })
                                                     }

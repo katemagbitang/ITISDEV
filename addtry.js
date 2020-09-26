@@ -777,14 +777,6 @@ var paymentDetails = [
         bank_name: "BDO",
         ref_num: 300000003,
         proof_image: "proof_image_1.jpg"
-    },
-    {
-        payment_ID: ObjectId(),
-        username: "willowsmith",
-        order_ID: Orders[4].order_ID,
-        bank_name: "BPI",
-        ref_num: 40000004,
-        proof_image: "proof_image_1.jpg"
     }
 ]
 
