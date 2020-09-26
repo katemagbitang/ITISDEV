@@ -77,6 +77,7 @@ const bookController = {
         var category = req.params.category;
         var bookList = []; // stores all info for the listing
 
+
         //vars need for rendering: bookCover, title, aName, sellingPrice, 
             //      from versionsresult:  bookCover, sellingPrice, **book_ID
             //      from booksresult: title, author(contains _id of authors)
@@ -84,6 +85,7 @@ const bookController = {
         bookVersionsModel.find({}, function (err, versionsresult) {
 
             if(versionsresult!=null){
+                var versresCount = 0;
                 //the process runs for each versionresult. 
                 versionsresult.forEach(function(v, err){
 
@@ -95,6 +97,9 @@ const bookController = {
                             
                     // find book with the same book_id as the bookversions
                     booksModel.findOne({book_ID: book_ID, category: category}, function (err, booksresult) {
+
+                        console.log("category: " + category);
+                        console.log("booksresult: " + booksresult);
                         if(booksresult != null){ 
                             // stores needed variables from the booksModel
                             var authorsID = booksresult.author;
@@ -118,19 +123,34 @@ const bookController = {
                                 // console.log(booklisting);
                                 //adds each booklisting into the bookList array || the bookList array contains all info needed per listing
                                 bookList.push(booklisting);
+
+                                versresCount++;
+                                if( versresCount == versionsresult.length){
+                                    //renders the page
+                                    res.render("productpage",{
+                                        header: category,
+                                        bookList: bookList,
+                                        userType: req.session.userType
+                                    });
+                                }
                                  
                             });  
+                        }else{
+                            versresCount++;
+                            if( versresCount == versionsresult.length){
+                                //renders the page
+                                res.render("productpage",{
+                                    header: category,
+                                    bookList: bookList,
+                                    userType: req.session.userType
+                                });
+                            }
                         }
                     });
                 });
             }
 
-            //renders the page
-            res.render("productpage",{
-                header: category,
-                bookList: bookList,
-                userType: req.session.userType
-            });
+            
         });
 
     },
