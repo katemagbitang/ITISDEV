@@ -67,7 +67,8 @@ const bookController = {
             //renders the page
             res.render("productpage",{
                 header: 'All Books',
-                bookList: bookList
+                bookList: bookList,
+                userType: req.session.userType
             });
         });
 
@@ -127,7 +128,8 @@ const bookController = {
             //renders the page
             res.render("productpage",{
                 header: category,
-                bookList: bookList
+                bookList: bookList,
+                userType: req.session.userType
             });
         });
 
@@ -179,7 +181,8 @@ const bookController = {
                                 type: type,
                                 year: year,
                                 publisher: publisher,
-                                category: category
+                                category: category,
+                                userType: req.session.userType
                             });
                         });
                     }
@@ -236,7 +239,8 @@ const bookController = {
                                 type: type,
                                 year: year,
                                 publisher: publisher,
-                                category: category
+                                category: category,
+                                userType: req.session.userType
                             });
                         });
                     }
