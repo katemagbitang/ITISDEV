@@ -21,7 +21,7 @@
 
     <div class="col-10  card card-body" style="margin: 0 auto">
         <table class="table table-hover">
-            <tr>
+            <tr class = "bg-light">
                 <th>Date</th>
                 <th>Customer</th>
                 <th>Product</th>
@@ -29,17 +29,24 @@
                 <th>Total Amount</th>
             </tr>
 
-            {{#each salesList}}
-                <tr>
-                    <td>{{confirm_date}}</td>
-                    <td>{{customer}}</td>
-                    {{!-- {{#each itemlist}}   --}}
-                        <td> {{#each itemlist}} {{title}} <br>{{/each}}</td>
-                        <td>{{#each itemlist}} {{quantity}}<br>{{/each}}</td>
-                        <td style="text-align: right;">{{#each itemlist}} ₱ {{subtotal}}<br>{{/each}}</td>
-                    {{!-- {{/each}} --}}
+            {{#if salesList}}
+                {{#each salesList}}
+                    <tr>
+                        <td>{{confirm_date}}</td>
+                        <td>{{customer}}</td>
+                        {{!-- {{#each itemlist}}   --}}
+                            <td> {{#each itemlist}} {{title}} <br>{{/each}}</td>
+                            <td>{{#each itemlist}} {{quantity}}<br>{{/each}}</td>
+                            <td style="text-align: right;">{{#each itemlist}} ₱ {{subtotal}}<br>{{/each}}</td>
+                        {{!-- {{/each}} --}}
+                    </tr>
+                {{/each}}
+            {{else}}
+                <tr >
+                    <td colspan="5" style = "text-align: center;"> No sales to show.</td>
                 </tr>
-            {{/each}}
+            {{/if}}
+
         </table>
     </div>
 </body>

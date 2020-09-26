@@ -485,6 +485,7 @@ const orderController = {
             
             
             ordersModel.find({status: status}, function(err, ordersResult) {
+                console.log("ordersResult: " + ordersResult)
                 if (ordersResult != null) {
 
                     
@@ -499,6 +500,8 @@ const orderController = {
                             // console.log("Confirm Date: " + confirm_date + " is included.");
 
                             orderItemsModel.findOne({order_ID: order_ID}, function(err, itemsResult) {
+
+                                
                                 if (itemsResult != null) {
                                     var CartItems_ID = itemsResult.CartItems_ID;
                                     // console.log("Cart Items ID: " + CartItems_ID);
@@ -556,24 +559,27 @@ const orderController = {
                                                 }
                                             });
                                         });
-
-                                        
-                                        
                                     });
                                 }
                             });
+                        }else{
+                            ordersResultCount++; //
+                            if(ordersResultCount == ordersResult.length){
+
+                                console.log("salesList: " + JSON.stringify(salesList, null, ' '))
+                                res.render("salesreport",{
+                                    startingdate: startingdate,
+                                    endingdate: endingdate,
+                                    salesList: salesList
+                                });
+                            }
+
+
                         }
                     });
-
-                    // console.log("salesList!!!!!!!!!: " + JSON.stringify(salesList, null, ' '));
-
-                    // res.render("salesreport",{
-                    //     startingdate: startingdate,
-                    //     endingdate: endingdate,
-                    //     salesList: salesList
-                    // });
     
                 }
+
             });
         }
         else {
