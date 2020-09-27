@@ -295,7 +295,7 @@ const requestController = {
         
 
         // console.log(" New request: "+ JSON.stringify(request, null, ' '));
-        res.redirect('back');
+        res.redirect('/requestlist/Active');
     },
 
     postFulfillRequest: function(req, res){
