@@ -181,70 +181,75 @@ const requestController = {
     },
 
     getRequestsForAdmin: function (req, res) {
-        var view = req.params.view;
-        var requests = [];
-        // var status = "null";
+        if (req.session.userType != "Regular") {
+            var view = req.params.view;
+            var requests = [];
+            // var status = "null";
 
-        //updates the priority ratings first
-        updatePriorityRating();
+            //updates the priority ratings first
+            updatePriorityRating();
 
-        requestModel.find({}, function(err, requestModelResult){
+            requestModel.find({}, function(err, requestModelResult){
 
-            requestModelResult.forEach(function(request, err){
+                requestModelResult.forEach(function(request, err){
 
-                var priority_rating = computePriorityRating(request.maxPrice, request.date_requested, request.isUrgent);
+                    var priority_rating = computePriorityRating(request.maxPrice, request.date_requested, request.isUrgent);
 
-                
-                var request1 = {
-                    request_ID : request.request_ID,
-                    requester : request.username,
-                    book_title : request.book_title,
-                    book_author : request.book_author,
-                    isUrgent : request.isUrgent,
-                    maxPrice : request.maxPrice,
-                    quantity : request.quantity, 
-                    description : request.description,
-                    date_requested : request.date_requested.toDateString(),
-                    priority_rating : priority_rating,
-                    status : request.status,
-                    override: request.override
-                }
-                if(request.status == "Active" && view == "Individual"){
-                    requests.push(request1);
-                }else if(request.status == "SoonExpiring"  && view == "SoonExpiring"){
                     
-                    // soon expiring if the request has 3 ignored notifs and is not overridden
-                    if(request.ignored_notif_count >=3 && request.override == false)
+                    var request1 = {
+                        request_ID : request.request_ID,
+                        requester : request.username,
+                        book_title : request.book_title,
+                        book_author : request.book_author,
+                        isUrgent : request.isUrgent,
+                        maxPrice : request.maxPrice,
+                        quantity : request.quantity, 
+                        description : request.description,
+                        date_requested : request.date_requested.toDateString(),
+                        priority_rating : priority_rating,
+                        status : request.status,
+                        override: request.override
+                    }
+                    if(request.status == "Active" && view == "Individual"){
                         requests.push(request1);
+                    }else if(request.status == "SoonExpiring"  && view == "SoonExpiring"){
                         
-                }else if(view == "Fulfilled" && request.status == "Fulfilled"){
-                    requests.push(request1);
-                }else if(view == "Cancelled" && request.status == "Cancelled"){
-                    requests.push(request1);
+                        // soon expiring if the request has 3 ignored notifs and is not overridden
+                        if(request.ignored_notif_count >=3 && request.override == false)
+                            requests.push(request1);
+                            
+                    }else if(view == "Fulfilled" && request.status == "Fulfilled"){
+                        requests.push(request1);
+                    }else if(view == "Cancelled" && request.status == "Cancelled"){
+                        requests.push(request1);
+                    }
+                })
+
+                // console.log(requests);
+            
+                if(view == "Fulfilled"){
+                    res.render("adminRequestsListFulfilled",{
+                        requestList: requests
+                    });
+                }else if (view == "Individual"){
+                    res.render("adminRequestsListIndividual",{
+                        requestList: requests
+                    });
+                    
+                }else if(view == "SoonExpiring"){
+                    res.render("adminRequestsListSTBC",{
+                        requestList: requests
+                    });
+                }else if(view == "Cancelled"){
+                    res.render("adminRequestsListCancelled",{
+                        requestList: requests
+                    });
                 }
             })
-
-            // console.log(requests);
-        
-            if(view == "Fulfilled"){
-                res.render("adminRequestsListFulfilled",{
-                    requestList: requests
-                });
-            }else if (view == "Individual"){
-                res.render("adminRequestsListIndividual",{
-                    requestList: requests
-                });
-                
-            }else if(view == "SoonExpiring"){
-                res.render("adminRequestsListSTBC",{
-                    requestList: requests
-                });
-            }else if(view == "Cancelled"){
-                res.render("adminRequestsListCancelled",{
-                    requestList: requests
-                });
-            }
-        })
+        } else {
+            console.log("unauthorized");
+            res.render("errorpage", {});
+        }
     },
 
     postOverrideRequest: function(req, res){
