@@ -112,7 +112,7 @@ function updatePriorityRating(){
 
 const requestController = {
     getRequest: function(req,res) {
-        if (req.session.userType == "Admin") {
+        if (req.session.userType != "Admin") {
             res.render("requestlist",{});
         } else {
             console.log("unauthorized");
@@ -130,7 +130,7 @@ const requestController = {
     },
 
     getRequestsForRegular: function(req,res){
-        if (req.session.userType == "Admin") {
+        if (req.session.userType != "Admin") {
             var status = req.params.status;
             var requests = [];
 
