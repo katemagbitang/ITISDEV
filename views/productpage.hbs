@@ -29,9 +29,9 @@
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div>
                 <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Art">Art</a><br>
-                <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Beauty and Fashion">Beauty and Fashion</a><br>
+                <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Beauty And Fashion">Beauty And Fashion</a><br>
                 <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Architecture">Architecture</a><br>
-                <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Film and Media">Film and Media</a><br>
+                <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Film And Media">Film And Media</a><br>
                 <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Photography">Photography</a><br>
                 <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Graphic Design">Graphic Design</a><br>
               </div>
@@ -101,7 +101,7 @@
             <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
               <div>
                 <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Cooking">Cooking</a><br>
-                <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Family and Relationships">Family and Relationships</a><br>
+                <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Family And Relationships">Family And Relationships</a><br>
                 <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Health">Health</a><br>
                 <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Travel">Travel</a><br>
                 <a style="margin: 5px" class="btn btn-outline-secondary" href="../browse/Sports">Sports</a><br>
@@ -131,35 +131,37 @@
       </center>
     </div>
 
-
     <div class="container" style="width: 85%">
       <br>
       <div class="row" style="padding: 0% 3%">
         <h3>{{header}}</h3>
       </div>
       <br>
+
       <div class="row">
-        {{#each bookList}}
-        <div class="col-3">
-          <div class="card text-center">
-            <a href="/books/{{{bookVersion_ID}}}"style = " color: black">
-            <img class="card-img-top" src="{{{bookCover}}}" height="200px" width="180px" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text"><b>{{title}}</b></p>
-              <p classes="card-text">{{aName}}</p>
-              <p classes="card-text">Php {{sellingPrice}}</p>
-            </a>
+          {{#each bookList}}
+          <div class="col-3">
+            <div class="card text-center">
+                <a href="../books/{{{bookVersion_ID}}}"style = " color: black">
+                <img class="card-img-top" src="{{{bookCover}}}" height="200px" width="180px" alt="Card image cap">
+                </a>
+                <div class="card-body">
+                  <a href="../books/{{{bookVersion_ID}}}"style = " color: black">
+                    <p class="card-text"><b>{{title}}</b></p>
+                    <p classes="card-text">{{aName}}</p>
+                    <p classes="card-text">Php {{sellingPrice}}</p>
+                  </a>
                 
-                  <button type="button" id="{{{bookVersion_ID}}}" onclick="addBookToCart(this.id)" class="btn btn-primary addTCBtn" >Add to Cart</button>
+                <button type="button" id="{{{bookVersion_ID}}}" onclick="addBookToCart(this.id)" class="btn btn-primary">Add to Cart</button>
                 
-                
+                </div>
             </div>
           </div>
-        </div>
-        {{/each}}
-        
+          {{/each}}
+          
       </div>
     </div>
+
 
     <script>
       function addBookToCart(clicked) {
