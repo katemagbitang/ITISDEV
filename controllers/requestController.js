@@ -426,7 +426,7 @@ const requestController = {
         /*
             cancels all qualified request 
             2 qualifications:
-                1. a user hasnt logged in in 30days.
+                1. a user hasnt logged in in 21days.
                 2. 3 notifications has been ignored (we condition it to if 4 ignored_notif_count tho to give time to user to answer the 4th )
         */
 
