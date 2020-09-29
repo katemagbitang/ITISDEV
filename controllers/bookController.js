@@ -37,36 +37,35 @@ const bookController = {
                             // stores needed variables from the booksModel
                             var authorsID = booksresult.author;
                             var title = booksresult.title;
+                            var aName = []; //because there can be multiple authors
 
-                            authorModel.find({_id: authorsID},  function (err, authorsresult) {
+                            authorsID.forEach(function(a, err) {
+                                authorModel.findOne({_id: authorsID},  function (err, authorsresult) {
+                                    var name = authorsresult.aName;
+                                    aName.push(name);
+                                });
+                            });
 
-                                var aName = []; //because there can be multiple authors
-                                authorsresult.forEach(function(authors, err){
-                                    aName.push(authors.aName);
-                                })
-
-                                //encapsulates all needed variables into 1 object called booklisting
-                                var booklisting = {
-                                    title: title,
-                                    sellingPrice: sellingPrice,
-                                    aName:aName,
-                                    bookCover: bookCover,
-                                    bookVersion_ID: bookVersion_ID
-                                }
-                                // console.log(booklisting);
-                                //adds each booklisting into the bookList array || the bookList array contains all info needed per listing
-                                bookList.push(booklisting);
-                                // console.log(bookList);
-                            })  
+                            //encapsulates all needed variables into 1 object called booklisting
+                            var booklisting = {
+                                title: title,
+                                sellingPrice: sellingPrice,
+                                aName: aName,
+                                bookCover: bookCover,
+                                bookVersion_ID: bookVersion_ID
+                            }
+                            // console.log(booklisting);
+                            //adds each booklisting into the bookList array || the bookList array contains all info needed per listing
+                            bookList.push(booklisting);
+                            //console.log(bookList);
                         }
                     });
-                })
+                });
             }
-            
 
             //renders the page
             res.render("productpage",{
-                header: 'All Books',
+                header: "All Books",
                 bookList: bookList,
                 userType: req.session.userType
             });
@@ -98,8 +97,8 @@ const bookController = {
                     // find book with the same book_id as the bookversions
                     booksModel.findOne({book_ID: book_ID, category: category}, function (err, booksresult) {
 
-                        console.log("category: " + category);
-                        console.log("booksresult: " + booksresult);
+                        //console.log("category: " + category);
+                        //console.log("booksresult: " + booksresult);
                         if(booksresult != null){ 
                             // stores needed variables from the booksModel
                             var authorsID = booksresult.author;
