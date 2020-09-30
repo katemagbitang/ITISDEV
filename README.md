@@ -22,9 +22,8 @@ Connected to Database: mongodb://localhost:27017/chapterone
 ## Running the tests
 
 ### User Features
-These features are located at the top-right of the home page, which can be accessed through the navigation bar by clicking **Sign Up** (not logged in) or **Profile**.
 #### Create User Account
-Click on **SIGN UP** and fill in the necessary information. All new users will be given a **Regular** user type.
+Click on **Sign Up** and fill in the necessary information. All new users will be given a **Regular** user type.
 #### Login Account
 Login using the username and password you used to register, or choose one of the following to log in:
 | Username | Password | Type |
@@ -33,22 +32,43 @@ Login using the username and password you used to register, or choose one of the
 | katemagbitang | secret | Admin |
 | willowsmith | secret | Regular |
 #### Edit Profile
-Click **EDIT PROFILE** and fill in the necessary information that you would want to change.
-> This feature edits only the **first** and **last name**, as well as the **password**. To the information that you want to maintain, please input your original information or go back to the Home page.
+Click **Edit Profile** and fill in the necessary information that you would want to change. Note that you are not allowed to change your username.
 #### Logout
-Click **LOGOUT** located at **Profile**.
+Click **Logout** located at **Profile**.
 
 ### Admin User Features
 These features are only applicable to the Admin users.
-#### Add Product
-Click **Add Product** located on the navigation bar. Fill Up the necessary information about the new book to be added to the store. 
+#### Add Products
+Click **Add Products** located on the navigation bar. Fill Up the necessary information about the new book to be added to the store. Once done, click **Add Product** to add the item.
+#### Confirm Payment
+Click **Orders** located on the navigation bar. On the **Payment Processing** tab, you will see all the orders that have a proof of payment for confirmation. Select either **Confirm** or **Reject** depending on the validity of the payment made. 
+#### Generate Sales Report
+Click **Sales** located on the navigation bar. Input the start and end dates where you want to see the list of confirmed orders made during the range given. Once done, click **Submit**.
+#### Generate Requested Books
+If the book is unavailable in the system, the admin must perform **Add Products** first before fulfilling the requested books. Click **Book Requests** and click on the **Fulfill** button to fulfill the requested books. To fulfill the requested books, on the right, you should find the exact title of the book requested. If the specific book pops up, copy the **bookVersion_ID** and paste it on the left, where you have to place the ID of the book. Once done, click **Send**.
+#### Override Automatic Cancellation of Request
+Click **Book Requests** and click on the **Override** button to override the automatic cancellation of the requested books.
 
 ### Store Features 
-All the products are located at **Browse Books**. Featured books can also be seen at the homepage.
 #### Add to Cart
-There are three (3) ways to add to cart:
+Regular users can add tp cart in three (3) ways:
 1. From **Browse Books**, choose a book and press **Add to Cart**. This will add one copy of the book to your cart.
 2. From **Browse Books**, click on a specific book. You will be directed to the specific book's page. You may adjust the quantity of copies you want to buy from here. Click **Add to Cart** to add the book/s to your cart.
+3. From the **Home page**, click on a specific book. You will be directed to the specific book's page. You may adjust the quantity of copies you want to buy from here. Click **Add to Cart** to add the book/s to your cart.
+#### Remove Item from Cart
+From **Cart**, click the **Remove** button to remove the item from the cart. 
+#### Checkout Cart
+From **Cart**, on the right side, fill up the form for your name, contact number, and billing address. Once this is done, and after reading about the payment details, click **Checkout/Pay**.
+#### Send Payment Details
+Click on **My Orders** located at the navigation bar. On the **To Pay** tab, click **Send Payment**. Select the bank, input the reference/official receipt number, and attach a picture of the receipt. Click **Send** once done.
+#### Send Private Message
+Click **Messages** on the navigation bar. If it is your first time to message an admin, click on the :memo: icon, and place any admin username as a recipient. Afterwards, input your message below. Click **Send** once done. If you had a history of messaging one of the admins already, click on your conversation on the left to view the whole conversation. You may now input your message at the bottom and click the **Send (paper airplane)** button.
+#### Request a Book
+On the navigation bar, click **Book Requests** and select **Request a Book**. Input the necessary details, tick the **Urgent** checkbox if necessary, and click **Submit** once done.
+
+### System Feature
+#### Notify to Update Interest on Required Book
+The user will be notified every two weeks, if they are still interested in the requested book. This will be seen in **Notifications** on the navigation bar.
 
 ## Dependencies
 - Assert
@@ -74,6 +94,3 @@ There are three (3) ways to add to cart:
 - Sean Nieva
 - Gabriel Olan
 - Shimei Zhang
-
-## Acknowledgements
-1. Stack Overflow community, as always, for being there in times of need.
