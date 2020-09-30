@@ -2,6 +2,7 @@
 Chapter One is a fictional bookstore located at Leon Guinto. This web application aims to support the selling and the marketing of the bookstore as they struggle to operate during this pandemic.
 ## How to run the web application
 ### Option 1: Deployed Link
+https://chapterone-itisdevs19.herokuapp.com/home
 ### Option 2: Running locally
 #### Follow the steps below to set-up :
 1. Clone the repository either by downloading the contents of the repository [here](https://github.com/katemagbitang/ITISDEV), or using the command below (Note: git should be installed in your system for this to work).
@@ -44,7 +45,7 @@ Click **Add Products** located on the navigation bar. Fill Up the necessary info
 Click **Orders** located on the navigation bar. On the **Payment Processing** tab, you will see all the orders that have a proof of payment for confirmation. Select either **Confirm** or **Reject** depending on the validity of the payment made. 
 #### Generate Sales Report
 Click **Sales** located on the navigation bar. Input the start and end dates where you want to see the list of confirmed orders made during the range given. Once done, click **Submit**.
-#### Generate Requested Books
+#### Fulfill Request
 If the book is unavailable in the system, the admin must perform **Add Products** first before fulfilling the requested books. Click **Book Requests** and click on the **Fulfill** button to fulfill the requested books. To fulfill the requested books, on the right, you should find the exact title of the book requested. If the specific book pops up, copy the **bookVersion_ID** and paste it on the left, where you have to place the ID of the book. Once done, click **Send**.
 #### Override Automatic Cancellation of Request
 Click **Book Requests** and click on the **Override** button to override the automatic cancellation of the requested books.
