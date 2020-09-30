@@ -191,6 +191,7 @@ const requestController = {
 
             requestModel.find({}, function(err, requestModelResult){
 
+                var requestCount = 0;
                 requestModelResult.forEach(function(request, err){
 
                     var priority_rating = computePriorityRating(request.maxPrice, request.date_requested, request.isUrgent);
@@ -211,40 +212,56 @@ const requestController = {
                         override: request.override
                     }
                     if(request.status == "Active" && view == "Individual"){
+                        requestCount++;
                         requests.push(request1);
-                    }else if(request.status == "SoonExpiring"  && view == "SoonExpiring"){
-                        
-                        // soon expiring if the request has 3 ignored notifs and is not overridden
-                        if(request.ignored_notif_count >=3 && request.override == false)
+                    }else if(request.status == "Active"  && view == "SoonExpiring"){
+                        requestCount++;
+                        // soon expiring if the request has 2 ignored notifs and is not overridden
+                        // we set it to 3 tho bc give time 
+                        if(request.ignored_notif_count == 3 && request.override == false){
                             requests.push(request1);
+                        }
                             
                     }else if(view == "Fulfilled" && request.status == "Fulfilled"){
+                        requestCount++;
                         requests.push(request1);
                     }else if(view == "Cancelled" && request.status == "Cancelled"){
+                        requestCount++;
                         requests.push(request1);
+                    }else{
+                        requestCount++;
                     }
+
+                    if(requestCount == requestModelResult.length){
+
+                        if(view == "Fulfilled"){
+                            res.render("adminRequestsListFulfilled",{
+                                requestList: requests
+                            });
+                        }else if (view == "Individual"){
+                            res.render("adminRequestsListIndividual",{
+                                requestList: requests
+                            });
+                            
+                        }else if(view == "SoonExpiring"){
+                            res.render("adminRequestsListSTBC",{
+                                requestList: requests
+                            });
+                        }else if(view == "Cancelled"){
+                            res.render("adminRequestsListCancelled",{
+                                requestList: requests
+                            });
+                        }
+
+
+                    }
+
+
+
                 })
 
-                // console.log(requests);
             
-                if(view == "Fulfilled"){
-                    res.render("adminRequestsListFulfilled",{
-                        requestList: requests
-                    });
-                }else if (view == "Individual"){
-                    res.render("adminRequestsListIndividual",{
-                        requestList: requests
-                    });
-                    
-                }else if(view == "SoonExpiring"){
-                    res.render("adminRequestsListSTBC",{
-                        requestList: requests
-                    });
-                }else if(view == "Cancelled"){
-                    res.render("adminRequestsListCancelled",{
-                        requestList: requests
-                    });
-                }
+                
             })
         } else {
             console.log("unauthorized");

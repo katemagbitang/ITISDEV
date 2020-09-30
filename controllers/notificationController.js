@@ -113,7 +113,8 @@ const notificationController ={
     getSendNotification: function(req,res){
 
         //computes for the difference in days between the date_requested and current_date
-        const current_date = new Date();
+        const current_date =  new Date();
+        console.log("current_date: " + current_date);
         const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
         
 
@@ -135,8 +136,7 @@ const notificationController ={
                 var isEligible = days%14;
 
                 // console.log("\n\nActiveRequest: " + ActiveRequest);
-                // console.log("days: " + days);
-                // console.log("isEligible: " + isEligible);
+                
 
 
 
@@ -144,6 +144,7 @@ const notificationController ={
                 if(isEligible == 0 && days!= 0){
                     //finds all Update Notifications for that
 
+                    // console.log("\nrequest_ID: " + request_ID);
                     // console.log("days: " + days);
                     // console.log("isEligible: " + isEligible);
 
@@ -151,68 +152,105 @@ const notificationController ={
                     notifModel.find({request_ID: request_ID, type: "Update"}, function(err, notifsResult){
 
                         // console.log("notifsResult.length: "+ notifsResult.length);
+                        // console.log("notifsResult: "+ notifsResult);
 
                         //if may laman na notifs
                         if(notifsResult.length != 0){
 
                             // console.log("may update na")
                             notifsResultCount = 0;
+                            var meronna = false;
                             notifsResult.forEach(function(n, err){
+                                console.log(n)
+
+                                var notifDate =  n.date;
                                 // if meron nang notif made on current_date
                                 if( Math.round(Math.abs((n.date - current_date) / oneDay )) == 0 ){
                                     //do nothing //end na
 
-
-                                    // console.log("pasok    if( Math.round(Math.abs((n.date - current_date) / oneDay )) == 0 ")
-
                                     // console.log("notifsResult: "+ notifsResult);
+                                    meronna = true;
 
                                     notifsResultCount++;
                                     // if all 'update' notifs are checked na for that request
-                                    if(notifsResultCount == notifsResult.length){
+                                    // if(notifsResultCount == notifsResult.length){
 
-                                        ActiveRequestsCount++;
-                                        //if all active requests are checked na
-                                        if(ActiveRequestsCount == ActiveRequests.length){
-                                            //end
-                                            res.send("ok na from may notif na on that day");
-                                        }
+                                    //     ActiveRequestsCount++;
+                                    //     //if all active requests are checked na
+                                    //     if(ActiveRequestsCount == ActiveRequests.length){
+                                    //         //end
+                                    //         res.send("ok na from may notif na on that day");
+                                    //     }
 
-                                    }
+                                    // }
 
                                 }
                                 // else, wala pang notif for that day(current day)
                                 else{
 
                                     console.log("else part magccreate ng notiof dapat")
+                                    console.log( Math.round(Math.abs((n.date - current_date) / oneDay )) )
                                     //make notif
+                                    console.log(n.date);
+                                    console.log(" n.date " +n.date);
+                                    console.log( current_date);
+                                    console.log("current_date : " +  current_date);
 
-                                    ignored_notif_count++; //plus 1 everytime na may notif na gagawin
-                                    requestModel.updateOne({request_ID: request_ID}, {$Set: {ignored_notif_count: ignored_notif_count}}, function(){
-                                        var notification = new notifModel({
-                                            notif_ID: ObjectId(),
-                                            type : "Update",
-                                            username: username,
-                                            request_ID: request_ID,
-                                            date: new Date()
-                                        })
-                                        notification.save();
+                                    notifsResultCount++;
 
-                                        notifsResultCount++;
-                                        // if all 'update' notifs are checked na for that request
-                                        if(notifsResultCount == notifsResult.length){
-
-                                            ActiveRequestsCount++;
-                                            //if all active requests are checked na
-                                            if(ActiveRequestsCount == ActiveRequests.length){
-                                                //end
-                                                res.send("ok na from may notif na but no notifs pa on that day");
-                                            }
-
-                                        }
-                                    })
+                                    
+                                            
 
                                 }
+
+
+                                if(notifsResultCount == notifsResult.length && meronna == false){
+                                    requestModel.findOne({request_ID: request_ID}, function(err, requestResult){
+
+                                        ignored_notif_count++; //plus 1 everytime na may notif na gagawin.
+                                        console.log("ignored_notif_count: " +ignored_notif_count);
+
+                                        requestModel.updateOne({request_ID: request_ID}, {$set: {ignored_notif_count: requestResult.ignored_notif_count+1}}, function(){
+
+                                            var notification = new notifModel({
+                                                notif_ID: ObjectId(),
+                                                type : "Update",
+                                                username: username,
+                                                request_ID: request_ID,
+                                                date: new Date()
+                                            })
+                                            notification.save();
+
+                                        })
+
+                                        // var notification = new notifModel({
+                                        //     notif_ID: ObjectId(),
+                                        //     type : "Update",
+                                        //     username: username,
+                                        //     request_ID: request_ID,
+                                        //     date: new Date()
+                                        // })
+                                        // notification.save();
+
+                                        // notifsResultCount++;
+                                        // // if all 'update' notifs are checked na for that request
+                                        // if(notifsResultCount == notifsResult.length){
+
+                                        //     ActiveRequestsCount++;
+                                        //     //if all active requests are checked na
+                                        //     if(ActiveRequestsCount == ActiveRequests.length){
+                                        //         //end
+                                        //         res.send("ok na from may notif na but no notifs pa on that day");
+                                        //     }
+
+                                        // }
+                                        
+
+
+                                    })
+                                }
+
+
                             })
                         }
                         //if wala pang update notif ever

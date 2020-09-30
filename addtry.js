@@ -48,7 +48,7 @@ var user = [
         firstName: "sean",
         lastName: "nieva",
         userType: "Admin",
-        lastLogin: new Date("2020-09-01T10:13:19.873+00:00")
+        lastLogin: new Date("2020-09-30T10:13:19.873+00:00")
     },
     {
         _id : ObjectId(),
@@ -58,7 +58,7 @@ var user = [
         firstName: "Kate",
         lastName: "Magbitang",
         userType: "Admin",
-        lastLogin: new Date("2020-08-30T10:13:19.873+00:00")
+        lastLogin: new Date("2020-09-30T10:13:19.873+00:00")
     }
     ,
     {
@@ -69,7 +69,7 @@ var user = [
         firstName: "Shimei",
         lastName: "Zhang",
         userType: "Admin",
-        lastLogin: new Date("2020-08-30T10:13:19.873+00:00")
+        lastLogin: new Date("2020-09-30T10:13:19.873+00:00")
     }
     ,
     {
@@ -80,7 +80,7 @@ var user = [
         firstName: "Olan",
         lastName: "Onin",
         userType: "Admin",
-        lastLogin: new Date("2020-08-30T10:13:19.873+00:00")
+        lastLogin: new Date("2020-09-30T10:13:19.873+00:00")
     },
     {
         _id : ObjectId(),
@@ -90,7 +90,7 @@ var user = [
         firstName: "john",
         lastName: "smith",
         userType: "Regular",
-        lastLogin: new Date("2020-08-27T10:13:19.873+00:00")
+        lastLogin: new Date("2020-09-30T10:13:19.873+00:00")
     },
     {
         _id : ObjectId(),
@@ -100,7 +100,7 @@ var user = [
         firstName: "bob",
         lastName: "johnson",
         userType: "Regular",
-        lastLogin: new Date("2020-08-28T10:13:19.873+00:00")
+        lastLogin: new Date("2020-09-30T10:13:19.873+00:00")
     },
     {
         _id : ObjectId(),
@@ -110,7 +110,7 @@ var user = [
         firstName: "willow",
         lastName: "smith",
         userType: "Regular",
-        lastLogin: new Date("2020-08-30T10:13:19.873+00:00")
+        lastLogin: new Date("2020-09-30T10:13:19.873+00:00")
     }
 ]
 
@@ -1307,7 +1307,7 @@ var requests = [
         quantity: 2,
         override: false,
         //notifications:
-        ignored_notif_count: 0,
+        ignored_notif_count: 0
     },
     { // [2]
         request_ID : ObjectId(),
@@ -1318,13 +1318,13 @@ var requests = [
         isUrgent:"No",
         maxPrice: 1500.00,
         description: "none",
-        date_requested: new Date("2020-09-12T10:13:19.873+00:00"),
+        date_requested: new Date("2020-08-21T10:13:19.873+00:00"), //
         status: "Active",
         priority_rating: 0.034,
-        quantity: 2,
+        quantity: 2, 
         override: false,
         //notifications:
-        ignored_notif_count: 0,
+        ignored_notif_count: 3 //stbc
     },
     { // [3]
         request_ID : ObjectId(),
@@ -1341,7 +1341,7 @@ var requests = [
         quantity: 1,
         override: false,
         //notifications:
-        ignored_notif_count: 0,
+        ignored_notif_count: 0
     },
     { // [4]
         request_ID : ObjectId(),
@@ -1358,14 +1358,14 @@ var requests = [
         quantity: 1,
         override: false,
         //notifications:
-        ignored_notif_count: 0,
+        ignored_notif_count: 3
     },
     { // [5]
         request_ID : ObjectId(),
         username: "willowsmith",
         // bookversion_ID: bookVersions[4].bookVersion_ID,
-        book_title: "The Art of Moana",
-        book_author: "Janet Campbell",
+        book_title: "Everyday",
+        book_author: "David Levithan",
         isUrgent:"No",
         maxPrice: 1000.00,
         description: "none",
@@ -1375,14 +1375,14 @@ var requests = [
         quantity: 1,
         override: false,
         //notifications:
-        ignored_notif_count: 0,
+        ignored_notif_count: 0
     },
     { // [6]
         request_ID : ObjectId(),
         username: "willowsmith",
         // bookversion_ID: bookVersions[4].bookVersion_ID,
-        book_title: "The Art of Moana",
-        book_author: "Jessica Julius & Maggie Malone",
+        book_title: "The Lover's Dictionary",
+        book_author: "David Levithan",
         isUrgent:"Yes",
         maxPrice: 1000.00,
         description: "none",
@@ -1392,14 +1392,14 @@ var requests = [
         quantity: 1,
         override: false,
         //notifications:
-        ignored_notif_count: 0,
+        ignored_notif_count: 0
     },
     { // [7]
         request_ID : ObjectId(),
         username: "willowsmith",
         // bookversion_ID: bookVersions[4].bookVersion_ID,
-        book_title: "The Art of Moana",
-        book_author: "Jessica Julius & Maggie Malone",
+        book_title: "Flipped",
+        book_author: "Van Dranen",
         isUrgent:"Yes",
         maxPrice: 1000.00,
         description: "none",
@@ -1409,7 +1409,7 @@ var requests = [
         quantity: 1,
         override: false,
         //notifications:
-        ignored_notif_count: 0,
+        ignored_notif_count: 0
     }
     
 ]
@@ -1640,7 +1640,16 @@ mongodb.insertMany(paymentDetailsCollections, paymentDetails);
 
 var notif = [
     {
-        //dummy
+        // [0] sept 19
+        response: "No Answer",
+        seen: false,
+        notif_ID: ObjectId(),
+        type: "Update",
+        username: "willowsmith",
+        request_ID: requests[2].request_ID,
+        date: new Date("2020-09-18T10:13:19.873+00:00")
+
+
     }
 ]
 
