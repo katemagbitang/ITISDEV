@@ -74,3 +74,6 @@ There are three (3) ways to add to cart:
 - Sean Nieva
 - Gabriel Olan
 - Shimei Zhang
+
+## Acknowledgements
+1. Stack Overflow community, as always, for being there in times of need.

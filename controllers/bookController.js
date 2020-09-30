@@ -22,6 +22,7 @@ const bookController = {
         bookVersionsModel.find({}, function (err, versionsresult) {
 
             if(versionsresult!=null){
+                versresCount = 0;
                 //the process runs for each versionresult. 
                 versionsresult.forEach(function(v, err){
 
@@ -58,17 +59,27 @@ const bookController = {
                             //adds each booklisting into the bookList array || the bookList array contains all info needed per listing
                             bookList.push(booklisting);
                             //console.log(bookList);
+
+                            versresCount++;
+                                if( versresCount == versionsresult.length){
+                                    //renders the page
+                                    res.render("productpage",{
+                                        header: "All Books",
+                                        bookList: bookList,
+                                        userType: req.session.userType
+                                    });
+                                }
                         }
                     });
                 });
             }
 
-            //renders the page
-            res.render("productpage",{
-                header: "All Books",
-                bookList: bookList,
-                userType: req.session.userType
-            });
+            // //renders the page
+            // res.render("productpage",{
+            //     header: "All Books",
+            //     bookList: bookList,
+            //     userType: req.session.userType
+            // });
         });
 
     },
