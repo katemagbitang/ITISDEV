@@ -114,7 +114,7 @@ const notificationController ={
 
         //computes for the difference in days between the date_requested and current_date
         const current_date =  new Date();
-        console.log("current_date: " + current_date);
+        // console.log("current_date: " + current_date);
         const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
         
 
@@ -161,7 +161,7 @@ const notificationController ={
                             notifsResultCount = 0;
                             var meronna = false;
                             notifsResult.forEach(function(n, err){
-                                console.log(n)
+                                // console.log(n)
 
                                 var notifDate =  n.date;
                                 // if meron nang notif made on current_date

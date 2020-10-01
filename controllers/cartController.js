@@ -155,7 +155,7 @@ const cartController = {
                     barangay: barangay,
                     zip: zip
                 })
-                mongodb.insertOne("billingaddress", billingAddress);
+                mongodb.insertOne("billingaddresses", billingAddress);
 
                 // creates the order object with reference to billingaddress
                 var billingAddress_ID = billingAddress.billingAddress_ID;
