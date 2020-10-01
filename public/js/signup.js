@@ -197,6 +197,11 @@ $(document).ready(function(){
             disableSubmit();
 
         }
+        else if (cpwname.val().length < 5){
+            $('#cpassword').css({'border': "1px solid #DB4E35 "});
+            $('#errorcpassword').text('Password must be at least 5 characters.');
+            disableSubmit();
+        }
         else{
             $('#password').css({
                 'border' : '1.5px solid #DDDDDD'
